@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEALIGHT — Redefine Your Lights</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand:  { DEFAULT:'#FF6600', dark:'#E05500', darker:'#C44A00', light:'#FFF3E8', mid:'#FF8533' },
+            ink:    { DEFAULT:'#0D0D0D', 2:'#1A1A1A', 3:'#2A2A2A', 4:'#3A3A3A', 5:'#555555' },
+            warm:   { DEFAULT:'#F5F0EB', 2:'#EDE7DF' },
+          },
+          fontFamily: { sans: ['Inter','sans-serif'] },
+          boxShadow: {
+            'orange':    '0 4px 24px rgba(255,102,0,0.25)',
+            'orange-lg': '0 8px 40px rgba(255,102,0,0.35)',
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #0D0D0D; }
+
+    /* ── HERO ── */
+    .hero-bg {
+      background: #0D0D0D;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 75% 45%, rgba(255,102,0,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 85%, rgba(255,102,0,0.07) 0%, transparent 40%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ── FITMENT SELECT ── */
+    .fitment-select {
+      appearance: none;
+      background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 10px center;
+    }
+
+    /* ── SCENE CARDS ── */
+    .scene-card { transition: transform .28s ease, box-shadow .28s ease; cursor: pointer; }
+    .scene-card:hover { transform: translateY(-5px); box-shadow: 0 24px 48px rgba(0,0,0,.38); }
+    .scene-card:hover .card-cta { opacity: 1; transform: translateY(0); }
+    .card-cta { opacity: 0; transform: translateY(6px); transition: opacity .22s, transform .22s; }
+    @media (hover: none) { .card-cta { opacity: 1; transform: none; } }
+
+    /* card 4 — orange glow overlay */
+    .card-orange-glow::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 45%;
+      background: linear-gradient(to top, rgba(255,102,0,.45), transparent);
+      pointer-events: none;
+    }
+
+    /* ── CATEGORY TILES ── */
+    .cat-tile {
+      transition: background .18s, transform .18s, border-color .18s;
+      border: 1.5px solid #EBEBEB;
+    }
+    .cat-tile:hover { background: #FFF3E8; border-color: #FF6600; transform: translateY(-3px); }
+    .cat-tile:hover .cat-icon { background: #FF6600 !important; }
+    .cat-tile:hover .cat-icon i { color: #fff !important; }
+    .cat-icon { transition: background .18s; }
+    .cat-icon i { transition: color .18s; }
+
+    /* ── SERIES CARDS ── */
+    .series-card { transition: box-shadow .22s, transform .22s; }
+    .series-card:hover { box-shadow: 0 14px 40px rgba(0,0,0,.1); transform: translateY(-3px); }
+    .series-featured { box-shadow: 0 0 0 2.5px #FF6600, 0 8px 32px rgba(255,102,0,.15); }
+
+    /* ── SUPPORT CARDS ── */
+    .support-card { transition: box-shadow .2s, transform .2s, border-color .2s; border: 1.5px solid #EBEBEB; }
+    .support-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.08); transform: translateY(-3px); border-color: #FF6600; }
+
+    /* ── REVIEW CARDS ── */
+    .review-card {
+      border: 1.5px solid #F0EDE8; border-radius: 14px;
+      padding: 22px; background: #fff;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .review-card:hover { border-color: #FFD0A0; box-shadow: 0 6px 20px rgba(255,102,0,.07); }
+
+    /* ── BUTTONS ── */
+    .btn-orange {
+      background: #FF6600; color: #fff; font-weight: 700; border-radius: 12px;
+      transition: background .18s, box-shadow .18s, transform .12s;
+      box-shadow: 0 4px 16px rgba(255,102,0,.3);
+    }
+    .btn-orange:hover { background: #E05500; box-shadow: 0 6px 24px rgba(255,102,0,.4); transform: translateY(-1px); }
+    .btn-outline-white {
+      border: 1.5px solid rgba(255,255,255,.3); color: #fff; font-weight: 600; border-radius: 12px;
+      transition: border-color .18s, background .18s;
+    }
+    .btn-outline-white:hover { border-color: #FF6600; background: rgba(255,102,0,.1); }
+    .btn-ink {
+      background: #0D0D0D; color: #fff; font-weight: 700; border-radius: 12px;
+      transition: background .18s;
+    }
+    .btn-ink:hover { background: #1A1A1A; }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: #FF6600; background: #FFF3E8;
+      padding: 4px 10px; border-radius: 20px;
+      border: 1px solid rgba(255,102,0,.25); margin-bottom: 10px;
+    }
+
+    /* ── IMAGE PLACEHOLDERS ── */
+    .ph-dark   { background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%); }
+    .ph-mid    { background: linear-gradient(135deg, #262626 0%, #3A3A3A 100%); }
+    .ph-orange { background: linear-gradient(135deg, #3D1800 0%, #5C2800 100%); }
+  </style>
+</head>
+<body>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- NAV (placeholder — outside homepage scope) -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-8">
+      <div class="flex items-center">
+        <span class="text-ink font-black text-xl tracking-tight">SEA</span>
+        <span class="text-brand font-black text-xl tracking-tight">LIGHT</span>
+      </div>
+      <div class="hidden md:flex gap-6 text-sm font-semibold text-ink-5">
+        <a href="#" class="hover:text-brand transition-colors">Shop</a>
+        <a href="#" class="hover:text-brand transition-colors">Vehicle Fit</a>
+        <a href="#" class="hover:text-brand transition-colors">Support</a>
+        <a href="#" class="hover:text-brand transition-colors">About</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="#" class="hidden md:block text-sm text-ink-5 hover:text-brand transition-colors"><i class="fa fa-search mr-1"></i>Search</a>
+      <a href="#" class="hidden md:block text-sm text-ink-5 hover:text-brand transition-colors"><i class="fa fa-user mr-1"></i>Account</a>
+      <a href="#" class="relative text-ink-4 hover:text-brand transition-colors">
+        <i class="fa fa-shopping-cart text-lg"></i>
+        <span class="absolute -top-1.5 -right-2 bg-brand text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-black leading-none">0</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 01. HERO -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="hero-bg min-h-[90vh] flex items-center relative">
+  <div class="hero-grid"></div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 lg:py-28 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+
+      <!-- Left: Headline + Fitment Widget -->
+      <div class="text-white">
+        <div class="inline-flex items-center gap-2 bg-white/8 border border-brand/40 rounded-full px-4 py-1.5 text-xs font-black text-brand mb-7 uppercase tracking-widest">
+          <i class="fa fa-bolt text-xs"></i> Redefine Your Lights
+        </div>
+        <h1 class="text-4xl sm:text-5xl lg:text-[3.6rem] font-black leading-[1.06] mb-5 tracking-tight">
+          See More Road.<br/>
+          <span class="text-brand">Drive with<br/>Confidence.</span>
+        </h1>
+        <p class="text-gray-400 text-base mb-8 max-w-lg leading-relaxed">
+          Start by checking fitment for your vehicle — then choose the brightness, beam pattern, and install experience that fits how you drive.
+        </p>
+
+        <!-- Fitment Widget -->
+        <div class="bg-white rounded-2xl p-5 shadow-orange-lg mb-7 max-w-lg">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-6 h-6 bg-brand rounded-md flex items-center justify-center flex-shrink-0">
+              <i class="fa fa-car text-white" style="font-size:10px"></i>
+            </div>
+            <p class="text-[11px] font-black text-ink uppercase tracking-widest">Find Bulbs for Your Vehicle</p>
+          </div>
+          <div class="grid grid-cols-3 gap-2 mb-3">
+            <select class="fitment-select border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-600 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand w-full bg-gray-50">
+              <option>Year</option>
+              <option>2025</option><option>2024</option><option>2023</option><option>2022</option>
+              <option>2021</option><option>2020</option><option>2019</option><option>2018</option>
+            </select>
+            <select class="fitment-select border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-600 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand w-full bg-gray-50">
+              <option>Make</option>
+              <option>Toyota</option><option>Honda</option><option>Ford</option>
+              <option>Chevrolet</option><option>BMW</option><option>Nissan</option>
+              <option>Jeep</option><option>RAM</option>
+            </select>
+            <select class="fitment-select border border-gray-200 rounded-lg px-3 py-2.5 text-sm text-gray-600 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand w-full bg-gray-50">
+              <option>Model</option>
+              <option>Camry</option><option>Civic</option><option>F-150</option>
+              <option>Silverado</option><option>CR-V</option><option>Tacoma</option>
+            </select>
+          </div>
+          <button class="btn-orange w-full py-3 text-base flex items-center justify-center gap-2">
+            <i class="fa fa-search text-sm"></i> Find My Bulbs
+          </button>
+        </div>
+
+        <!-- Secondary CTAs -->
+        <div class="flex flex-wrap items-center gap-4 mb-8">
+          <a href="#driving-need" class="btn-outline-white px-5 py-2.5 text-sm flex items-center gap-2">
+            Shop by Driving Need <i class="fa fa-arrow-right text-xs"></i>
+          </a>
+          <a href="#series" class="text-gray-600 hover:text-brand text-sm font-semibold transition-colors flex items-center gap-1">
+            Compare Series <i class="fa fa-chevron-right text-xs"></i>
+          </a>
+        </div>
+
+        <!-- Trust micro-copy -->
+        <div class="flex flex-wrap gap-x-5 gap-y-2 text-xs text-gray-600">
+          <span class="flex items-center gap-1.5"><i class="fa fa-check text-brand text-xs"></i> Fitment-verified</span>
+          <span class="flex items-center gap-1.5"><i class="fa fa-check text-brand text-xs"></i> Plug-and-play options</span>
+          <span class="flex items-center gap-1.5"><i class="fa fa-check text-brand text-xs"></i> Fast U.S. shipping</span>
+          <span class="flex items-center gap-1.5"><i class="fa fa-check text-brand text-xs"></i> Easy returns</span>
+        </div>
+      </div>
+
+      <!-- Right: Visual Placeholder -->
+      <div class="hidden lg:flex items-center justify-center">
+        <div class="relative w-full max-w-md aspect-[4/3] rounded-2xl overflow-hidden ph-dark border border-white/8 shadow-orange">
+          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 h-56 rounded-full blur-3xl"
+               style="background:radial-gradient(ellipse, rgba(255,102,0,0.28) 0%, transparent 70%)"></div>
+          <div class="absolute bottom-4 left-1/2 flex flex-col items-center -translate-x-1/2 gap-3">
+            <div class="w-px h-14 bg-gradient-to-t from-white/35 to-transparent"></div>
+            <div class="w-px h-9 bg-gradient-to-t from-white/2 to-transparent"></div>
+          </div>
+          <div class="absolute top-4 left-4 bg-black/55 backdrop-blur-sm rounded-xl px-3 py-2 border border-white/8">
+            <p class="text-white text-xs font-bold">📸 Night driving hero photo</p>
+            <p class="text-gray-500 text-xs">Beam on road · real vehicle</p>
+          </div>
+          <div class="absolute bottom-4 right-4 text-right">
+            <span class="text-xs text-gray-600 block">Before: Halogen</span>
+            <span class="text-xs text-brand font-black block">After: SEALIGHT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 02. TRUST BAR -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="bg-white border-b border-gray-100 py-5">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-gray-100">
+      <div class="flex items-center gap-3 px-5 py-2 first:pl-0">
+        <div class="w-9 h-9 bg-brand/10 rounded-xl flex items-center justify-center flex-shrink-0">
+          <i class="fa fa-car text-brand text-sm"></i>
+        </div>
+        <div><p class="text-sm font-bold text-ink">Fitment-Verified</p><p class="text-xs text-gray-500">For your exact vehicle</p></div>
+      </div>
+      <div class="flex items-center gap-3 px-5 py-2">
+        <div class="w-9 h-9 bg-brand/10 rounded-xl flex items-center justify-center flex-shrink-0">
+          <i class="fa fa-plug text-brand text-sm"></i>
+        </div>
+        <div><p class="text-sm font-bold text-ink">Plug-and-Play</p><p class="text-xs text-gray-500">Options available</p></div>
+      </div>
+      <div class="flex items-center gap-3 px-5 py-2">
+        <div class="w-9 h-9 bg-brand/10 rounded-xl flex items-center justify-center flex-shrink-0">
+          <i class="fa fa-truck text-brand text-sm"></i>
+        </div>
+        <div><p class="text-sm font-bold text-ink">Free U.S. Shipping</p><p class="text-xs text-gray-500">On every order</p></div>
+      </div>
+      <div class="flex items-center gap-3 px-5 py-2">
+        <div class="w-9 h-9 bg-brand/10 rounded-xl flex items-center justify-center flex-shrink-0">
+          <i class="fa fa-headset text-brand text-sm"></i>
+        </div>
+        <div><p class="text-sm font-bold text-ink">30-Day Returns</p><p class="text-xs text-gray-500">+ Live expert support</p></div>
+      </div>
+    </div>
+    <p class="text-center text-xs text-gray-400 mt-4">
+      Not sure which bulb fits?
+      <a href="#" class="text-brand font-bold hover:underline ml-1">Start with your vehicle →</a>
+    </p>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 03. SHOP BY DRIVING NEED -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section id="driving-need" class="bg-ink-2 py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <div class="section-label">Shop by Driving Need</div>
+      <h2 class="text-3xl sm:text-4xl font-black text-white mb-3 tracking-tight">Tell Us How You Drive.</h2>
+      <p class="text-gray-500 text-base">We'll show you exactly what fits.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+
+      <!-- Card 1: Night Driving — featured -->
+      <div class="scene-card relative rounded-2xl overflow-hidden min-h-72 ph-dark">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/88 via-black/20 to-transparent"></div>
+        <div class="absolute top-3 right-3 bg-brand text-white text-xs font-black px-2.5 py-1 rounded-full">Most Popular</div>
+        <div class="absolute inset-0 flex flex-col justify-end p-6">
+          <i class="fa fa-moon text-brand text-2xl mb-3"></i>
+          <h3 class="text-white font-black text-xl mb-2 leading-snug">I Want to See More at Night</h3>
+          <p class="text-gray-400 text-sm mb-4 leading-relaxed">Stronger output for cleaner visibility on dark roads, highways, and rural routes.</p>
+          <a href="#" class="card-cta btn-orange inline-flex items-center gap-2 px-4 py-2.5 text-sm w-fit">
+            Shop Brightness Upgrades <i class="fa fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 2: Weather -->
+      <div class="scene-card relative rounded-2xl overflow-hidden min-h-72 ph-mid">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/88 via-black/20 to-transparent"></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-6">
+          <i class="fa fa-cloud-rain text-blue-400 text-2xl mb-3"></i>
+          <h3 class="text-white font-black text-xl mb-2 leading-snug">I Drive in Rain, Fog, or Snow</h3>
+          <p class="text-gray-400 text-sm mb-4 leading-relaxed">Fog-cutting beam design for low-visibility conditions and difficult night weather.</p>
+          <a href="#" class="card-cta bg-blue-600 hover:bg-blue-700 inline-flex items-center gap-2 text-white text-sm font-black px-4 py-2.5 rounded-xl w-fit transition-colors">
+            Shop Weather-Ready <i class="fa fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Card 3: Easy Install -->
+      <div class="scene-card relative rounded-2xl overflow-hidden min-h-72 ph-dark">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/88 via-black/20 to-transparent"></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-6">
+          <i class="fa fa-bolt text-yellow-400 text-2xl mb-3"></i>
+          <h3 class="text-white font-black text-xl mb-2 leading-snug">I Want a Fast, Tool-Free Install</h3>
+          <p class="text-gray-400 text-sm mb-4 leading-relaxed">Plug-and-play design — no mechanic, no decoder, no modification. Minutes, not hours.</p>
+          <a href="#" class="card-cta bg-yellow-500 hover:bg-yellow-600 inline-flex items-center gap-2 text-black text-sm font-black px-4 py-2.5 rounded-xl w-fit transition-colors">
+            See Easy-Install Picks <i class="fa fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- ★ CARD 4: ROTATABLE BEAM RING — Universal Fit ★ -->
+      <div class="scene-card relative rounded-2xl overflow-hidden sm:col-span-2" style="background: linear-gradient(135deg, #111111 0%, #1c1c1c 100%); min-height: 200px;">
+        <!-- Left orange accent stripe -->
+        <div class="absolute top-0 left-0 bottom-0 w-1 rounded-l-2xl" style="background: linear-gradient(to bottom, #FF6600, #E05500);"></div>
+        <!-- Subtle orange radial glow from right -->
+        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 85% 50%, rgba(255,102,0,0.13) 0%, transparent 60%);"></div>
+
+        <div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center gap-6 p-7 pl-8">
+          <!-- Text content — badge flows naturally above title, no overlap -->
+          <div class="flex-1">
+            <span class="inline-flex items-center gap-1.5 bg-brand text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide mb-4">
+              <i class="fa fa-rotate"></i> Universal Fit
+            </span>
+            <h3 class="text-white font-black text-xl leading-snug mb-2">
+              Works in Any Housing —<br/>
+              <span class="text-brand">Rotatable Beam Ring</span>
+            </h3>
+            <p class="text-gray-400 text-sm leading-relaxed max-w-sm mb-4">
+              Housing socket positions vary by vehicle. Our 360° rotatable beam ring lets you dial in a perfect light pattern for any housing — clean cutoff, zero scatter, no modification needed.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-5">
+              <span class="text-xs border border-white/15 text-gray-300 px-2.5 py-1 rounded-full font-medium">360° rotatable ring</span>
+              <span class="text-xs border border-white/15 text-gray-300 px-2.5 py-1 rounded-full font-medium">Fits all housings</span>
+              <span class="text-xs border border-white/15 text-gray-300 px-2.5 py-1 rounded-full font-medium">No modification needed</span>
+            </div>
+            <a href="#" class="card-cta btn-orange inline-flex items-center gap-2 px-5 py-2.5 text-sm w-fit">
+              Shop Adjustable Beam Ring <i class="fa fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+          <!-- Right: 360° ring diagram placeholder -->
+          <div class="hidden lg:flex flex-col items-center justify-center w-40 h-36 rounded-2xl flex-shrink-0 gap-2" style="background: rgba(255,102,0,0.07); border: 1px solid rgba(255,102,0,0.25);">
+            <i class="fa fa-compact-disc text-5xl" style="color: #FF6600; opacity: 0.7;"></i>
+            <p class="text-xs text-gray-500 text-center leading-snug">360° beam ring<br/>diagram</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Interior & Signal -->
+      <div class="scene-card relative rounded-2xl overflow-hidden min-h-64 ph-dark">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/88 via-black/20 to-transparent"></div>
+        <div class="absolute inset-0 flex flex-col justify-end p-6">
+          <i class="fa fa-lightbulb text-cyan-400 text-2xl mb-3"></i>
+          <h3 class="text-white font-black text-xl mb-2 leading-snug">I Want Interior & Signal Upgrades</h3>
+          <p class="text-gray-400 text-sm mb-4 leading-relaxed">Brighter dome lights, turn signals, brake lights and backup lights.</p>
+          <a href="#" class="card-cta bg-cyan-600 hover:bg-cyan-700 inline-flex items-center gap-2 text-white text-sm font-black px-4 py-2.5 rounded-xl w-fit transition-colors">
+            Shop Everyday Lighting <i class="fa fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 04. SHOP BY CATEGORY -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="bg-white py-16 border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-end justify-between mb-8 flex-wrap gap-3">
+      <div>
+        <div class="section-label">Categories</div>
+        <h2 class="text-2xl font-black text-ink tracking-tight">Shop by Category</h2>
+        <p class="text-gray-500 text-sm mt-1">Know what you need? Go straight there.</p>
+      </div>
+      <a href="#" class="text-brand text-sm font-bold hover:underline">View All Products →</a>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+      <a href="#" class="cat-tile bg-gray-50 rounded-xl p-4 flex flex-col items-center gap-2 text-center">
+        <div class="cat-icon w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center"><i class="fa fa-car-side text-ink-3 text-lg"></i></div>
+        <span class="text-xs font-bold text-ink leading-tight">Headlight Bulbs</span>
+        <span class="text-xs bg-brand text-white px-1.5 py-0.5 rounded-full font-black">Popular</span>
+      </a>
+      <a href="#" class="cat-tile bg-gray-50 rounded-xl p-4 flex flex-col items-center gap-2 text-center">
+        <div class="cat-icon w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center"><i class="fa fa-smog text-ink-3 text-lg"></i></div>
+        <span class="text-xs font-bold text-ink leading-tight">Fog Lights</span>
+      </a>
+      <a href="#" class="cat-tile bg-gray-50 rounded-xl p-4 flex flex-col items-center gap-2 text-center">
+        <div class="cat-icon w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center"><i class="fa fa-circle text-red-500 text-lg"></i></div>
+        <span class="text-xs font-bold text-ink leading-tight">Brake Lights</span>
+      </a>
+      <a href="#" class="cat-tile bg-gray-50 rounded-xl p-4 flex flex-col items-center gap-2 text-center">
+        <div class="cat-icon w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center"><i class="fa fa-arrows-alt-h text-ink-3 text-lg"></i></div>
+        <span class="text-xs font-bold text-ink leading-tight">Backup Lights</span>
+      </a>
+      <a href="#" class="cat-tile bg-gray-50 rounded-xl p-4 flex flex-col items-center gap-2 text-center">
+        <div class="cat-icon w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center"><i class="fa fa-arrows-turn-right text-amber-500 text-lg"></i></div>
+        <span class="text-xs font-bold text-ink leading-tight">Turn Signals</span>
+      </a>
+      <a href="#" class="cat-tile bg-gray-50 rounded-xl p-4 flex flex-col items-center gap-2 text-center">
+        <div class="cat-icon w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center"><i class="fa fa-lightbulb text-cyan-500 text-lg"></i></div>
+        <span class="text-xs font-bold text-ink leading-tight">Interior Lights</span>
+      </a>
+      <a href="#" class="cat-tile bg-gray-50 rounded-xl p-4 flex flex-col items-center gap-2 text-center">
+        <div class="cat-icon w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center"><i class="fa fa-box-open text-purple-500 text-lg"></i></div>
+        <span class="text-xs font-bold text-ink leading-tight">Combo Kits</span>
+        <span class="text-xs bg-ink text-white px-1.5 py-0.5 rounded-full font-black">New</span>
+      </a>
+      <a href="#" class="cat-tile bg-gray-50 rounded-xl p-4 flex flex-col items-center gap-2 text-center">
+        <div class="cat-icon w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center"><i class="fa fa-microchip text-ink-4 text-lg"></i></div>
+        <span class="text-xs font-bold text-ink leading-tight">Decoders</span>
+      </a>
+    </div>
+    <p class="text-center text-sm text-gray-400 mt-5">
+      Know your bulb size? <a href="#" class="text-brand font-bold hover:underline">Browse by size →</a>
+      &nbsp;·&nbsp;
+      Not sure? <a href="#" class="text-brand font-bold hover:underline">Use Bulb Finder →</a>
+    </p>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 05. SERIES SELECTOR -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section id="series" class="bg-warm py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <div class="section-label">Series Guide</div>
+      <h2 class="text-3xl sm:text-4xl font-black text-ink mb-3 tracking-tight">Which SEALIGHT Series Is Right for You?</h2>
+      <p class="text-gray-500">Compare by brightness, beam quality, install ease, and value.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <!-- Series 1: Max Brightness -->
+      <div class="series-card bg-white rounded-2xl overflow-hidden border border-gray-100">
+        <div class="h-1.5 bg-red-500"></div>
+        <div class="p-6">
+          <span class="text-[11px] font-black text-red-600 uppercase tracking-widest">Highest Output</span>
+          <div class="w-full h-28 ph-dark rounded-xl my-4 flex items-center justify-center">
+            <i class="fa fa-sun text-4xl" style="color:rgba(255,102,0,0.2)"></i>
+          </div>
+          <h3 class="font-black text-ink text-lg mb-2">Maximum Brightness</h3>
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            <span class="text-xs bg-red-50 text-red-700 border border-red-100 px-2 py-0.5 rounded-full font-bold">Up to 300% brighter</span>
+            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">IP68</span>
+          </div>
+          <p class="text-gray-500 text-sm mb-5 leading-relaxed">Built for drivers who want the strongest nighttime upgrade and maximum beam reach.</p>
+          <a href="#" class="btn-ink block text-center py-2.5 rounded-xl text-sm">Shop Max Brightness →</a>
+        </div>
+      </div>
+
+      <!-- Series 2: Easy Install — FEATURED -->
+      <div class="series-card series-featured bg-white rounded-2xl overflow-hidden relative">
+        <div class="absolute top-3 right-3 bg-brand text-white text-xs font-black px-2.5 py-1 rounded-full z-10">★ Most Popular</div>
+        <div class="h-1.5 bg-brand"></div>
+        <div class="p-6">
+          <span class="text-[11px] font-black text-brand uppercase tracking-widest">Easiest Install</span>
+          <div class="w-full h-28 ph-dark rounded-xl my-4 flex items-center justify-center">
+            <i class="fa fa-plug text-4xl" style="color:rgba(255,102,0,0.2)"></i>
+          </div>
+          <h3 class="font-black text-ink text-lg mb-2">Plug-and-Play Upgrade</h3>
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            <span class="text-xs bg-brand/10 text-brand border border-brand/20 px-2 py-0.5 rounded-full font-bold">No error codes</span>
+            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">No decoder</span>
+          </div>
+          <p class="text-gray-500 text-sm mb-5 leading-relaxed">A fast, no-hassle replacement for everyday drivers who want results without modification.</p>
+          <a href="#" class="btn-orange block text-center py-2.5 rounded-xl text-sm">Shop Easy Install →</a>
+        </div>
+      </div>
+
+      <!-- Series 3: Beam Control -->
+      <div class="series-card bg-white rounded-2xl overflow-hidden border border-gray-100">
+        <div class="h-1.5 bg-blue-600"></div>
+        <div class="p-6">
+          <span class="text-[11px] font-black text-blue-700 uppercase tracking-widest">Best Beam Control</span>
+          <div class="w-full h-28 ph-dark rounded-xl my-4 flex items-center justify-center">
+            <i class="fa fa-eye text-4xl" style="color:rgba(37,99,235,0.2)"></i>
+          </div>
+          <h3 class="font-black text-ink text-lg mb-2">Precision Beam Performance</h3>
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            <span class="text-xs bg-blue-50 text-blue-700 border border-blue-100 px-2 py-0.5 rounded-full font-bold">Sharp cutoff</span>
+            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Zero scatter</span>
+          </div>
+          <p class="text-gray-500 text-sm mb-5 leading-relaxed">For drivers who prioritize beam quality, cutoff line, and clean light output over raw brightness.</p>
+          <a href="#" class="btn-ink block text-center py-2.5 rounded-xl text-sm">Shop Beam Control →</a>
+        </div>
+      </div>
+
+      <!-- Series 4: Best Value -->
+      <div class="series-card bg-white rounded-2xl overflow-hidden border border-gray-100">
+        <div class="h-1.5 bg-green-600"></div>
+        <div class="p-6">
+          <span class="text-[11px] font-black text-green-700 uppercase tracking-widest">Best Value</span>
+          <div class="w-full h-28 ph-dark rounded-xl my-4 flex items-center justify-center">
+            <i class="fa fa-star text-4xl" style="color:rgba(22,163,74,0.2)"></i>
+          </div>
+          <h3 class="font-black text-ink text-lg mb-2">Smart Value Upgrade</h3>
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            <span class="text-xs bg-green-50 text-green-700 border border-green-100 px-2 py-0.5 rounded-full font-bold">Best price/perf</span>
+            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Top first upgrade</span>
+          </div>
+          <p class="text-gray-500 text-sm mb-5 leading-relaxed">A balanced upgrade for drivers who want visible results at a smart price, without overthinking.</p>
+          <a href="#" class="btn-ink block text-center py-2.5 rounded-xl text-sm">Shop Best Value →</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="text-center mt-8 flex flex-wrap items-center justify-center gap-4">
+      <a href="#" class="text-brand font-bold hover:underline text-sm">View Full Series Comparison →</a>
+      <span class="text-gray-300 hidden sm:inline">|</span>
+      <a href="#" class="text-gray-500 hover:text-brand text-sm transition-colors">Not sure? Answer 2 questions to find your series →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 06. WHY CHOOSE SEALIGHT -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="bg-ink py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-14">
+      <div class="section-label">Why SEALIGHT</div>
+      <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">Why Drivers Choose SEALIGHT</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="text-center">
+        <div class="w-14 h-14 bg-brand/12 border border-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-microchip text-brand text-xl"></i>
+        </div>
+        <h3 class="text-white font-bold text-base mb-2">Engineered for Your Exact Vehicle</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Every recommendation starts with your vehicle's fitment data — not a one-size-fits-all guess.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-14 h-14 bg-brand/12 border border-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-road text-brand text-xl"></i>
+        </div>
+        <h3 class="text-white font-bold text-base mb-2">Options for Every Driving Need</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">From max brightness to rotatable beam adjustment, there's a SEALIGHT series designed for how you drive.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-14 h-14 bg-brand/12 border border-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-tools text-brand text-xl"></i>
+        </div>
+        <h3 class="text-white font-bold text-base mb-2">Installation Help Built In</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Plug-and-play options for easy upgrades, plus step-by-step guides and expert support when you need it.</p>
+      </div>
+      <div class="text-center">
+        <div class="w-14 h-14 bg-brand/12 border border-brand/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i class="fa fa-redo text-brand text-xl"></i>
+        </div>
+        <h3 class="text-white font-bold text-base mb-2">Drivers Come Back for More</h3>
+        <p class="text-gray-600 text-sm leading-relaxed">Once drivers upgrade their headlights, most return for fog lights, interior, and signals. That says it all.</p>
+      </div>
+    </div>
+    <div class="mt-12 pt-10 border-t border-white/6 text-center">
+      <p class="text-gray-600 text-sm">From headlights to interior bulbs — SEALIGHT helps you upgrade with confidence, not guesswork.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 07. UGC / REVIEWS -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <div class="section-label">Customer Stories</div>
+      <h2 class="text-3xl sm:text-4xl font-black text-ink mb-3 tracking-tight">Real Drivers. Real Vehicles. Real Results.</h2>
+      <p class="text-gray-500">See how SEALIGHT upgrades look on cars just like yours.</p>
+    </div>
+
+    <!-- Before / After -->
+    <div class="rounded-2xl overflow-hidden mb-8 border border-gray-100">
+      <div class="grid md:grid-cols-2">
+        <div class="ph-mid min-h-48 relative flex items-center justify-center">
+          <div class="absolute inset-0 bg-black/35 flex flex-col items-center justify-center">
+            <span class="text-xs text-gray-500 uppercase tracking-widest mb-1 font-black">Before</span>
+            <p class="text-white font-black text-xl">Stock Halogen</p>
+          </div>
+        </div>
+        <div class="ph-orange min-h-48 relative flex items-center justify-center">
+          <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 80%, rgba(255,102,0,0.28) 0%, transparent 60%)"></div>
+          <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+            <span class="text-xs text-gray-400 uppercase tracking-widest mb-1 font-black">After</span>
+            <p class="text-brand font-black text-xl">SEALIGHT [Series]</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 px-6 py-3 border-t border-gray-100 text-center">
+        <p class="text-xs text-gray-400">📸 Replace with real customer before/after · same vehicle · same angle</p>
+      </div>
+    </div>
+
+    <!-- Review Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+      <div class="review-card">
+        <div class="flex items-center gap-1 text-brand mb-3">
+          <i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i>
+          <span class="text-xs text-gray-400 ml-2 font-semibold">Verified Buyer</span>
+        </div>
+        <p class="text-gray-700 text-sm italic mb-4 leading-relaxed">"Installed in under 10 minutes — no coding, no flicker. Massive difference at night."</p>
+        <div class="flex items-center justify-between pt-3 border-t border-gray-50">
+          <span class="text-sm font-black text-ink">Mike T.</span>
+          <span class="text-xs bg-brand/8 text-brand px-2.5 py-1 rounded-full font-bold border border-brand/12">2020 Toyota Tacoma</span>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="flex items-center gap-1 text-brand mb-3">
+          <i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i>
+          <span class="text-xs text-gray-400 ml-2 font-semibold">Verified Buyer</span>
+        </div>
+        <p class="text-gray-700 text-sm italic mb-4 leading-relaxed">"Fit perfectly and the beam pattern is so much cleaner than what came stock."</p>
+        <div class="flex items-center justify-between pt-3 border-t border-gray-50">
+          <span class="text-sm font-black text-ink">Sarah K.</span>
+          <span class="text-xs bg-brand/8 text-brand px-2.5 py-1 rounded-full font-bold border border-brand/12">2019 Honda CR-V</span>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="flex items-center gap-1 text-brand mb-3">
+          <i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i><i class="fa fa-star text-sm"></i>
+          <span class="text-xs text-gray-400 ml-2 font-semibold">Verified Buyer</span>
+        </div>
+        <p class="text-gray-700 text-sm italic mb-4 leading-relaxed">"Already came back for the fog lights after seeing the headlight difference."</p>
+        <div class="flex items-center justify-between pt-3 border-t border-gray-50">
+          <span class="text-sm font-black text-ink">James R.</span>
+          <span class="text-xs bg-brand/8 text-brand px-2.5 py-1 rounded-full font-bold border border-brand/12">2021 Ford F-150</span>
+        </div>
+      </div>
+    </div>
+    <div class="text-center flex flex-wrap items-center justify-center gap-4">
+      <a href="#" class="btn-ink px-6 py-3 text-sm rounded-xl inline-block">Read More Customer Reviews</a>
+      <a href="#" class="text-brand hover:underline font-bold text-sm">Share Your Install →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 08. SUPPORT HUB -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="bg-warm py-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10">
+      <div class="section-label">Support Center</div>
+      <h2 class="text-3xl sm:text-4xl font-black text-ink mb-3 tracking-tight">Need Help Before You Buy?</h2>
+      <p class="text-gray-500">Find the right bulb, confirm fitment, and install with confidence.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <a href="#" class="support-card bg-white rounded-2xl p-6 flex flex-col gap-3 group">
+        <div class="w-11 h-11 bg-brand/10 rounded-xl flex items-center justify-center">
+          <i class="fa fa-search text-brand text-lg"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-ink group-hover:text-brand transition-colors">Find the Right Bulb</h3>
+          <p class="text-gray-500 text-sm mt-1 leading-relaxed">Enter your Year, Make, and Model to confirm fitment before you buy.</p>
+        </div>
+        <span class="text-brand text-sm font-bold mt-auto flex items-center gap-1 group-hover:gap-2 transition-all">Open Bulb Finder <i class="fa fa-arrow-right text-xs"></i></span>
+      </a>
+      <a href="#" class="support-card bg-white rounded-2xl p-6 flex flex-col gap-3 group">
+        <div class="w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center">
+          <i class="fa fa-book text-ink-3 text-lg"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-ink group-hover:text-brand transition-colors">Installation Guides</h3>
+          <p class="text-gray-500 text-sm mt-1 leading-relaxed">Step-by-step instructions for every product — from unboxing to first light.</p>
+        </div>
+        <span class="text-brand text-sm font-bold mt-auto flex items-center gap-1 group-hover:gap-2 transition-all">Browse Guides <i class="fa fa-arrow-right text-xs"></i></span>
+      </a>
+      <a href="#" class="support-card bg-white rounded-2xl p-6 flex flex-col gap-3 group">
+        <div class="w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center">
+          <i class="fa fa-wrench text-ink-3 text-lg"></i>
+        </div>
+        <div>
+          <h3 class="font-black text-ink group-hover:text-brand transition-colors">Troubleshooting</h3>
+          <p class="text-gray-500 text-sm mt-1 leading-relaxed">Fix flickering, error codes, decoder needs, or compatibility questions.</p>
+        </div>
+        <span class="text-brand text-sm font-bold mt-auto flex items-center gap-1 group-hover:gap-2 transition-all">Fix Issues <i class="fa fa-arrow-right text-xs"></i></span>
+      </a>
+      <a href="#" class="support-card bg-white rounded-2xl p-6 flex flex-col gap-3 group">
+        <div class="w-11 h-11 bg-gray-100 rounded-xl flex items-center justify-center">
+          <i class="fa fa-comments text-ink-3 text-lg"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h3 class="font-black text-ink group-hover:text-brand transition-colors">FAQ & Contact</h3>
+            <span class="text-xs bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-black leading-tight">● Live</span>
+          </div>
+          <p class="text-gray-500 text-sm mt-1 leading-relaxed">Browse our FAQ or reach our team directly — before or after purchase.</p>
+        </div>
+        <span class="text-brand text-sm font-bold mt-auto flex items-center gap-1 group-hover:gap-2 transition-all">Get Support <i class="fa fa-arrow-right text-xs"></i></span>
+      </a>
+    </div>
+    <div class="text-center mt-8">
+      <a href="#" class="text-brand font-bold hover:underline text-sm">Visit Support Center →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<!-- 09. BOTTOM CTA -->
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section class="bg-ink py-20 relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none"
+       style="background:radial-gradient(ellipse at 50% 110%, rgba(255,102,0,0.14) 0%, transparent 58%)"></div>
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center relative z-10">
+    <p class="text-brand text-[11px] font-black uppercase tracking-widest mb-4">Redefine Your Lights</p>
+    <h2 class="text-3xl sm:text-4xl font-black text-white mb-4 tracking-tight leading-tight">
+      The Right Bulb Is Just<br/>a Few Clicks Away.
+    </h2>
+    <p class="text-gray-500 text-base mb-10 leading-relaxed">Start with your vehicle — or tell us how you drive.<br/>We'll handle the rest.</p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+      <a href="#" class="btn-orange px-8 py-4 text-base flex items-center gap-2 w-full sm:w-auto justify-center">
+        <i class="fa fa-search text-sm"></i> Find My Bulbs
+      </a>
+      <a href="#driving-need" class="btn-outline-white px-8 py-4 text-base w-full sm:w-auto justify-center flex items-center">
+        Shop by Driving Need
+      </a>
+      <a href="#series" class="text-gray-600 hover:text-brand font-bold text-sm transition-colors flex items-center gap-1 py-4">
+        Compare Series <i class="fa fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black border-t border-white/5 py-8 text-gray-600">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div class="flex items-center">
+      <span class="text-white font-black text-sm tracking-tight">SEA</span>
+      <span class="text-brand font-black text-sm tracking-tight">LIGHT</span>
+    </div>
+    <p class="text-xs text-center">
+      © 2024 SEALIGHT ·
+      <a href="#" class="hover:text-brand transition-colors">Privacy</a> ·
+      <a href="#" class="hover:text-brand transition-colors">Terms</a> ·
+      <a href="#" class="hover:text-brand transition-colors">Support</a>
+    </p>
+    <p class="text-xs text-gray-700">Prototype v0.2 · Brand: #FF6600/#0D0D0D · Claude Cowork</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
