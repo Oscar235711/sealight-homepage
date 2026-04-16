@@ -1,0 +1,256 @@
+/* ============================================================
+   SEALIGHT Homepage v03 — Responsive Stylesheet
+   Breakpoints:
+     Mobile   < 640px
+     Tablet   640px – 1024px
+     Desktop  > 1024px
+   Mobile-first approach: base = mobile, scale up.
+   ============================================================ */
+
+/* ── Tablet: 640px–1024px ── */
+@media (max-width: 1024px) {
+
+  :root {
+    --section-v: 60px;
+  }
+
+  /* Nav */
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
+  /* Hero */
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 52px 24px;
+  }
+  .hero-visual { justify-content: center; }
+  .hero-img-wrap { max-width: 100%; }
+  .hero-subhead { max-width: 100%; }
+  .fitment-selects {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+  .fitment-btn { grid-column: 1 / -1; }
+
+  /* Trust Bar */
+  .trust-items { grid-template-columns: repeat(2, 1fr); }
+
+  /* Scenes */
+  .scenes-grid { grid-template-columns: repeat(2, 1fr); }
+  .scene-card--wide { grid-column: 1 / -1; }
+
+  /* Categories */
+  .categories-grid { grid-template-columns: repeat(4, 1fr); }
+
+  /* Series */
+  .series-grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* Brand */
+  .brand-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Reviews */
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Support */
+  .support-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Education */
+  .edu-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-brand { grid-column: 1 / -1; }
+
+}
+
+/* ── Mobile: < 640px ── */
+@media (max-width: 640px) {
+
+  :root {
+    --section-v: 44px;
+    --header-h: 56px;
+  }
+
+  .container { padding: 0 16px; }
+
+  /* Nav */
+  .site-header { height: var(--header-h); }
+  .nav-logo { font-size: 18px; }
+  .btn-nav { display: none; }
+
+  /* Hero */
+  .hero-module { min-height: auto; }
+  .hero-content { padding: 36px 16px; gap: 24px; }
+  .hero-headline { font-size: 26px; }
+  .hero-subhead { font-size: 15px; }
+  .fitment-selects {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .fitment-btn { width: 100%; justify-content: center; }
+  .hero-ctas { flex-direction: column; gap: 10px; }
+  .hero-ctas .btn { text-align: center; justify-content: center; }
+  .hero-badge-strip { justify-content: center; }
+
+  /* Trust Bar */
+  .trust-items { grid-template-columns: 1fr; gap: 12px; }
+  .trust-bar-module { padding: 20px 0; }
+
+  /* Section Headers */
+  .section-header { margin-bottom: 28px; }
+  .section-header h2 { font-size: 22px; }
+  .section-header p { font-size: 14px; }
+
+  /* Scenes — horizontal scroll on mobile */
+  .scenes-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .scenes-grid::-webkit-scrollbar { display: none; }
+  .scene-card {
+    min-width: 80vw;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    aspect-ratio: 4/3;
+  }
+  .scene-card--wide {
+    min-width: 90vw;
+    aspect-ratio: auto;
+    min-height: 280px;
+  }
+  /* Always show CTAs on mobile (no hover) */
+  .scene-cta { opacity: 1 !important; transform: none !important; }
+
+  /* Categories */
+  .categories-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .category-item { padding: 16px 10px; gap: 6px; }
+  .cat-icon { width: 36px; height: 36px; }
+  .cat-label { font-size: 11px; }
+  .cat-badge { font-size: 8px; top: 6px; right: 6px; }
+
+  /* Series — horizontal scroll on mobile */
+  .series-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .series-grid::-webkit-scrollbar { display: none; }
+  .series-card {
+    min-width: 72vw;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+  .series-elestial-name { font-size: 26px; }
+  .series-footer { flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+  .series-footer-sep { display: none; }
+
+  /* Brand */
+  .brand-grid { grid-template-columns: 1fr; gap: 14px; }
+  .brand-item { padding: 20px 16px; }
+
+  /* UGC Before/After */
+  .before-after-pair { flex-direction: column; align-items: center; gap: 8px; }
+  .ba-card { max-width: 100%; min-width: unset; width: 100%; }
+  .ba-vs { transform: rotate(90deg); font-size: 18px; }
+
+  /* Reviews — horizontal scroll */
+  .reviews-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .reviews-grid::-webkit-scrollbar { display: none; }
+  .review-card {
+    min-width: 80vw;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+  .ugc-footer { flex-direction: column; align-items: center; }
+
+  /* Support */
+  .support-grid { grid-template-columns: 1fr; gap: 12px; }
+  .support-card { flex-direction: row; gap: 16px; padding: 18px; }
+  .support-icon { width: 40px; height: 40px; flex-shrink: 0; }
+
+  /* Education */
+  .edu-grid { grid-template-columns: 1fr; gap: 12px; }
+  .edu-card { padding: 22px 18px; }
+  .edu-number { font-size: 30px; }
+
+  /* Bottom CTA */
+  .bottom-cta-module { padding: 48px 0; }
+  .bottom-cta-module h2 { font-size: 24px; }
+  .bottom-cta-module p { font-size: 15px; }
+  .bottom-cta-btns { flex-direction: column; align-items: center; gap: 10px; }
+  .bottom-cta-btns .btn { width: 100%; justify-content: center; max-width: 320px; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer-brand { grid-column: unset; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 6px; }
+
+  /* Scroll top */
+  .scroll-top-btn { bottom: 18px; right: 18px; width: 40px; height: 40px; font-size: 16px; }
+
+}
+
+/* ── Extra small: < 380px (small Android) ── */
+@media (max-width: 380px) {
+  .hero-headline { font-size: 22px; }
+  .categories-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .cat-label { font-size: 10px; }
+  .nav-logo { font-size: 16px; }
+}
+
+/* ── Large Desktop: > 1400px ── */
+@media (min-width: 1400px) {
+  :root { --container: 1320px; }
+  .series-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* ── Dark Mode ── */
+@media (prefers-color-scheme: dark) {
+  /* The site is largely dark already; adjust light modules */
+  .trust-bar-module, .categories-module { background: #1a1f28; border-color: #2a2f38; }
+  .categories-module { background: #161a22; }
+  .category-item { background: #1e2330; border-color: #2a3040; }
+  .cat-label, .trust-text strong { color: #e8eaf0; }
+  .trust-text span { color: #8A9BB0; }
+  .brand-module { background: #141820; }
+  .brand-item { background: #1a1f28; border-color: #2a3040; }
+  .brand-item h3 { color: #e8eaf0; }
+  .support-module { background: #141820; }
+  .support-card { background: #1a1f28; border-color: #2a3040; }
+  .support-card h3 { color: #e8eaf0; }
+  .education-module { background: #141820; }
+  .edu-card { background: #1a1f28; border-color: #2a3040; }
+  .edu-card h3 { color: #e8eaf0; }
+}
+
+/* ── Print ── */
+@media print {
+  .site-header, .scroll-top-btn, .nav-hamburger, .mobile-menu { display: none; }
+  .module { page-break-inside: avoid; }
+}
