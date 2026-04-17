@@ -725,3 +725,242 @@ input, select { font: inherit; }
 }
 .scroll-top-btn.visible { opacity: 1; pointer-events: all; }
 .scroll-top-btn:hover { transform: translateY(-2px); }
+
+/* ============================================================
+   v03 REFINEMENT LAYER — "DJI / Apple feel"
+   Goals:
+   - Tighter display type (letter-spacing, weight rhythm, leading)
+   - More generous section whitespace
+   - Slower, cubic-bezier Apple-style transitions
+   - Softer dark surfaces (subtle gradient, noise-free depth)
+   - Subtle hero "cinematic" breathing animation
+   - Cleaner focus / hover micro-interactions
+   These overrides DO NOT change layout — only refinement.
+   ============================================================ */
+
+:root {
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --section-v: 104px;     /* more generous vertical rhythm */
+  --display-track: -0.022em;
+}
+
+/* ── Typography refinement ── */
+body { font-feature-settings: 'cv11', 'ss01', 'liga' on; letter-spacing: -0.003em; }
+
+.section-header { margin-bottom: 64px; }
+.section-header h2 {
+  font-size: clamp(28px, 4.6vw, 44px);
+  font-weight: 700;
+  letter-spacing: var(--display-track);
+  line-height: 1.08;
+}
+.section-header p {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.55;
+  margin-top: 14px;
+}
+.section-header--light p { color: rgba(255,255,255,.65); }
+
+/* ── Hero cinematic ── */
+.hero-module {
+  min-height: 720px;
+  background:
+    radial-gradient(ellipse 60% 80% at 70% 40%, rgba(255,102,0,.10) 0%, transparent 60%),
+    linear-gradient(180deg, #111418 0%, #0D0D0D 100%);
+}
+.hero-content { padding: 96px 24px; gap: 72px; }
+.hero-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(255,180,130,0.85);
+}
+.hero-headline {
+  font-size: clamp(32px, 5.2vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.02;
+  margin-bottom: 22px;
+}
+.hero-subhead {
+  font-size: 19px;
+  font-weight: 300;
+  color: rgba(255,255,255,.72);
+  line-height: 1.55;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+.hero-img-placeholder {
+  animation: heroBreathe 9s var(--ease-in-out-soft) infinite;
+}
+@keyframes heroBreathe {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.025); }
+}
+.hero-badge {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.75);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 7px 14px;
+  font-size: 12px;
+}
+
+/* ── Fitment widget: glassier ── */
+.fitment-widget {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  box-shadow: 0 20px 60px -20px rgba(0,0,0,.6);
+}
+.fitment-select {
+  background-color: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.12);
+  transition: border-color .3s var(--ease-out-soft), background-color .3s var(--ease-out-soft);
+}
+.fitment-select:hover:not(:disabled) { background-color: rgba(255,255,255,.1); }
+
+/* ── Button polish (Apple-style press) ── */
+.btn {
+  transition: background-color .3s var(--ease-out-soft),
+              border-color .3s var(--ease-out-soft),
+              color .3s var(--ease-out-soft),
+              transform .3s var(--ease-out-soft),
+              box-shadow .35s var(--ease-out-soft);
+  letter-spacing: -0.002em;
+  font-weight: 600;
+}
+.btn:active { transform: translateY(0.5px) scale(0.985); }
+.btn-orange:hover { box-shadow: 0 10px 30px -10px rgba(255,102,0,.55); }
+
+/* ── Trust bar: brand-orange accent (unified from blue) ── */
+.trust-item { border-left-color: var(--orange); }
+
+/* ── Cards: softer depth, Apple-like motion ── */
+.scene-card, .series-card, .brand-item, .support-card, .edu-card, .category-item, .review-card {
+  transition: transform .5s var(--ease-out-soft),
+              box-shadow .5s var(--ease-out-soft),
+              border-color .3s var(--ease-out-soft),
+              background-color .3s var(--ease-out-soft);
+}
+.scene-card:hover   { transform: translateY(-4px); box-shadow: 0 20px 50px -20px rgba(0,0,0,.55); }
+.series-card:hover  { transform: translateY(-6px); box-shadow: 0 24px 60px -24px rgba(255,102,0,.35); }
+.brand-item:hover   { transform: translateY(-3px); box-shadow: 0 14px 40px -18px rgba(0,0,0,.2); }
+.support-card:hover { transform: translateY(-3px); box-shadow: 0 14px 40px -18px rgba(255,102,0,.18); }
+.edu-card:hover     { transform: translateY(-3px); box-shadow: 0 14px 40px -18px rgba(255,102,0,.15); }
+.category-item:hover{ transform: translateY(-3px); box-shadow: 0 14px 34px -18px rgba(255,102,0,.20); }
+.review-card:hover  { transform: translateY(-2px); }
+
+/* ── Series Elestial names (display-weight) ── */
+.series-elestial-name {
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  font-size: clamp(26px, 2.8vw, 34px);
+}
+.series-tagline { letter-spacing: 0.01em; }
+.series-popular-ribbon { letter-spacing: 0.1em; padding: 5px 14px 5px 20px; }
+
+/* ── Bottom CTA: restrained premium dark (override navy) ── */
+.bottom-cta-module {
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 30%, rgba(255,102,0,.12) 0%, transparent 60%),
+    linear-gradient(180deg, #141921 0%, #0B0E13 100%);
+  padding: 112px 0;
+}
+.bottom-cta-module h2 {
+  font-size: clamp(30px, 5vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+}
+.bottom-cta-module p { font-weight: 300; font-size: 19px; color: rgba(255,255,255,.65); }
+
+/* ── Dark section base uplift (Hero / Scenes / Series / UGC) ── */
+.scenes-module, .series-module, .ugc-module {
+  background:
+    linear-gradient(180deg, #111418 0%, #0D0D0D 100%);
+}
+
+/* ── Section header gradient accent line (subtle, Apple-like) ── */
+.section-header h2::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin: 18px auto 0;
+  background: linear-gradient(90deg, var(--orange), rgba(255,102,0,0));
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+/* ── Module top accent (hairline) for dark-on-light transitions ── */
+.trust-bar-module { border-top-color: rgba(0,0,0,.06); border-bottom-color: rgba(0,0,0,.06); }
+
+/* ── Navigation refinement ── */
+.nav-links a {
+  letter-spacing: -0.003em;
+  font-weight: 500;
+  position: relative;
+  padding: 6px 2px;
+}
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1.5px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .35s var(--ease-out-soft);
+}
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+
+/* ── Footer refinement ── */
+.site-footer { padding: 72px 0 36px; }
+.footer-logo { letter-spacing: -0.02em; }
+.footer-links h4 { letter-spacing: 0.12em; }
+
+/* ── Preview banner (so collaborators immediately know this is a test build) ── */
+.preview-banner {
+  position: fixed;
+  top: calc(var(--header-h) + 14px);
+  right: 20px;
+  z-index: 80;
+  background: rgba(255,102,0,0.95);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px -6px rgba(255,102,0,.6);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+.preview-banner::before {
+  content: "● ";
+  color: #fff;
+  animation: pulseDot 2s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+/* ── Reduce motion: honor user preference ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

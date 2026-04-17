@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initSmoothScroll();
   initSeriesHighlight();
+  initHeroParallax();        // v03: subtle Apple/DJI-style parallax on hero image
+  initMagneticButtons();     // v03: soft magnetic pull on primary CTAs
 });
 
 /* ============================================================
@@ -171,11 +173,17 @@ function initFitmentSelector() {
       'success'
     );
 
-    // Simulate redirect after 1.5s
+    // In production: window.location.href = `/fitment?year=${year}&make=${make}&model=${model}`;
+    // Preview behavior: gently scroll to the Scene Navigator so reviewers see what "results" flow looks like
     setTimeout(() => {
-      showFitmentMessage('', 'clear');
-      // In production: window.location.href = `/fitment?year=${year}&make=${make}&model=${model}`;
-    }, 3000);
+      const scenes = document.getElementById('m03-scenes');
+      if (scenes) {
+        const headerH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 64;
+        const top = scenes.getBoundingClientRect().top + window.scrollY - headerH - 8;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+      setTimeout(() => showFitmentMessage('', 'clear'), 2500);
+    }, 900);
   });
 }
 
@@ -358,6 +366,51 @@ function clearSeriesHighlights() {
 function debounce(fn, ms) {
   let t;
   return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+/* ============================================================
+   v03 REFINEMENT: Hero subtle parallax (Apple-style)
+   Moves the hero image placeholder ~8px on scroll, within 500px
+   of the top. Respects prefers-reduced-motion.
+   ============================================================ */
+function initHeroParallax() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const wrap = document.querySelector('.hero-img-wrap');
+  if (!wrap) return;
+  let raf = null;
+  const update = () => {
+    const y = Math.max(0, Math.min(window.scrollY, 520));
+    // counter-motion: image floats up slightly as page scrolls down
+    wrap.style.transform = `translate3d(0, ${-(y * 0.06)}px, 0)`;
+    raf = null;
+  };
+  window.addEventListener('scroll', () => {
+    if (!raf) raf = requestAnimationFrame(update);
+  }, { passive: true });
+  update();
+}
+
+/* ============================================================
+   v03 REFINEMENT: Magnetic buttons (DJI/Apple-style CTA pull)
+   Only applies to primary orange CTAs on pointer-fine devices.
+   ============================================================ */
+function initMagneticButtons() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const targets = document.querySelectorAll('.btn-orange, .btn-outline-orange, .fitment-btn');
+  targets.forEach(btn => {
+    const strength = 10; // px
+    btn.addEventListener('mousemove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2);
+      const dy = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
+      btn.style.transform = `translate(${dx * strength * 0.35}px, ${dy * strength * 0.35}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = '';
+    });
+  });
 }
 
 /* ============================================================
