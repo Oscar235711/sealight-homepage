@@ -1,0 +1,225 @@
+/* SEALIGHT v04 · Hero variants */
+
+/* ─── Hero 1 · Cinematic Beam ───────────────────── */
+.sl-root .hero1 {
+  position: relative; overflow: hidden;
+  background: radial-gradient(ellipse 80% 70% at 65% 40%, rgba(255,102,0,.13) 0%, transparent 55%),
+              linear-gradient(180deg, #111418 0%, #0A0B0E 100%);
+  color: #fff;
+  padding: 120px 0 100px;
+  min-height: 720px;
+}
+.sl-root .hero1 .container { position: relative; z-index: 2; }
+.sl-root .hero1-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 72px; align-items: center; }
+.sl-root .hero1 .sl-eyebrow { color: var(--brand-orange-2); margin-bottom: 20px; }
+.sl-root .hero1 h1 {
+  font-size: clamp(44px, 6.2vw, 84px);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 0.98;
+  margin-bottom: 26px; color: #fff;
+}
+.sl-root .hero1 h1 em { color: var(--brand-orange-2); font-style: normal; }
+.sl-root .hero1 .hero1-sub { font-size: 18px; color: rgba(255,255,255,.72); max-width: 500px; margin-bottom: 36px; font-weight: 300; line-height: 1.55; }
+.sl-root .hero1-fitment {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px; padding: 18px; backdrop-filter: blur(12px) saturate(1.2);
+  box-shadow: 0 20px 60px -20px rgba(0,0,0,.6);
+}
+.sl-root .hero1-fitment .label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.55); margin-bottom: 12px; }
+.sl-root .hero1-fitment .row { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 8px; }
+.sl-root .hero1-fitment select, .sl-root .hero1-fitment .sel {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  color: #fff; padding: 12px 14px; border-radius: 10px; font-size: 13px; font-family: inherit;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,0.5)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.sl-root .hero1-fitment .go { background: var(--accent); color: #fff; border: 0; padding: 12px 18px; border-radius: 10px; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+.sl-root .hero1-fitment .hint { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 10px; font-family: var(--font-mono); letter-spacing: .04em; }
+.sl-root .hero1-ctas { display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
+.sl-root .hero1-ctas .btn-outline { border-color: rgba(255,255,255,.3); color: #fff; }
+.sl-root .hero1-ctas .btn-outline:hover { background: #fff; color: #0B0C0E; border-color: #fff; }
+.sl-root .hero1-ctas .btn-ghost { color: rgba(255,255,255,.8); border-color: rgba(255,255,255,.3); }
+.sl-root .hero1-ctas .btn-ghost:hover { color: #fff; border-color: #fff; }
+
+.sl-root .hero1-visual { position: relative; aspect-ratio: 4/5; border-radius: 24px; overflow: hidden; background: #05070A; }
+.sl-root .hero1-visual .beam {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 45% at 50% 22%, rgba(255,160,100,0.55) 0%, rgba(255,90,0,.25) 30%, transparent 60%),
+    radial-gradient(ellipse 60% 35% at 50% 22%, rgba(255,220,180,.9) 0%, rgba(255,180,120,0) 40%);
+}
+.sl-root .hero1-visual::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,.3) 70%, rgba(0,0,0,.8) 100%);
+}
+.sl-root .hero1-visual .hl {
+  position: absolute; top: 19%; left: 50%; transform: translateX(-50%);
+  width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 0 40px 10px #fff, 0 0 80px 30px rgba(255,180,120,.8);
+}
+.sl-root .hero1-visual .hl.r { left: calc(50% + 50px); }
+.sl-root .hero1-visual .hl.l { left: calc(50% - 50px); }
+.sl-root .hero1-visual .ph-label {
+  position: absolute; bottom: 20px; left: 20px; z-index: 3;
+  font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.sl-root .hero1-meta {
+  position: absolute; top: 20px; right: 20px; z-index: 3;
+  display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+  font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.7); letter-spacing: .08em;
+}
+.sl-root .hero1-meta .k { display: flex; gap: 8px; align-items: center; background: rgba(0,0,0,.5); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,.1); }
+.sl-root .hero1-meta .k b { color: #fff; font-weight: 600; }
+
+.sl-root .hero1-marquee {
+  margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,.08);
+  display: flex; gap: 48px; overflow: hidden;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5);
+}
+
+/* ─── Hero 2 · Editorial Split ─────────────────── */
+.sl-root .hero2 {
+  background: var(--bg); padding: 56px 0 80px;
+  position: relative;
+}
+.sl-root .hero2-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+  min-height: 620px; align-items: stretch;
+}
+.sl-root .hero2-left {
+  padding: 40px 20px 40px 0; display: flex; flex-direction: column; justify-content: space-between;
+}
+.sl-root .hero2-kicker {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-3);
+  letter-spacing: .14em; text-transform: uppercase;
+}
+.sl-root .hero2-kicker .bullet { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.sl-root .hero2 h1 {
+  font-size: clamp(48px, 7vw, 96px); font-weight: 700; letter-spacing: -0.035em; line-height: 0.95;
+  margin: 28px 0; color: var(--fg);
+}
+.sl-root .hero2 h1 .serif { font-family: 'Instrument Serif', 'Times New Roman', serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: var(--accent); }
+.sl-root .hero2-sub { font-size: 18px; color: var(--fg-2); max-width: 46ch; line-height: 1.55; margin-bottom: 32px; }
+.sl-root .hero2-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.sl-root .hero2-metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding-top: 40px; margin-top: 40px; border-top: 1px solid var(--line); }
+.sl-root .hero2-metric .n { font-family: var(--font-display); font-size: 32px; font-weight: 700; letter-spacing: -0.02em; color: var(--fg); }
+.sl-root .hero2-metric .l { font-size: 12px; color: var(--fg-2); margin-top: 2px; line-height: 1.4; }
+
+.sl-root .hero2-right { position: relative; display: flex; flex-direction: column; gap: 16px; }
+.sl-root .hero2-product {
+  flex: 1; border-radius: 24px; position: relative; overflow: hidden;
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,140,60,.2) 0%, transparent 70%),
+    linear-gradient(160deg, #E8E2D6 0%, #DCD4C3 100%);
+  min-height: 420px;
+}
+.sl-root [data-tone="midnight"] .hero2-product { background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,140,60,.3) 0%, transparent 70%), linear-gradient(160deg, #1A1C20 0%, #0F1114 100%); }
+.sl-root .hero2-product .product-shape {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 62%; aspect-ratio: 1/1.4;
+  background: linear-gradient(180deg, #2C2E33 0%, #121318 100%);
+  border-radius: 40% 40% 18px 18px / 35% 35% 18px 18px;
+  box-shadow: inset 0 -20px 60px rgba(0,0,0,.5), inset 0 20px 40px rgba(255,255,255,.04), 0 40px 80px -20px rgba(0,0,0,.4);
+}
+.sl-root .hero2-product .product-shape::before {
+  content: ""; position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+  width: 70%; aspect-ratio: 1/1; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #fff 0%, #FFE3B0 30%, #FF9540 50%, rgba(255,102,0,0) 75%);
+  filter: blur(1px);
+}
+.sl-root .hero2-product .product-shape::after {
+  content: ""; position: absolute; left: 20%; right: 20%; bottom: 15%;
+  height: 4px; background: var(--accent); border-radius: 2px;
+  box-shadow: 0 0 20px var(--accent);
+}
+.sl-root .hero2-product .ph-label {
+  position: absolute; bottom: 18px; left: 18px;
+  font-family: var(--font-mono); font-size: 10px; color: var(--fg-3); letter-spacing: .1em; text-transform: uppercase;
+}
+.sl-root .hero2-product .p-meta {
+  position: absolute; top: 18px; left: 18px; display: flex; flex-direction: column; gap: 4px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--fg-3); text-transform: uppercase;
+}
+.sl-root .hero2-product .p-meta b { color: var(--fg); font-weight: 600; font-size: 11px; }
+
+.sl-root .hero2-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 110px; }
+.sl-root .hero2-thumbs .img-ph { aspect-ratio: auto; height: 100%; border-radius: 14px; }
+
+/* ─── Hero 3 · Interactive Fitment-first ──────── */
+.sl-root .hero3 {
+  position: relative; overflow: hidden; color: #fff;
+  padding: 120px 0 80px;
+  background: linear-gradient(180deg, #0C0D10 0%, #15181D 100%);
+  min-height: 760px;
+}
+.sl-root .hero3-video {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 35% at 30% 30%, rgba(255,120,40,.35) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 70% 60%, rgba(255,80,0,.25) 0%, transparent 60%),
+    linear-gradient(180deg, #0C0D10 0%, #15181D 100%);
+}
+.sl-root .hero3-video::after {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode: overlay;
+}
+.sl-root .hero3-video .ph-label {
+  position: absolute; bottom: 20px; left: 20px; z-index: 2;
+  font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: .1em; text-transform: uppercase;
+}
+.sl-root .hero3-inner { position: relative; z-index: 2; text-align: center; }
+.sl-root .hero3-kicker { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.04); font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.75); }
+.sl-root .hero3-kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: sl-pulse 1.6s infinite; }
+@keyframes sl-pulse { 50% { opacity: .4; } }
+.sl-root .hero3 h1 {
+  margin: 28px auto 18px;
+  font-size: clamp(48px, 6.5vw, 86px); letter-spacing: -0.032em; line-height: 1;
+  color: #fff; max-width: 18ch;
+}
+.sl-root .hero3-sub { font-size: 17px; color: rgba(255,255,255,.72); max-width: 560px; margin: 0 auto 48px; font-weight: 300; }
+.sl-root .hero3-fit {
+  max-width: 880px; margin: 0 auto;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px; padding: 8px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 30px 80px -30px rgba(0,0,0,.7);
+}
+.sl-root .hero3-fit-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1.2fr; gap: 4px;
+  align-items: stretch;
+}
+.sl-root .hero3-slot {
+  padding: 22px 20px;
+  display: flex; flex-direction: column; gap: 6px; text-align: left;
+  border-radius: 14px; cursor: pointer;
+  transition: background .2s;
+}
+.sl-root .hero3-slot:hover { background: rgba(255,255,255,.04); }
+.sl-root .hero3-slot.active { background: rgba(255,255,255,.06); }
+.sl-root .hero3-slot .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.sl-root .hero3-slot .v { font-size: 20px; font-weight: 600; color: #fff; letter-spacing: -0.01em; display: flex; justify-content: space-between; align-items: center; }
+.sl-root .hero3-slot .v span.placeholder { color: rgba(255,255,255,.4); font-weight: 400; }
+.sl-root .hero3-fit .go {
+  background: var(--accent); color: #fff; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 600; gap: 10px;
+  transition: background .2s;
+}
+.sl-root .hero3-fit .go:hover { background: var(--brand-orange-deep); }
+.sl-root .hero3-altlinks { margin-top: 24px; display: flex; justify-content: center; gap: 28px; font-size: 13px; color: rgba(255,255,255,.6); flex-wrap: wrap; }
+.sl-root .hero3-altlinks a { border-bottom: 1px solid rgba(255,255,255,.2); padding-bottom: 2px; }
+.sl-root .hero3-altlinks a:hover { color: #fff; border-color: var(--accent); }
+.sl-root .hero3-stats {
+  margin-top: 72px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 32px;
+  color: rgba(255,255,255,.7);
+}
+.sl-root .hero3-stats > div { padding: 0 24px; border-left: 1px solid rgba(255,255,255,.06); }
+.sl-root .hero3-stats > div:first-child { border-left: 0; }
+.sl-root .hero3-stats .n { font-family: var(--font-display); font-size: 30px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+.sl-root .hero3-stats .l { font-size: 12px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .1em; margin-top: 6px; }

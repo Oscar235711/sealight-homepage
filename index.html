@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0D0D0D" />
+<title>SEALIGHT LED Headlight Bulbs — See the Road Ahead</title>
+<meta name="description" content="Premium LED headlight upgrades with verified vehicle fitment. Brightness, precision beam, or easy install — built for how you actually drive." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="SEALIGHT LED Headlight Bulbs — See the Road Ahead" />
+<meta property="og:description" content="Verified fitment. Plug-and-play upgrade options. 500,000+ drivers trust SEALIGHT for safer, brighter night driving." />
+<meta property="og:image" content="assets/og-preview.svg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="SEALIGHT" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="SEALIGHT LED Headlight Bulbs — See the Road Ahead" />
+<meta name="twitter:description" content="Verified fitment. Plug-and-play upgrade options. Built for how you actually drive." />
+<meta name="twitter:image" content="assets/og-preview.svg" />
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="apple-touch-icon" href="assets/favicon.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+<style>
+/* ── tokens.css ── */
+/* ============================================================
+   SEALIGHT v04 · Design Tokens
+   3 tonal modes: midnight / daylight / hybrid
+   Type pairing: Space Grotesk (display) + Inter (text) + JetBrains Mono (spec)
+   ============================================================ */
+
+:root {
+  /* brand constants */
+  --brand-orange: #FF6600;
+  --brand-orange-2: #FF8A3D;
+  --brand-orange-deep: #CC4F00;
+
+  /* typography */
+  --font-display: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-text: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --track-display: -0.028em;
+  --track-h2: -0.022em;
+  --track-body: -0.003em;
+  --track-eyebrow: 0.18em;
+
+  /* radii / shadows */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --shadow-soft: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px -12px rgba(0,0,0,.12);
+  --shadow-card: 0 1px 3px rgba(0,0,0,.06), 0 16px 40px -16px rgba(0,0,0,.16);
+  --shadow-lift: 0 30px 60px -30px rgba(0,0,0,.35);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 220ms;
+  --dur: 360ms;
+  --dur-slow: 600ms;
+}
+
+/* ── Midnight (DJI-like cinematic) ── */
+[data-tone="midnight"] {
+  --bg:        #0B0C0E;
+  --bg-2:      #121418;
+  --bg-3:      #1A1D22;
+  --surface:   #14171C;
+  --line:      rgba(255,255,255,0.08);
+  --line-2:    rgba(255,255,255,0.14);
+  --fg:        #F4F4F2;
+  --fg-2:      rgba(244,244,242,0.72);
+  --fg-3:      rgba(244,244,242,0.50);
+  --accent:    #FF6600;
+  --accent-soft: rgba(255,102,0,0.14);
+  --success:   #6DE07A;
+}
+
+/* ── Daylight (Velotric / Kwikset editorial) ── */
+[data-tone="daylight"] {
+  --bg:        #F7F5F1;
+  --bg-2:      #EFECE6;
+  --bg-3:      #E6E1D9;
+  --surface:   #FFFFFF;
+  --line:      rgba(15,15,15,0.08);
+  --line-2:    rgba(15,15,15,0.16);
+  --fg:        #111213;
+  --fg-2:      rgba(17,18,19,0.68);
+  --fg-3:      rgba(17,18,19,0.45);
+  --accent:    #FF6600;
+  --accent-soft: rgba(255,102,0,0.10);
+  --success:   #0F8F4A;
+}
+
+/* ── Hybrid (deep hero, light product, deep UGC) ── */
+[data-tone="hybrid"] {
+  --bg:        #F7F5F1;
+  --bg-2:      #EFECE6;
+  --bg-3:      #0B0C0E;
+  --surface:   #FFFFFF;
+  --line:      rgba(15,15,15,0.08);
+  --line-2:    rgba(15,15,15,0.16);
+  --fg:        #111213;
+  --fg-2:      rgba(17,18,19,0.68);
+  --fg-3:      rgba(17,18,19,0.45);
+  --accent:    #FF6600;
+  --accent-soft: rgba(255,102,0,0.10);
+  --success:   #0F8F4A;
+}
+
+/* ── Base resets scoped to prototype ── */
+.sl-root, .sl-root * { box-sizing: border-box; }
+.sl-root {
+  font-family: var(--font-text);
+  color: var(--fg);
+  background: var(--bg);
+  letter-spacing: var(--track-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.sl-root h1, .sl-root h2, .sl-root h3, .sl-root h4 {
+  font-family: var(--font-display);
+  letter-spacing: var(--track-display);
+  line-height: 1.04;
+  font-weight: 700;
+  margin: 0;
+  text-wrap: balance;
+}
+.sl-root p { margin: 0; }
+.sl-root a { color: inherit; text-decoration: none; }
+.sl-root button { font: inherit; border: 0; background: transparent; cursor: pointer; color: inherit; }
+.sl-root ul { list-style: none; margin: 0; padding: 0; }
+.sl-root img, .sl-root svg { display: block; max-width: 100%; }
+
+.sl-eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--track-eyebrow);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--fg-3);
+}
+.sl-mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── components.css ── */
+/* =============================================================
+   SEALIGHT v04 · Shared prototype components (buttons, cards, etc)
+   All selectors are scoped under .sl-root to avoid colliding with
+   design canvas chrome.
+   ============================================================= */
+
+/* Buttons */
+.sl-root .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 20px; min-height: 44px;
+  font-family: var(--font-text);
+  font-size: 14px; font-weight: 600; letter-spacing: -0.002em;
+  border-radius: 999px;
+  transition: background var(--dur) var(--ease-out),
+              color var(--dur) var(--ease-out),
+              border-color var(--dur) var(--ease-out),
+              transform var(--dur) var(--ease-out),
+              box-shadow var(--dur) var(--ease-out);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.sl-root .btn-primary { background: var(--accent); color: #fff; }
+.sl-root .btn-primary:hover { background: var(--brand-orange-deep); box-shadow: 0 10px 30px -10px rgba(255,102,0,.55); transform: translateY(-1px); }
+.sl-root .btn-dark { background: var(--fg); color: var(--bg); }
+.sl-root .btn-dark:hover { transform: translateY(-1px); }
+.sl-root .btn-outline { border-color: var(--line-2); color: var(--fg); background: transparent; }
+.sl-root .btn-outline:hover { background: var(--fg); color: var(--bg); }
+.sl-root .btn-outline-inv { border-color: rgba(255,255,255,.4); color: #fff; background: transparent; }
+.sl-root .btn-outline-inv:hover { background: #fff; color: #0B0C0E; }
+.sl-root .btn-ghost { padding: 12px 2px; border-radius: 0; border-bottom: 1px solid currentColor; color: var(--fg); }
+.sl-root .btn-ghost:hover { color: var(--accent); }
+.sl-root .btn-sm { padding: 9px 14px; font-size: 13px; min-height: 38px; }
+.sl-root .btn-lg { padding: 16px 26px; font-size: 15px; min-height: 52px; }
+.sl-root .btn svg { width: 16px; height: 16px; }
+
+/* Section */
+.sl-root section { position: relative; }
+.sl-root .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+.sl-root .section-pad { padding: 112px 0; }
+.sl-root .section-pad-sm { padding: 72px 0; }
+
+/* Section header */
+.sl-root .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 56px; }
+.sl-root .sec-head h2 { font-size: clamp(28px, 3.8vw, 56px); letter-spacing: var(--track-display); max-width: 18ch; }
+.sl-root .sec-head .sec-kicker { display: flex; flex-direction: column; gap: 10px; }
+.sl-root .sec-head .sec-kicker p { max-width: 44ch; color: var(--fg-2); font-size: 16px; line-height: 1.55; }
+.sl-root .sec-head-center { flex-direction: column; text-align: center; align-items: center; }
+.sl-root .sec-head-center .sec-kicker { align-items: center; }
+
+/* Chip */
+.sl-root .chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--accent-soft); color: var(--accent);
+}
+.sl-root .chip-dot::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor; display: inline-block;
+}
+
+/* Image placeholder */
+.sl-root .img-ph {
+  position: relative; overflow: hidden; border-radius: var(--radius);
+  background-color: var(--bg-3);
+  background-image:
+    repeating-linear-gradient(135deg,
+      rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px,
+      transparent 1px, transparent 8px),
+    linear-gradient(180deg, var(--bg-3) 0%, var(--bg-2) 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.sl-root [data-tone="daylight"] .img-ph,
+.sl-root .img-ph[data-theme="light"] {
+  background-image:
+    repeating-linear-gradient(135deg,
+      rgba(0,0,0,0.04) 0, rgba(0,0,0,0.04) 1px,
+      transparent 1px, transparent 8px),
+    linear-gradient(180deg, #EAE5DC 0%, #DCD5C8 100%);
+}
+.sl-root .img-ph .ph-label {
+  font-family: var(--font-mono);
+  font-size: 11px; color: var(--fg-3);
+  padding: 6px 10px; border: 1px dashed var(--line-2);
+  border-radius: 6px;
+  background: rgba(0,0,0,0.15);
+  letter-spacing: 0.02em;
+}
+.sl-root [data-tone="daylight"] .img-ph .ph-label,
+.sl-root .img-ph[data-theme="light"] .ph-label { background: rgba(255,255,255,.6); color: rgba(0,0,0,.55); }
+
+/* Trust/marquee bar */
+.sl-root .hairline-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.sl-root .hairline-row > * {
+  padding: 22px 24px; border-left: 1px solid var(--line);
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.sl-root .hairline-row > *:first-child { border-left: 0; }
+.sl-root .hairline-row strong { font-size: 13px; font-weight: 600; display: block; margin-bottom: 3px; }
+.sl-root .hairline-row span { font-size: 12px; color: var(--fg-2); line-height: 1.4; }
+
+/* Tag */
+.sl-root .tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 10px; border-radius: 6px;
+  font-size: 11px; font-weight: 500;
+  border: 1px solid var(--line-2);
+  color: var(--fg-2);
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+}
+
+/* Divider with label */
+.sl-root .rule-label {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.12em;
+}
+.sl-root .rule-label::before,
+.sl-root .rule-label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+/* Scroll marquee (logos / trust) */
+@keyframes sl-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.sl-root .marquee { overflow: hidden; }
+.sl-root .marquee-track { display: flex; width: max-content; gap: 56px; animation: sl-marquee 40s linear infinite; }
+.sl-root .marquee-track > * { flex-shrink: 0; }
+
+/* Fade in on appear */
+.sl-root .fade-up { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+.sl-root .fade-up.in { opacity: 1; transform: translateY(0); }
+
+/* ── nav-variants.css ── */
+/* SEALIGHT v04 · Navigation variants (A/B/C) */
+
+.sl-root .nav-shell { position: sticky; top: 0; z-index: 40; }
+
+/* ─── Nav A · Mega by Need ────────────────────────────── */
+.sl-root .navA { background: var(--bg); border-bottom: 1px solid var(--line); }
+.sl-root .navA-top {
+  display: flex; align-items: center; gap: 24px;
+  height: 64px; max-width: 1280px; margin: 0 auto; padding: 0 32px;
+}
+.sl-root .navA-logo { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.04em; font-size: 22px; }
+.sl-root .navA-logo em { color: var(--accent); font-style: normal; }
+.sl-root .navA-links { display: flex; gap: 4px; flex: 1; margin-left: 24px; }
+.sl-root .navA-link {
+  padding: 8px 14px; font-size: 14px; font-weight: 500; color: var(--fg-2);
+  border-radius: 8px; display: inline-flex; align-items: center; gap: 4px;
+  transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+  cursor: pointer;
+}
+.sl-root .navA-link:hover, .sl-root .navA-link.open { color: var(--fg); background: var(--bg-2); }
+.sl-root .navA-link svg { width: 10px; height: 10px; opacity: .5; }
+.sl-root .navA-right { display: flex; align-items: center; gap: 12px; }
+.sl-root .navA-fit {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 8px 6px 14px; border: 1px solid var(--line-2); border-radius: 999px;
+  font-size: 13px; color: var(--fg-2);
+}
+.sl-root .navA-fit strong { color: var(--fg); font-weight: 600; }
+.sl-root .navA-fit .go {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+.sl-root .navA-mega {
+  position: absolute; left: 0; right: 0; top: 100%;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  padding: 36px 0 44px;
+  animation: sl-mega-in .3s var(--ease-out);
+}
+@keyframes sl-mega-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.sl-root .navA-mega-grid { display: grid; grid-template-columns: repeat(3, 1fr) 1.1fr; gap: 36px; }
+.sl-root .navA-col h5 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; color: var(--fg-3); text-transform: uppercase; margin-bottom: 14px; font-weight: 500; }
+.sl-root .navA-col ul { display: flex; flex-direction: column; gap: 2px; }
+.sl-root .navA-col li a {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 8px 10px; border-radius: 8px;
+  font-size: 14px; color: var(--fg);
+  transition: background .2s;
+}
+.sl-root .navA-col li a:hover { background: var(--bg-2); color: var(--accent); }
+.sl-root .navA-col li a .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+
+.sl-root .navA-feature {
+  background: var(--bg-2); border-radius: var(--radius);
+  padding: 18px; display: flex; flex-direction: column; gap: 12px;
+}
+.sl-root .navA-feature .img-ph { aspect-ratio: 16/10; border-radius: 10px; }
+.sl-root .navA-feature h6 { font-family: var(--font-display); font-size: 15px; font-weight: 600; }
+.sl-root .navA-feature p { font-size: 12px; color: var(--fg-2); line-height: 1.5; }
+
+/* ─── Nav B · Fitment-first sticky bar ────────────────── */
+.sl-root .navB { background: var(--bg); border-bottom: 1px solid var(--line); }
+.sl-root .navB-top { height: 60px; display: flex; align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 32px; gap: 32px; }
+.sl-root .navB-top .navA-logo { font-size: 20px; }
+.sl-root .navB-top ul { display: flex; gap: 28px; margin-left: 16px; flex: 1; }
+.sl-root .navB-top ul a { font-size: 13px; color: var(--fg-2); font-weight: 500; }
+.sl-root .navB-top ul a:hover { color: var(--accent); }
+.sl-root .navB-bar {
+  background: var(--bg-2); border-top: 1px solid var(--line);
+  padding: 14px 0;
+}
+.sl-root .navB-bar-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 32px;
+  display: grid; grid-template-columns: auto 1fr 1fr 1fr auto auto; gap: 10px; align-items: center;
+}
+.sl-root .navB-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fg-3); padding-right: 14px; border-right: 1px solid var(--line); margin-right: 4px;
+}
+.sl-root .navB-pick {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--surface); cursor: pointer;
+  font-size: 13px; font-weight: 500;
+  transition: border-color .2s;
+}
+.sl-root .navB-pick:hover { border-color: var(--accent); }
+.sl-root .navB-pick .navB-pick-label { color: var(--fg-3); font-size: 11px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .1em; }
+.sl-root .navB-pick .navB-pick-val { color: var(--fg); display: flex; align-items: center; justify-content: space-between; }
+.sl-root .navB-pick .caret { width: 10px; height: 10px; opacity: .5; }
+.sl-root .navB-hint { font-size: 12px; color: var(--fg-3); font-family: var(--font-mono); }
+
+/* ─── Nav C · Minimal + Drawer ───────────────────────── */
+.sl-root .navC { background: transparent; position: absolute; top: 0; left: 0; right: 0; z-index: 40; }
+.sl-root .navC.on-light { color: var(--fg); }
+.sl-root .navC.on-dark { color: #fff; }
+.sl-root .navC-top { height: 72px; display: flex; align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 32px; gap: 24px; }
+.sl-root .navC-top ul { display: flex; gap: 36px; flex: 1; justify-content: center; }
+.sl-root .navC-top ul a { font-size: 13px; font-weight: 500; opacity: .75; letter-spacing: 0; }
+.sl-root .navC-top ul a:hover { opacity: 1; color: var(--accent); }
+.sl-root .navC-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 8px 10px 18px; border: 1px solid currentColor; opacity: .8;
+  border-radius: 999px; font-size: 13px; font-weight: 500;
+  transition: all .3s var(--ease-out);
+}
+.sl-root .navC-cta:hover { opacity: 1; background: var(--accent); color: #fff; border-color: var(--accent); }
+.sl-root .navC-cta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.sl-root .navC-drawer-hint {
+  position: absolute; top: 72px; right: 32px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; opacity: .5;
+}
+
+/* Miniature drawer overlay preview (tucked into Nav C hero) */
+.sl-root .navC-drawer {
+  position: absolute; top: 0; right: 0; bottom: 0; width: 38%;
+  background: var(--surface); color: var(--fg);
+  padding: 96px 32px 32px; display: flex; flex-direction: column; gap: 20px;
+  box-shadow: -40px 0 80px -30px rgba(0,0,0,.5);
+  border-left: 1px solid var(--line);
+  transform: translateX(0);
+}
+.sl-root .navC-drawer h4 { font-family: var(--font-display); font-size: 22px; }
+.sl-root .navC-drawer p { font-size: 13px; color: var(--fg-2); }
+.sl-root .navC-drawer .navB-pick { background: var(--bg); }
+
+/* ── hero-variants.css ── */
+/* SEALIGHT v04 · Hero variants */
+
+/* ─── Hero 1 · Cinematic Beam ───────────────────── */
+.sl-root .hero1 {
+  position: relative; overflow: hidden;
+  background: radial-gradient(ellipse 80% 70% at 65% 40%, rgba(255,102,0,.13) 0%, transparent 55%),
+              linear-gradient(180deg, #111418 0%, #0A0B0E 100%);
+  color: #fff;
+  padding: 120px 0 100px;
+  min-height: 720px;
+}
+.sl-root .hero1 .container { position: relative; z-index: 2; }
+.sl-root .hero1-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 72px; align-items: center; }
+.sl-root .hero1 .sl-eyebrow { color: var(--brand-orange-2); margin-bottom: 20px; }
+.sl-root .hero1 h1 {
+  font-size: clamp(44px, 6.2vw, 84px);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 0.98;
+  margin-bottom: 26px; color: #fff;
+}
+.sl-root .hero1 h1 em { color: var(--brand-orange-2); font-style: normal; }
+.sl-root .hero1 .hero1-sub { font-size: 18px; color: rgba(255,255,255,.72); max-width: 500px; margin-bottom: 36px; font-weight: 300; line-height: 1.55; }
+.sl-root .hero1-fitment {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px; padding: 18px; backdrop-filter: blur(12px) saturate(1.2);
+  box-shadow: 0 20px 60px -20px rgba(0,0,0,.6);
+}
+.sl-root .hero1-fitment .label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.55); margin-bottom: 12px; }
+.sl-root .hero1-fitment .row { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 8px; }
+.sl-root .hero1-fitment select, .sl-root .hero1-fitment .sel {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  color: #fff; padding: 12px 14px; border-radius: 10px; font-size: 13px; font-family: inherit;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(255,255,255,0.5)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.sl-root .hero1-fitment .go { background: var(--accent); color: #fff; border: 0; padding: 12px 18px; border-radius: 10px; font-weight: 600; font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
+.sl-root .hero1-fitment .hint { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 10px; font-family: var(--font-mono); letter-spacing: .04em; }
+.sl-root .hero1-ctas { display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
+.sl-root .hero1-ctas .btn-outline { border-color: rgba(255,255,255,.3); color: #fff; }
+.sl-root .hero1-ctas .btn-outline:hover { background: #fff; color: #0B0C0E; border-color: #fff; }
+.sl-root .hero1-ctas .btn-ghost { color: rgba(255,255,255,.8); border-color: rgba(255,255,255,.3); }
+.sl-root .hero1-ctas .btn-ghost:hover { color: #fff; border-color: #fff; }
+
+.sl-root .hero1-visual { position: relative; aspect-ratio: 4/5; border-radius: 24px; overflow: hidden; background: #05070A; }
+.sl-root .hero1-visual .beam {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 45% at 50% 22%, rgba(255,160,100,0.55) 0%, rgba(255,90,0,.25) 30%, transparent 60%),
+    radial-gradient(ellipse 60% 35% at 50% 22%, rgba(255,220,180,.9) 0%, rgba(255,180,120,0) 40%);
+}
+.sl-root .hero1-visual::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,.3) 70%, rgba(0,0,0,.8) 100%);
+}
+.sl-root .hero1-visual .hl {
+  position: absolute; top: 19%; left: 50%; transform: translateX(-50%);
+  width: 14px; height: 14px; border-radius: 50%; background: #fff; box-shadow: 0 0 40px 10px #fff, 0 0 80px 30px rgba(255,180,120,.8);
+}
+.sl-root .hero1-visual .hl.r { left: calc(50% + 50px); }
+.sl-root .hero1-visual .hl.l { left: calc(50% - 50px); }
+.sl-root .hero1-visual .ph-label {
+  position: absolute; bottom: 20px; left: 20px; z-index: 3;
+  font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.sl-root .hero1-meta {
+  position: absolute; top: 20px; right: 20px; z-index: 3;
+  display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+  font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.7); letter-spacing: .08em;
+}
+.sl-root .hero1-meta .k { display: flex; gap: 8px; align-items: center; background: rgba(0,0,0,.5); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,.1); }
+.sl-root .hero1-meta .k b { color: #fff; font-weight: 600; }
+
+.sl-root .hero1-marquee {
+  margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,.08);
+  display: flex; gap: 48px; overflow: hidden;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5);
+}
+
+/* ─── Hero 2 · Editorial Split ─────────────────── */
+.sl-root .hero2 {
+  background: var(--bg); padding: 56px 0 80px;
+  position: relative;
+}
+.sl-root .hero2-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+  min-height: 620px; align-items: stretch;
+}
+.sl-root .hero2-left {
+  padding: 40px 20px 40px 0; display: flex; flex-direction: column; justify-content: space-between;
+}
+.sl-root .hero2-kicker {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--fg-3);
+  letter-spacing: .14em; text-transform: uppercase;
+}
+.sl-root .hero2-kicker .bullet { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.sl-root .hero2 h1 {
+  font-size: clamp(48px, 7vw, 96px); font-weight: 700; letter-spacing: -0.035em; line-height: 0.95;
+  margin: 28px 0; color: var(--fg);
+}
+.sl-root .hero2 h1 .serif { font-family: 'Instrument Serif', 'Times New Roman', serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; color: var(--accent); }
+.sl-root .hero2-sub { font-size: 18px; color: var(--fg-2); max-width: 46ch; line-height: 1.55; margin-bottom: 32px; }
+.sl-root .hero2-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.sl-root .hero2-metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding-top: 40px; margin-top: 40px; border-top: 1px solid var(--line); }
+.sl-root .hero2-metric .n { font-family: var(--font-display); font-size: 32px; font-weight: 700; letter-spacing: -0.02em; color: var(--fg); }
+.sl-root .hero2-metric .l { font-size: 12px; color: var(--fg-2); margin-top: 2px; line-height: 1.4; }
+
+.sl-root .hero2-right { position: relative; display: flex; flex-direction: column; gap: 16px; }
+.sl-root .hero2-product {
+  flex: 1; border-radius: 24px; position: relative; overflow: hidden;
+  background:
+    radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,140,60,.2) 0%, transparent 70%),
+    linear-gradient(160deg, #E8E2D6 0%, #DCD4C3 100%);
+  min-height: 420px;
+}
+.sl-root [data-tone="midnight"] .hero2-product { background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,140,60,.3) 0%, transparent 70%), linear-gradient(160deg, #1A1C20 0%, #0F1114 100%); }
+.sl-root .hero2-product .product-shape {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 62%; aspect-ratio: 1/1.4;
+  background: linear-gradient(180deg, #2C2E33 0%, #121318 100%);
+  border-radius: 40% 40% 18px 18px / 35% 35% 18px 18px;
+  box-shadow: inset 0 -20px 60px rgba(0,0,0,.5), inset 0 20px 40px rgba(255,255,255,.04), 0 40px 80px -20px rgba(0,0,0,.4);
+}
+.sl-root .hero2-product .product-shape::before {
+  content: ""; position: absolute; top: 8%; left: 50%; transform: translateX(-50%);
+  width: 70%; aspect-ratio: 1/1; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #fff 0%, #FFE3B0 30%, #FF9540 50%, rgba(255,102,0,0) 75%);
+  filter: blur(1px);
+}
+.sl-root .hero2-product .product-shape::after {
+  content: ""; position: absolute; left: 20%; right: 20%; bottom: 15%;
+  height: 4px; background: var(--accent); border-radius: 2px;
+  box-shadow: 0 0 20px var(--accent);
+}
+.sl-root .hero2-product .ph-label {
+  position: absolute; bottom: 18px; left: 18px;
+  font-family: var(--font-mono); font-size: 10px; color: var(--fg-3); letter-spacing: .1em; text-transform: uppercase;
+}
+.sl-root .hero2-product .p-meta {
+  position: absolute; top: 18px; left: 18px; display: flex; flex-direction: column; gap: 4px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; color: var(--fg-3); text-transform: uppercase;
+}
+.sl-root .hero2-product .p-meta b { color: var(--fg); font-weight: 600; font-size: 11px; }
+
+.sl-root .hero2-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 110px; }
+.sl-root .hero2-thumbs .img-ph { aspect-ratio: auto; height: 100%; border-radius: 14px; }
+
+/* ─── Hero 3 · Interactive Fitment-first ──────── */
+.sl-root .hero3 {
+  position: relative; overflow: hidden; color: #fff;
+  padding: 120px 0 80px;
+  background: linear-gradient(180deg, #0C0D10 0%, #15181D 100%);
+  min-height: 760px;
+}
+.sl-root .hero3-video {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 35% at 30% 30%, rgba(255,120,40,.35) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 70% 60%, rgba(255,80,0,.25) 0%, transparent 60%),
+    linear-gradient(180deg, #0C0D10 0%, #15181D 100%);
+}
+.sl-root .hero3-video::after {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0, rgba(255,255,255,.02) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode: overlay;
+}
+.sl-root .hero3-video .ph-label {
+  position: absolute; bottom: 20px; left: 20px; z-index: 2;
+  font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: .1em; text-transform: uppercase;
+}
+.sl-root .hero3-inner { position: relative; z-index: 2; text-align: center; }
+.sl-root .hero3-kicker { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.04); font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.75); }
+.sl-root .hero3-kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); animation: sl-pulse 1.6s infinite; }
+@keyframes sl-pulse { 50% { opacity: .4; } }
+.sl-root .hero3 h1 {
+  margin: 28px auto 18px;
+  font-size: clamp(48px, 6.5vw, 86px); letter-spacing: -0.032em; line-height: 1;
+  color: #fff; max-width: 18ch;
+}
+.sl-root .hero3-sub { font-size: 17px; color: rgba(255,255,255,.72); max-width: 560px; margin: 0 auto 48px; font-weight: 300; }
+.sl-root .hero3-fit {
+  max-width: 880px; margin: 0 auto;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px; padding: 8px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 30px 80px -30px rgba(0,0,0,.7);
+}
+.sl-root .hero3-fit-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1.2fr; gap: 4px;
+  align-items: stretch;
+}
+.sl-root .hero3-slot {
+  padding: 22px 20px;
+  display: flex; flex-direction: column; gap: 6px; text-align: left;
+  border-radius: 14px; cursor: pointer;
+  transition: background .2s;
+}
+.sl-root .hero3-slot:hover { background: rgba(255,255,255,.04); }
+.sl-root .hero3-slot.active { background: rgba(255,255,255,.06); }
+.sl-root .hero3-slot .k { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.sl-root .hero3-slot .v { font-size: 20px; font-weight: 600; color: #fff; letter-spacing: -0.01em; display: flex; justify-content: space-between; align-items: center; }
+.sl-root .hero3-slot .v span.placeholder { color: rgba(255,255,255,.4); font-weight: 400; }
+.sl-root .hero3-fit .go {
+  background: var(--accent); color: #fff; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 600; gap: 10px;
+  transition: background .2s;
+}
+.sl-root .hero3-fit .go:hover { background: var(--brand-orange-deep); }
+.sl-root .hero3-altlinks { margin-top: 24px; display: flex; justify-content: center; gap: 28px; font-size: 13px; color: rgba(255,255,255,.6); flex-wrap: wrap; }
+.sl-root .hero3-altlinks a { border-bottom: 1px solid rgba(255,255,255,.2); padding-bottom: 2px; }
+.sl-root .hero3-altlinks a:hover { color: #fff; border-color: var(--accent); }
+.sl-root .hero3-stats {
+  margin-top: 72px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 32px;
+  color: rgba(255,255,255,.7);
+}
+.sl-root .hero3-stats > div { padding: 0 24px; border-left: 1px solid rgba(255,255,255,.06); }
+.sl-root .hero3-stats > div:first-child { border-left: 0; }
+.sl-root .hero3-stats .n { font-family: var(--font-display); font-size: 30px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+.sl-root .hero3-stats .l { font-size: 12px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .1em; margin-top: 6px; }
+
+/* ── modules.css ── */
+/* SEALIGHT v04 · Shared modules — product cards, UGC, support */
+
+/* Sticky sub-nav under hero */
+.sl-root .subnav { position: sticky; top: 64px; z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
+.sl-root .subnav-inner { max-width: 1280px; margin: 0 auto; padding: 0 32px; display: flex; gap: 28px; height: 52px; align-items: center; overflow-x: auto; }
+.sl-root .subnav a { font-size: 13px; font-weight: 500; color: var(--fg-2); white-space: nowrap; padding: 6px 0; border-bottom: 2px solid transparent; }
+.sl-root .subnav a.active { color: var(--fg); border-color: var(--accent); }
+
+/* Scene strip */
+.sl-root .scene-row { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 16px; }
+.sl-root .scene-card { position: relative; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; background: var(--bg-3); cursor: pointer; transition: transform .5s var(--ease-out); }
+.sl-root .scene-card.featured { aspect-ratio: 4/5; }
+.sl-root .scene-card:hover { transform: translateY(-4px); }
+.sl-root .scene-card .bg { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(255,102,0,.3), rgba(0,0,0,.0)), linear-gradient(180deg, #1B1D22 0%, #0C0D10 100%); }
+.sl-root .scene-card.featured .bg { background: radial-gradient(ellipse 70% 50% at 60% 40%, rgba(255,150,60,.35), transparent 60%), linear-gradient(180deg, #15171B 0%, #06070A 100%); }
+.sl-root .scene-card .mask { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,.8) 100%); }
+.sl-root .scene-card .body { position: absolute; inset: 0; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; color: #fff; }
+.sl-root .scene-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: #fff; line-height: 1.1; max-width: 14ch; }
+.sl-root .scene-card.featured h3 { font-size: 34px; max-width: 16ch; }
+.sl-root .scene-card p { font-size: 13px; color: rgba(255,255,255,.75); margin-top: 8px; max-width: 28ch; }
+.sl-root .scene-card .tag { color: #fff; border-color: rgba(255,255,255,.25); align-self: flex-start; }
+.sl-root .scene-card .cta-arrow { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; font-weight: 500; color: #fff; }
+
+/* Product series cards */
+.sl-root .series-rail { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+.sl-root .series-card {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 22px;
+  display: flex; flex-direction: column; gap: 14px;
+  transition: border-color var(--dur) var(--ease-out), transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+}
+.sl-root .series-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.sl-root .series-card.popular { border-color: var(--accent); }
+.sl-root .series-card .popular-flag { position: absolute; top: 14px; right: 14px; z-index: 2; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); background: var(--surface); border: 1px solid var(--accent); padding: 3px 8px; border-radius: 4px; }
+.sl-root .series-card .img-ph { aspect-ratio: 1/1; border-radius: 10px; }
+.sl-root .series-card h3 { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+.sl-root .series-card .tagline { font-size: 13px; color: var(--fg-2); }
+.sl-root .series-card .specs { display: flex; flex-direction: column; gap: 6px; padding: 10px 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); }
+.sl-root .series-card .specs li { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 12px; color: var(--fg-2); font-family: var(--font-mono); }
+.sl-root .series-card .specs li b { color: var(--fg); font-weight: 600; }
+.sl-root .series-card .bar { flex: 1; height: 4px; background: var(--bg-2); border-radius: 2px; margin: 0 8px; position: relative; }
+.sl-root .series-card .bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); border-radius: 2px; }
+.sl-root .series-card .price { font-family: var(--font-mono); font-size: 12px; color: var(--fg-2); }
+.sl-root .series-card .price b { color: var(--fg); font-size: 15px; font-weight: 700; letter-spacing: 0; }
+
+/* Before/After */
+.sl-root .ba-wrap {
+  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  aspect-ratio: 21/9; background: #000;
+}
+.sl-root .ba-half { position: absolute; inset: 0; }
+.sl-root .ba-half.before { background: radial-gradient(ellipse 40% 30% at 50% 45%, rgba(255,220,120,.35), transparent 60%), #191611; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
+.sl-root .ba-half.after { background: radial-gradient(ellipse 55% 40% at 50% 45%, rgba(255,240,220,.85) 0%, rgba(255,180,100,.35) 30%, transparent 60%), #080A0C; clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); }
+.sl-root .ba-divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: rgba(255,255,255,.8); transform: translateX(-50%); }
+.sl-root .ba-divider::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; border-radius: 50%; background: #fff; }
+.sl-root .ba-label { position: absolute; bottom: 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; padding: 5px 10px; border-radius: 4px; }
+.sl-root .ba-label.left { left: 16px; background: rgba(0,0,0,.5); color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.15); }
+.sl-root .ba-label.right { right: 16px; background: var(--accent); color: #fff; }
+
+/* UGC reviews */
+.sl-root .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.sl-root .review-card { padding: 22px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; }
+.sl-root .review-card.dark { background: var(--bg-2); color: #fff; }
+.sl-root .review-card .img-ph { aspect-ratio: 4/3; border-radius: 10px; }
+.sl-root .review-card .stars { color: var(--accent); letter-spacing: 2px; font-size: 13px; }
+.sl-root .review-card blockquote { font-size: 14px; line-height: 1.55; }
+.sl-root .review-card .meta { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--fg-3); font-family: var(--font-mono); }
+.sl-root .review-card.dark .meta { color: rgba(255,255,255,.5); }
+
+/* Footer */
+.sl-root .site-footer { background: var(--bg); border-top: 1px solid var(--line); padding: 72px 0 36px; }
+.sl-root .site-footer .cols { display: grid; grid-template-columns: 2fr repeat(4, 1fr); gap: 40px; margin-bottom: 48px; }
+.sl-root .site-footer h5 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 14px; font-weight: 500; }
+.sl-root .site-footer ul { display: flex; flex-direction: column; gap: 8px; }
+.sl-root .site-footer ul a { font-size: 13px; color: var(--fg-2); }
+.sl-root .site-footer ul a:hover { color: var(--accent); }
+.sl-root .site-footer .brand p { font-size: 13px; color: var(--fg-2); max-width: 34ch; line-height: 1.55; margin-top: 14px; }
+.sl-root .site-footer .legal { border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; color: var(--fg-3); font-size: 12px; font-family: var(--font-mono); letter-spacing: .04em; }
+
+/* Breadcrumbs for secondary pages */
+.sl-root .crumbs { display: flex; gap: 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--fg-3); }
+.sl-root .crumbs a { color: var(--fg-2); }
+.sl-root .crumbs span { opacity: .4; }
+
+
+/* ── v05 page chrome ── */
+html, body { margin: 0; background: #F7F5F1; overflow-x: hidden; }
+body { max-width: 100vw; }
+#root { min-height: 100vh; }
+
+/* ── responsive (mobile, ≤ 900px) ── */
+@media (max-width: 900px) {
+  .sl-root .container { padding-left: 20px !important; padding-right: 20px !important; }
+  .sl-root .section-pad,
+  .sl-root .section-pad-sm { padding-top: 56px; padding-bottom: 56px; }
+
+  /* Nav B */
+  .sl-root .navB-top { flex-wrap: wrap; gap: 12px; padding: 14px 20px !important; }
+  .sl-root .navB-top ul { display: none; }
+  .sl-root .navB-bar { padding: 12px 0; }
+  .sl-root .navB-bar-inner { flex-wrap: wrap; gap: 8px; padding: 0 20px !important; }
+  .sl-root .navB-pick { flex: 1 1 calc(50% - 4px); min-width: 0; }
+  .sl-root .navB-label { flex-basis: 100%; }
+  .sl-root .navB-hint { display: none; }
+
+  /* Hero 3 fitment row */
+  .sl-root .hero3 h1 { font-size: 40px !important; }
+  .sl-root .hero3-fit-row { flex-wrap: wrap; gap: 8px; }
+  .sl-root .hero3-slot { flex: 1 1 calc(50% - 4px); min-width: 0; }
+  .sl-root .hero3-fit-row .go { flex: 1 1 100%; }
+  .sl-root .hero3-stats { gap: 18px; flex-wrap: wrap; }
+  .sl-root .hero3-altlinks { flex-wrap: wrap; gap: 10px; }
+
+  /* Scenes */
+  .sl-root .scene-row { grid-template-columns: 1fr !important; }
+  .sl-root .scene-card.featured { grid-column: auto !important; grid-row: auto !important; aspect-ratio: 16/10; }
+
+  /* Series rail */
+  .sl-root .series-rail { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
+  .sl-root .series-card h3 { font-size: 22px !important; }
+
+  /* Reviews */
+  .sl-root .reviews-grid { grid-template-columns: 1fr !important; }
+
+  /* Trust bar */
+  .sl-root .hairline-row { flex-direction: column; gap: 16px; padding: 20px 0 !important; }
+
+  /* Section head */
+  .sl-root .sec-head { grid-template-columns: 1fr !important; gap: 16px; }
+  .sl-root .sec-head h2 { font-size: clamp(28px, 8vw, 42px) !important; }
+
+  /* Footer */
+  .sl-root .site-footer .cols { grid-template-columns: 1fr 1fr !important; gap: 32px 20px; }
+  .sl-root .site-footer .brand { grid-column: 1 / -1; }
+
+  /* Before/After — smaller height */
+  .sl-root .ba-wrap { aspect-ratio: 4/3 !important; }
+
+  /* Hero 1 / 2 grids collapse */
+  .sl-root .hero1-grid, .sl-root .hero2-grid { grid-template-columns: 1fr !important; }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" data-file="navs.jsx">
+// SEALIGHT v04 · Nav variant components
+const { useState } = React;
+
+const Logo = ({ dark }) => (
+  <a href="https://sealight-led.com/" className="navA-logo" style={dark ? { color: '#fff' } : {}}>
+    SEA<em>LIGHT</em>
+  </a>
+);
+
+function NavA({ onTone }) {
+  const [open, setOpen] = useState(null);
+  const cols = {
+    need: { title: 'Shop by Need', items: [
+      ['See farther at night', 'Brightness', 'https://sealight-led.com/category/headlight-bulbs'],
+      ['Rain · Fog · Snow', 'Weather', 'https://sealight-led.com/category/fog-light-bulbs'],
+      ['Easy self-install', 'Plug & Play', 'https://sealight-led.com/category/headlight-bulbs'],
+      ['Fits any housing', 'Universal', 'https://sealight-led.com/collection/forward-lighting'],
+      ['Off-road / Pickup', 'Trail', 'https://sealight-led.com/collection/led-fog-light-bulbs-extreme-conditions'],
+    ]},
+    vehicle: { title: 'Shop by Vehicle', items: [
+      ['Year → Make → Model', 'Fitment', 'https://sealight-led.com/automotive-bulb-finder'],
+      ['Ford F-150 (2015-24)', 'Popular', 'https://sealight-led.com/automotive-bulb-finder'],
+      ['Toyota Tacoma', 'Popular', 'https://sealight-led.com/automotive-bulb-finder'],
+      ['Jeep Wrangler JL', 'Popular', 'https://sealight-led.com/automotive-bulb-finder'],
+      ['Browse all 10k+ fits', 'All', 'https://sealight-led.com/automotive-bulb-finder'],
+    ]},
+    bulb: { title: 'Shop by Bulb Size', items: [
+      ['H11 / H8 / H9', 'Common', 'https://sealight-led.com/category/headlight-bulbs'],
+      ['9005 / HB3', 'Common', 'https://sealight-led.com/category/headlight-bulbs'],
+      ['9006 / HB4', 'Common', 'https://sealight-led.com/category/headlight-bulbs'],
+      ['H7 · H4 · 9012', 'Common', 'https://sealight-led.com/category/headlight-bulbs'],
+      ['Part number lookup', 'Tool', 'https://sealight-led.com/automotive-bulb-finder'],
+    ]},
+  };
+  return (
+    <div className="navA nav-shell" onMouseLeave={() => setOpen(null)}>
+      <div className="navA-top">
+        <Logo />
+        <nav className="navA-links">
+          {['need', 'vehicle', 'bulb'].map(k => (
+            <span key={k}
+              className={`navA-link${open === k ? ' open' : ''}`}
+              onMouseEnter={() => setOpen(k)}
+              onClick={() => setOpen(open === k ? null : k)}>
+              {cols[k].title}
+              <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none"/></svg>
+            </span>
+          ))}
+          <a className="navA-link" href="https://sealight-led.com/page/help-center">Support</a>
+          <a className="navA-link" href="https://sealight-led.com/blog">Learn</a>
+        </nav>
+        <div className="navA-right">
+          <div className="navA-fit">
+            <span>2022 · Ford · <strong>F-150</strong></span>
+            <span className="go"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2l4 4-4 4" stroke="#fff" strokeWidth="1.8" strokeLinecap="round"/></svg></span>
+          </div>
+        </div>
+      </div>
+      {open && (
+        <div className="navA-mega" onMouseEnter={() => setOpen(open)}>
+          <div className="container">
+            <div className="navA-mega-grid">
+              {['need', 'vehicle', 'bulb'].map(k => (
+                <div key={k} className="navA-col">
+                  <h5>{cols[k].title}</h5>
+                  <ul>{cols[k].items.map(([name, meta, url]) => (
+                    <li key={name}><a href={url}><span>{name}</span><span className="meta">{meta}</span></a></li>
+                  ))}</ul>
+                </div>
+              ))}
+              <div className="navA-feature">
+                <div className="img-ph" style={{ height: 100 }}><span className="ph-label">PRODUCT · SCOPARC S7S</span></div>
+                <h6>New · Scoparc S7S</h6>
+                <p>500% brighter than OEM halogen with sharp cutoff line. Now fitting 1,200+ vehicles.</p>
+                <a href="https://sealight-led.com/collection/forward-lighting" className="btn btn-primary btn-sm">Shop Scoparc S7S →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function NavB() {
+  return (
+    <div className="navB nav-shell">
+      <div className="navB-top">
+        <Logo />
+        <ul>
+          <li><a href="https://sealight-led.com/category/headlight-bulbs">Headlights</a></li>
+          <li><a href="https://sealight-led.com/category/fog-light-bulbs">Fog & Driving</a></li>
+          <li><a href="https://sealight-led.com/collection/interior-lights">Interior</a></li>
+          <li><a href="https://sealight-led.com/collection/led-fog-light-bulbs-extreme-conditions">Off-road</a></li>
+          <li><a href="https://sealight-led.com/collection/package-combo">Combo Kits</a></li>
+          <li><a href="https://sealight-led.com/page/help-center">Support</a></li>
+        </ul>
+        <a href="https://sealight-led.com/automotive-bulb-finder" className="btn btn-outline btn-sm">Find My Bulb</a>
+      </div>
+      <div className="navB-bar">
+        <div className="navB-bar-inner">
+          <span className="navB-label">Your Vehicle</span>
+          <div className="navB-pick">
+            <div>
+              <div className="navB-pick-label">Year</div>
+              <div className="navB-pick-val">2022 <svg className="caret" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none"/></svg></div>
+            </div>
+          </div>
+          <div className="navB-pick">
+            <div>
+              <div className="navB-pick-label">Make</div>
+              <div className="navB-pick-val">Ford <svg className="caret" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none"/></svg></div>
+            </div>
+          </div>
+          <div className="navB-pick">
+            <div>
+              <div className="navB-pick-label">Model</div>
+              <div className="navB-pick-val">F-150 <svg className="caret" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none"/></svg></div>
+            </div>
+          </div>
+          <a href="https://sealight-led.com/automotive-bulb-finder" className="btn btn-primary btn-sm">Find My Bulb →</a>
+          <span className="navB-hint">12 matches</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NavC({ theme = 'dark', showDrawer }) {
+  return (
+    <header className={`navC ${theme === 'dark' ? 'on-dark' : 'on-light'}`}>
+      <div className="navC-top">
+        <Logo dark={theme === 'dark'} />
+        <nav><ul>
+          <li><a href="https://sealight-led.com/category/headlight-bulbs">Shop</a></li>
+          <li><a href="https://sealight-led.com/collection/forward-lighting">Series</a></li>
+          <li><a href="https://sealight-led.com/page/help-center">Support</a></li>
+          <li><a href="https://sealight-led.com/blog">Learn</a></li>
+        </ul></nav>
+        <a href="https://sealight-led.com/automotive-bulb-finder" className="navC-cta">
+          <span className="dot" />
+          Find My Bulb
+        </a>
+      </div>
+      {showDrawer && (
+        <div className="navC-drawer">
+          <div className="crumbs"><a>Home</a><span>/</span><span>Find My Bulb</span></div>
+          <h4>Tell us about your vehicle.</h4>
+          <p>We'll show only bulbs verified to fit — no guessing.</p>
+          <div className="navB-pick"><div><div className="navB-pick-label">Year</div><div className="navB-pick-val">Select year <svg className="caret" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none"/></svg></div></div></div>
+          <div className="navB-pick"><div><div className="navB-pick-label">Make</div><div className="navB-pick-val">—<svg className="caret" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none"/></svg></div></div></div>
+          <div className="navB-pick"><div><div className="navB-pick-label">Model</div><div className="navB-pick-val">—<svg className="caret" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" fill="none"/></svg></div></div></div>
+          <a href="https://sealight-led.com/automotive-bulb-finder" className="btn btn-primary">Show compatible bulbs →</a>
+          <a href="https://sealight-led.com/automotive-bulb-finder" className="sl-mono" style={{ fontSize: 11, color: 'var(--fg-3)', textTransform: 'uppercase', letterSpacing: '.12em' }}>Don't know? Browse by part number →</a>
+        </div>
+      )}
+    </header>
+  );
+}
+
+Object.assign(window, { NavA, NavB, NavC, Logo });
+
+</script>
+
+<script type="text/babel" data-file="heros.jsx">
+// SEALIGHT v04 · Hero variants
+
+function Hero1Cinematic() {
+  return (
+    <section className="hero1">
+      <div className="container">
+        <div className="hero1-grid">
+          <div>
+            <div className="sl-eyebrow">Night · Weather · Trail</div>
+            <h1>See the road.<br/>Own the <em>dark.</em></h1>
+            <p className="hero1-sub">Engineered LED upgrades with verified fitment for 10,000+ vehicles. Choose by how you drive — brightness, beam precision, or plug-and-play simplicity.</p>
+            <div className="hero1-fitment">
+              <div className="label">Find bulbs that fit your vehicle</div>
+              <div className="row">
+                <div className="sel">2022</div>
+                <div className="sel">Ford</div>
+                <div className="sel">F-150</div>
+                <a href="https://sealight-led.com/automotive-bulb-finder" className="go">Find My Bulb
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round"/></svg>
+                </a>
+              </div>
+              <div className="hint">✓ FITMENT VERIFIED &nbsp;·&nbsp; ✓ PLUG-AND-PLAY OPTIONS &nbsp;·&nbsp; ✓ SHIPS FROM US</div>
+            </div>
+            <div className="hero1-ctas">
+              <a href="https://sealight-led.com/category/headlight-bulbs" className="btn btn-outline">Shop by driving need</a>
+              <a href="https://sealight-led.com/collection/forward-lighting" className="btn btn-ghost" style={{ borderBottom: '1px solid currentColor', borderRadius: 0, padding: '12px 2px' }}>Compare series →</a>
+            </div>
+          </div>
+          <div className="hero1-visual">
+            <div className="beam" />
+            <div className="hl l" />
+            <div className="hl r" />
+            <div className="hero1-meta">
+              <div className="k">Series · <b>SCOPARC S7S</b></div>
+              <div className="k">Lumens · <b>12,000</b></div>
+              <div className="k">Kelvin · <b>6,500K</b></div>
+            </div>
+            <div className="ph-label">[ Hero — wet highway at night, headlight beams forward ]</div>
+          </div>
+        </div>
+        <div className="hero1-marquee">
+          <span>500,000+ DRIVERS</span>
+          <span>·</span>
+          <span>10,000+ VEHICLE FITMENTS</span>
+          <span>·</span>
+          <span>4.7 ★ ACROSS 38,000 REVIEWS</span>
+          <span>·</span>
+          <span>SHIPS IN 24 HOURS</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Hero2Editorial() {
+  return (
+    <section className="hero2">
+      <div className="container">
+        <div className="hero2-grid">
+          <div className="hero2-left">
+            <div>
+              <div className="hero2-kicker"><span className="bullet" />SEALIGHT · SCOPARC S7S · 2026</div>
+              <h1>Brighter. Cleaner.<br/><span className="serif">Finally,</span> yours.</h1>
+              <p className="hero2-sub">An LED headlight system shaped by how Americans actually drive — rain-soaked commutes, black-ice back roads, long Arizona nights. Fit verified. Beam sculpted. Install simplified.</p>
+              <div className="hero2-ctas">
+                <a href="https://sealight-led.com/collection/forward-lighting" className="btn btn-primary btn-lg">Shop Scoparc S7S →</a>
+                <a href="https://sealight-led.com/automotive-bulb-finder" className="btn btn-outline btn-lg">Find My Bulb</a>
+              </div>
+            </div>
+            <div className="hero2-metric-row">
+              <div className="hero2-metric"><div className="n">300%</div><div className="l">Brighter than OEM halogen</div></div>
+              <div className="hero2-metric"><div className="n">10K+</div><div className="l">Verified vehicle fitments</div></div>
+              <div className="hero2-metric"><div className="n">4.7★</div><div className="l">Across 38,000 reviews</div></div>
+            </div>
+          </div>
+          <div className="hero2-right">
+            <div className="hero2-product">
+              <div className="product-shape" />
+              <div className="p-meta">
+                <span>SERIES</span><b>SCOPARC S7S</b>
+              </div>
+              <div className="ph-label">[ Product hero — studio lit, 3/4 angle ]</div>
+            </div>
+            <div className="hero2-thumbs">
+              <div className="img-ph"><span className="ph-label">SCOPARC S2</span></div>
+              <div className="img-ph"><span className="ph-label">SCOPARC S1</span></div>
+              <div className="img-ph"><span className="ph-label">LAXMAS L2S</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Hero3Fitment() {
+  return (
+    <section className="hero3">
+      <div className="hero3-video">
+        <span className="ph-label">[ Muted looping video — night driving, beam sweeping curve ]</span>
+      </div>
+      <div className="container">
+        <div className="hero3-inner">
+          <div className="hero3-kicker"><span className="dot" />Fitment-first experience</div>
+          <h1>Start with your vehicle. Everything else follows.</h1>
+          <p className="hero3-sub">Tell us your year, make, and model. We'll surface only bulbs verified to fit — plus the right upgrade for how you drive.</p>
+          <div className="hero3-fit">
+            <div className="hero3-fit-row">
+              <div className="hero3-slot active">
+                <span className="k">Year</span>
+                <span className="v">2022 <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="rgba(255,255,255,.4)" strokeWidth="1.5" fill="none"/></svg></span>
+              </div>
+              <div className="hero3-slot">
+                <span className="k">Make</span>
+                <span className="v">Ford <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="rgba(255,255,255,.4)" strokeWidth="1.5" fill="none"/></svg></span>
+              </div>
+              <div className="hero3-slot">
+                <span className="k">Model</span>
+                <span className="v"><span className="placeholder">Select model</span> <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="rgba(255,255,255,.4)" strokeWidth="1.5" fill="none"/></svg></span>
+              </div>
+              <a href="https://sealight-led.com/automotive-bulb-finder" className="go">Show 12 compatible bulbs
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3l5 5-5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round"/></svg>
+              </a>
+            </div>
+          </div>
+          <div className="hero3-altlinks">
+            <a href="https://sealight-led.com/automotive-bulb-finder">Know your part number? Search directly</a>
+            <a href="https://sealight-led.com/category/headlight-bulbs">Browse by driving need</a>
+            <a href="https://sealight-led.com/collection/forward-lighting">Compare all series</a>
+          </div>
+          <div className="hero3-stats">
+            <div><div className="n">500K+</div><div className="l">Drivers trust</div></div>
+            <div><div className="n">10K+</div><div className="l">Vehicle fits</div></div>
+            <div><div className="n">24h</div><div className="l">US shipping</div></div>
+            <div><div className="n">30-day</div><div className="l">Returns</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+Object.assign(window, { Hero1Cinematic, Hero2Editorial, Hero3Fitment });
+
+</script>
+
+<script type="text/babel" data-file="modules.jsx">
+// SEALIGHT v04 · Shared modules (scenes, series, reviews, footer) used across all 3 full-page assemblies
+
+function TrustBar() {
+  return (
+    <section className="section-pad-sm" style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', padding: '0' }}>
+      <div className="container">
+        <ul className="hairline-row">
+          <li><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="var(--accent)" strokeWidth="1.6"><rect x="3" y="6" width="16" height="12" rx="2"/><path d="M7 11l3 3 6-6" strokeLinecap="round"/></svg><div><strong>Verified Vehicle Fitment</strong><span>Confirmed for your exact year, make &amp; model.</span></div></li>
+          <li><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="var(--accent)" strokeWidth="1.6"><circle cx="11" cy="11" r="8"/><path d="M7 11h8M11 7v8" strokeLinecap="round"/></svg><div><strong>Plug-and-Play Options</strong><span>No programmer. Drop-in replacements that just work.</span></div></li>
+          <li><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="var(--accent)" strokeWidth="1.6"><rect x="2" y="7" width="18" height="10" rx="2"/><path d="M2 11h18M6 4l2 3M16 4l-2 3" strokeLinecap="round"/></svg><div><strong>Free US Shipping</strong><span>Ships from US warehouse — 2-5 business days.</span></div></li>
+          <li><svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="var(--accent)" strokeWidth="1.6"><path d="M11 3l2.5 5 5.5.8-4 4 1 5.5L11 16l-5 2.3 1-5.5-4-4 5.5-.8z" strokeLinejoin="round"/></svg><div><strong>30-Day Returns + Expert Support</strong><span>Hassle-free returns and live help before &amp; after.</span></div></li>
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+function ScenesModule() {
+  return (
+    <section className="section-pad" style={{ background: 'var(--bg)' }}>
+      <div className="container">
+        <div className="sec-head">
+          <h2>Shop by how you actually drive.</h2>
+          <div className="sec-kicker">
+            <div className="sl-eyebrow">01 · DRIVING NEED</div>
+            <p>Skip the spec sheets. Tell us the problem you're solving — dark back roads, glare, tricky install — and we'll narrow the lineup.</p>
+          </div>
+        </div>
+        <div className="scene-row">
+          <div className="scene-card featured">
+            <div className="bg" />
+            <div className="mask" />
+            <div className="body">
+              <span className="tag">★ FLAGSHIP SCENE</span>
+              <div>
+                <h3>I want to see farther on dark highways.</h3>
+                <p>Maximum usable output for unlit two-lanes, long hauls, and rural night driving.</p>
+                <a href="https://sealight-led.com/category/headlight-bulbs" className="cta-arrow" style={{ marginTop: 18, textDecoration: 'none' }}>Shop brightness upgrades
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2l5 5-5 5" stroke="#fff" strokeWidth="2" strokeLinecap="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="scene-card">
+            <div className="bg" style={{ background: 'linear-gradient(180deg,#2B2E35 0%,#111318 100%)' }}/>
+            <div className="mask" />
+            <div className="body">
+              <span className="tag">WEATHER</span>
+              <div><h3>Rain, fog, snow</h3><p>Penetrating beam patterns for low-visibility weather.</p></div>
+            </div>
+          </div>
+          <div className="scene-card">
+            <div className="bg" style={{ background: 'linear-gradient(180deg,#232630 0%,#0D0F14 100%)' }}/>
+            <div className="mask" />
+            <div className="body">
+              <span className="tag">INSTALL</span>
+              <div><h3>5-minute install</h3><p>No tools, no coding. Plug-and-play drop-ins.</p></div>
+            </div>
+          </div>
+          <div className="scene-card">
+            <div className="bg" style={{ background: 'linear-gradient(180deg,#332315 0%,#120A04 100%)' }}/>
+            <div className="mask" />
+            <div className="body">
+              <span className="tag">UNIVERSAL</span>
+              <div><h3>360° rotating collar</h3><p>Fits odd housings — dial in the cutoff perfectly.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BeforeAfterModule() {
+  const [pos, setPos] = React.useState(50);
+  const wrapRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    let dragging = false;
+
+    const setFromClient = (clientX) => {
+      const r = el.getBoundingClientRect();
+      const p = Math.max(0, Math.min(100, ((clientX - r.left) / r.width) * 100));
+      setPos(p);
+    };
+
+    const onDown = (e) => {
+      dragging = true;
+      if (e.pointerId != null) {
+        try { el.setPointerCapture(e.pointerId); } catch {}
+      }
+      setFromClient(e.clientX);
+      e.preventDefault();
+    };
+    const onMove = (e) => {
+      if (!dragging) return;
+      setFromClient(e.clientX);
+    };
+    const onUp = () => { dragging = false; };
+    const onKey = (e) => {
+      if (e.key === 'ArrowLeft')  { setPos(p => Math.max(0, p - 2)); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { setPos(p => Math.min(100, p + 2)); e.preventDefault(); }
+    };
+
+    el.addEventListener('pointerdown', onDown);
+    el.addEventListener('pointermove', onMove);
+    el.addEventListener('pointerup', onUp);
+    el.addEventListener('pointercancel', onUp);
+    el.addEventListener('mousedown', onDown);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    el.addEventListener('keydown', onKey);
+
+    return () => {
+      el.removeEventListener('pointerdown', onDown);
+      el.removeEventListener('pointermove', onMove);
+      el.removeEventListener('pointerup', onUp);
+      el.removeEventListener('pointercancel', onUp);
+      el.removeEventListener('mousedown', onDown);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+      el.removeEventListener('keydown', onKey);
+    };
+  }, []);
+
+  return (
+    <section className="section-pad-sm" style={{ background: 'var(--bg-2)', padding: '56px 0' }}>
+      <div className="container">
+        <div
+          className="ba-wrap"
+          ref={wrapRef}
+          role="slider"
+          aria-label="Before and after comparison"
+          aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pos)}
+          tabIndex={0}
+          style={{ touchAction: 'none', cursor: 'ew-resize', userSelect: 'none' }}
+        >
+          <div className="ba-half before" style={{ clipPath: `polygon(0 0, ${pos}% 0, ${pos}% 100%, 0 100%)` }} />
+          <div className="ba-half after"  style={{ clipPath: `polygon(${pos}% 0, 100% 0, 100% 100%, ${pos}% 100%)` }} />
+          <div className="ba-divider" style={{ left: pos + '%' }} />
+          <div className="ba-label left">BEFORE · FACTORY HALOGEN</div>
+          <div className="ba-label right">SEALIGHT SCOPARC S7S</div>
+        </div>
+        <div style={{ textAlign: 'center', marginTop: 16, fontSize: 12, color: 'var(--fg-3)', fontFamily: 'var(--font-mono)', letterSpacing: '.08em', textTransform: 'uppercase' }}>
+          Drag the divider · Keyboard ← → · <a href="https://sealight-led.com/page/sealight-reviews" style={{ borderBottom: '1px solid currentColor' }}>See more real comparisons</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SeriesModule() {
+  const series = [
+    { code: 'S7S', name: 'Scoparc S7S', tag: 'Flagship brightness', brightness: 100, beam: 80, install: 50, price: '$139', popular: false, url: 'https://sealight-led.com/collection/forward-lighting' },
+    { code: 'S2', name: 'Scoparc S2', tag: 'Safety precision', brightness: 80, beam: 100, install: 60, price: '$119', popular: false, url: 'https://sealight-led.com/collection/forward-lighting' },
+    { code: 'S1', name: 'Scoparc S1', tag: 'Style performance', brightness: 85, beam: 85, install: 80, price: '$99', popular: true, url: 'https://sealight-led.com/collection/forward-lighting' },
+    { code: 'L2S', name: 'Laxmas L2S', tag: 'Plug-and-play', brightness: 65, beam: 65, install: 100, price: '$79', popular: false, url: 'https://sealight-led.com/collection/forward-lighting' },
+    { code: 'X', name: 'Xenower X', tag: 'Smart value', brightness: 60, beam: 60, install: 80, price: '$59', popular: false, url: 'https://sealight-led.com/collection/forward-lighting' },
+  ];
+  return (
+    <section className="section-pad" style={{ background: 'var(--bg)' }}>
+      <div className="container">
+        <div className="sec-head">
+          <h2>A series for every kind of driver.</h2>
+          <div className="sec-kicker">
+            <div className="sl-eyebrow">02 · SERIES SELECTOR</div>
+            <p>Compare by what actually matters — brightness, beam quality, install ease. Not just price.</p>
+          </div>
+        </div>
+        <div className="series-rail">
+          {series.map(s => (
+            <div key={s.code} className={`series-card${s.popular ? ' popular' : ''}`}>
+              {s.popular && <span className="popular-flag">Most popular</span>}
+              <div className="img-ph"><span className="ph-label">{s.code}</span></div>
+              <div>
+                <h3>{s.name}</h3>
+                <div className="tagline">{s.tag}</div>
+              </div>
+              <ul className="specs">
+                <li><span>Bright</span><span className="bar"><i style={{ width: s.brightness + '%' }}/></span></li>
+                <li><span>Beam</span><span className="bar"><i style={{ width: s.beam + '%' }}/></span></li>
+                <li><span>Install</span><span className="bar"><i style={{ width: s.install + '%' }}/></span></li>
+              </ul>
+              <div className="price">From <b>{s.price}</b></div>
+              <a href={s.url} className="btn btn-outline btn-sm" style={{ marginTop: 12, display: 'block', textAlign: 'center' }}>Shop {s.name} →</a>
+            </div>
+          ))}
+        </div>
+        <div style={{ marginTop: 32, display: 'flex', gap: 20, justifyContent: 'center', fontSize: 13, color: 'var(--fg-2)' }}>
+          <a href="https://sealight-led.com/collection/forward-lighting" style={{ borderBottom: '1px solid currentColor' }}>View full comparison →</a>
+          <span style={{ opacity: .3 }}>·</span>
+          <a href="https://sealight-led.com/automotive-bulb-finder" style={{ borderBottom: '1px solid currentColor' }}>Not sure? Find by vehicle →</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ReviewsModule({ dark = true }) {
+  const reviews = [
+    { stars: 5, quote: "Installed in under 10 minutes, no coding, no flickering. The difference at night is massive.", name: 'Mike T.', vehicle: '2020 Toyota Tacoma', series: 'Scoparc S1' },
+    { stars: 5, quote: "Beam pattern is so much cleaner than stock. Zero glare on oncoming traffic.", name: 'Sarah K.', vehicle: '2019 Honda CR-V', series: 'Scoparc S2' },
+    { stars: 5, quote: "Came back for fog lights after the headlights. Quality is consistent across the line.", name: 'James R.', vehicle: '2021 Ford F-150', series: 'Scoparc S7S' },
+  ];
+  return (
+    <section className="section-pad" style={{ background: dark ? 'var(--bg-3)' : 'var(--bg)', color: dark ? '#fff' : 'var(--fg)' }}>
+      <div className="container">
+        <div className="sec-head">
+          <h2 style={{ color: dark ? '#fff' : undefined }}>Real drivers. Real trucks. Real roads.</h2>
+          <div className="sec-kicker">
+            <div className="sl-eyebrow" style={{ color: dark ? 'rgba(255,255,255,.5)' : undefined }}>03 · USER PROOF</div>
+            <p style={{ color: dark ? 'rgba(255,255,255,.7)' : undefined }}>38,000+ verified reviews. We show the installs, not just the stars.</p>
+          </div>
+        </div>
+        <div className="reviews-grid">
+          {reviews.map((r,i) => (
+            <div key={i} className={`review-card ${dark ? 'dark' : ''}`} style={dark ? { background: 'rgba(255,255,255,.04)', borderColor: 'rgba(255,255,255,.08)' } : {}}>
+              <div className="img-ph" data-theme={dark ? 'dark' : 'light'}><span className="ph-label">[ INSTALL PHOTO · {r.vehicle} ]</span></div>
+              <div className="stars">★★★★★</div>
+              <blockquote>"{r.quote}"</blockquote>
+              <div className="meta">
+                <span>{r.name} · {r.vehicle}</span>
+                <span>{r.series}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SupportCTA() {
+  return (
+    <section className="section-pad" style={{ background: 'var(--bg)' }}>
+      <div className="container">
+        <div className="sec-head sec-head-center" style={{ textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(36px, 5vw, 72px)' }}>Find the right bulb, the first time.</h2>
+          <div className="sec-kicker" style={{ textAlign: 'center' }}>
+            <p>Start from your vehicle, or tell us how you drive. We'll handle the rest — fitment, beam, install guide, support.</p>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a href="https://sealight-led.com/automotive-bulb-finder" className="btn btn-primary btn-lg">Find My Bulb →</a>
+          <a href="https://sealight-led.com/category/headlight-bulbs" className="btn btn-outline btn-lg">Shop by driving need</a>
+          <a href="https://sealight-led.com/collection/forward-lighting" className="btn btn-outline btn-lg">Compare all series</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <div className="container">
+        <div className="cols">
+          <div className="brand">
+            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 22, letterSpacing: '-0.04em' }}>
+              SEA<em style={{ color: 'var(--accent)', fontStyle: 'normal' }}>LIGHT</em>
+            </div>
+            <p>Premium LED upgrades with verified fitment. Built for how you drive — night, weather, trail, or the commute home.</p>
+          </div>
+          <div><h5>Shop</h5><ul><li><a href="https://sealight-led.com/category/headlight-bulbs">Headlights</a></li><li><a href="https://sealight-led.com/category/fog-light-bulbs">Fog &amp; Driving</a></li><li><a href="https://sealight-led.com/collection/interior-lights">Interior</a></li><li><a href="https://sealight-led.com/collection/package-combo">Combo kits</a></li></ul></div>
+          <div><h5>Series</h5><ul><li><a href="https://sealight-led.com/collection/forward-lighting">Scoparc S7S</a></li><li><a href="https://sealight-led.com/collection/forward-lighting">Scoparc S2 · S1</a></li><li><a href="https://sealight-led.com/collection/forward-lighting">Laxmas L2S</a></li><li><a href="https://sealight-led.com/collection/forward-lighting">Xenower X</a></li></ul></div>
+          <div><h5>Support</h5><ul><li><a href="https://sealight-led.com/automotive-bulb-finder">Fitment finder</a></li><li><a href="https://sealight-led.com/page/installation-guides">Install guides</a></li><li><a href="https://sealight-led.com/page/help-center">Troubleshooting</a></li><li><a href="https://sealight-led.com/page/contact-us">Contact</a></li></ul></div>
+          <div><h5>Learn</h5><ul><li><a href="https://sealight-led.com/blog">Halogen vs LED</a></li><li><a href="https://sealight-led.com/blog">Beam pattern 101</a></li><li><a href="https://sealight-led.com/category/canbus-decoder-resistor">Canbus &amp; decoders</a></li><li><a href="https://sealight-led.com/blog">Blog</a></li></ul></div>
+        </div>
+        <div className="legal">
+          <span>© 2026 SEALIGHT · All rights reserved</span>
+          <span>INTERNAL PREVIEW v04 · INLINE WITH ROADMAP</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+Object.assign(window, { TrustBar, ScenesModule, BeforeAfterModule, SeriesModule, ReviewsModule, SupportCTA, SiteFooter });
+
+</script>
+
+<script type="text/babel" data-file="app.jsx">
+
+function App() {
+  return (
+    <div className="sl-root" data-tone="hybrid">
+      <NavB />
+      <Hero3Fitment />
+      <TrustBar />
+      <ScenesModule />
+      <BeforeAfterModule />
+      <SeriesModule />
+      <ReviewsModule dark={true} />
+      <SupportCTA />
+      <SiteFooter />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+</script>
+
+</body>
+</html>

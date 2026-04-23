@@ -1,0 +1,127 @@
+/* SEALIGHT v04 · Navigation variants (A/B/C) */
+
+.sl-root .nav-shell { position: sticky; top: 0; z-index: 40; }
+
+/* ─── Nav A · Mega by Need ────────────────────────────── */
+.sl-root .navA { background: var(--bg); border-bottom: 1px solid var(--line); }
+.sl-root .navA-top {
+  display: flex; align-items: center; gap: 24px;
+  height: 64px; max-width: 1280px; margin: 0 auto; padding: 0 32px;
+}
+.sl-root .navA-logo { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.04em; font-size: 22px; }
+.sl-root .navA-logo em { color: var(--accent); font-style: normal; }
+.sl-root .navA-links { display: flex; gap: 4px; flex: 1; margin-left: 24px; }
+.sl-root .navA-link {
+  padding: 8px 14px; font-size: 14px; font-weight: 500; color: var(--fg-2);
+  border-radius: 8px; display: inline-flex; align-items: center; gap: 4px;
+  transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+  cursor: pointer;
+}
+.sl-root .navA-link:hover, .sl-root .navA-link.open { color: var(--fg); background: var(--bg-2); }
+.sl-root .navA-link svg { width: 10px; height: 10px; opacity: .5; }
+.sl-root .navA-right { display: flex; align-items: center; gap: 12px; }
+.sl-root .navA-fit {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 8px 6px 14px; border: 1px solid var(--line-2); border-radius: 999px;
+  font-size: 13px; color: var(--fg-2);
+}
+.sl-root .navA-fit strong { color: var(--fg); font-weight: 600; }
+.sl-root .navA-fit .go {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+
+.sl-root .navA-mega {
+  position: absolute; left: 0; right: 0; top: 100%;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  padding: 36px 0 44px;
+  animation: sl-mega-in .3s var(--ease-out);
+}
+@keyframes sl-mega-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+.sl-root .navA-mega-grid { display: grid; grid-template-columns: repeat(3, 1fr) 1.1fr; gap: 36px; }
+.sl-root .navA-col h5 { font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; color: var(--fg-3); text-transform: uppercase; margin-bottom: 14px; font-weight: 500; }
+.sl-root .navA-col ul { display: flex; flex-direction: column; gap: 2px; }
+.sl-root .navA-col li a {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 8px 10px; border-radius: 8px;
+  font-size: 14px; color: var(--fg);
+  transition: background .2s;
+}
+.sl-root .navA-col li a:hover { background: var(--bg-2); color: var(--accent); }
+.sl-root .navA-col li a .meta { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); }
+
+.sl-root .navA-feature {
+  background: var(--bg-2); border-radius: var(--radius);
+  padding: 18px; display: flex; flex-direction: column; gap: 12px;
+}
+.sl-root .navA-feature .img-ph { aspect-ratio: 16/10; border-radius: 10px; }
+.sl-root .navA-feature h6 { font-family: var(--font-display); font-size: 15px; font-weight: 600; }
+.sl-root .navA-feature p { font-size: 12px; color: var(--fg-2); line-height: 1.5; }
+
+/* ─── Nav B · Fitment-first sticky bar ────────────────── */
+.sl-root .navB { background: var(--bg); border-bottom: 1px solid var(--line); }
+.sl-root .navB-top { height: 60px; display: flex; align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 32px; gap: 32px; }
+.sl-root .navB-top .navA-logo { font-size: 20px; }
+.sl-root .navB-top ul { display: flex; gap: 28px; margin-left: 16px; flex: 1; }
+.sl-root .navB-top ul a { font-size: 13px; color: var(--fg-2); font-weight: 500; }
+.sl-root .navB-top ul a:hover { color: var(--accent); }
+.sl-root .navB-bar {
+  background: var(--bg-2); border-top: 1px solid var(--line);
+  padding: 14px 0;
+}
+.sl-root .navB-bar-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 32px;
+  display: grid; grid-template-columns: auto 1fr 1fr 1fr auto auto; gap: 10px; align-items: center;
+}
+.sl-root .navB-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--fg-3); padding-right: 14px; border-right: 1px solid var(--line); margin-right: 4px;
+}
+.sl-root .navB-pick {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--surface); cursor: pointer;
+  font-size: 13px; font-weight: 500;
+  transition: border-color .2s;
+}
+.sl-root .navB-pick:hover { border-color: var(--accent); }
+.sl-root .navB-pick .navB-pick-label { color: var(--fg-3); font-size: 11px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .1em; }
+.sl-root .navB-pick .navB-pick-val { color: var(--fg); display: flex; align-items: center; justify-content: space-between; }
+.sl-root .navB-pick .caret { width: 10px; height: 10px; opacity: .5; }
+.sl-root .navB-hint { font-size: 12px; color: var(--fg-3); font-family: var(--font-mono); }
+
+/* ─── Nav C · Minimal + Drawer ───────────────────────── */
+.sl-root .navC { background: transparent; position: absolute; top: 0; left: 0; right: 0; z-index: 40; }
+.sl-root .navC.on-light { color: var(--fg); }
+.sl-root .navC.on-dark { color: #fff; }
+.sl-root .navC-top { height: 72px; display: flex; align-items: center; max-width: 1280px; margin: 0 auto; padding: 0 32px; gap: 24px; }
+.sl-root .navC-top ul { display: flex; gap: 36px; flex: 1; justify-content: center; }
+.sl-root .navC-top ul a { font-size: 13px; font-weight: 500; opacity: .75; letter-spacing: 0; }
+.sl-root .navC-top ul a:hover { opacity: 1; color: var(--accent); }
+.sl-root .navC-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 8px 10px 18px; border: 1px solid currentColor; opacity: .8;
+  border-radius: 999px; font-size: 13px; font-weight: 500;
+  transition: all .3s var(--ease-out);
+}
+.sl-root .navC-cta:hover { opacity: 1; background: var(--accent); color: #fff; border-color: var(--accent); }
+.sl-root .navC-cta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.sl-root .navC-drawer-hint {
+  position: absolute; top: 72px; right: 32px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; opacity: .5;
+}
+
+/* Miniature drawer overlay preview (tucked into Nav C hero) */
+.sl-root .navC-drawer {
+  position: absolute; top: 0; right: 0; bottom: 0; width: 38%;
+  background: var(--surface); color: var(--fg);
+  padding: 96px 32px 32px; display: flex; flex-direction: column; gap: 20px;
+  box-shadow: -40px 0 80px -30px rgba(0,0,0,.5);
+  border-left: 1px solid var(--line);
+  transform: translateX(0);
+}
+.sl-root .navC-drawer h4 { font-family: var(--font-display); font-size: 22px; }
+.sl-root .navC-drawer p { font-size: 13px; color: var(--fg-2); }
+.sl-root .navC-drawer .navB-pick { background: var(--bg); }

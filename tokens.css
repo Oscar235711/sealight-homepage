@@ -1,0 +1,126 @@
+/* ============================================================
+   SEALIGHT v04 · Design Tokens
+   3 tonal modes: midnight / daylight / hybrid
+   Type pairing: Space Grotesk (display) + Inter (text) + JetBrains Mono (spec)
+   ============================================================ */
+
+:root {
+  /* brand constants */
+  --brand-orange: #FF6600;
+  --brand-orange-2: #FF8A3D;
+  --brand-orange-deep: #CC4F00;
+
+  /* typography */
+  --font-display: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-text: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --track-display: -0.028em;
+  --track-h2: -0.022em;
+  --track-body: -0.003em;
+  --track-eyebrow: 0.18em;
+
+  /* radii / shadows */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --shadow-soft: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px -12px rgba(0,0,0,.12);
+  --shadow-card: 0 1px 3px rgba(0,0,0,.06), 0 16px 40px -16px rgba(0,0,0,.16);
+  --shadow-lift: 0 30px 60px -30px rgba(0,0,0,.35);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 220ms;
+  --dur: 360ms;
+  --dur-slow: 600ms;
+}
+
+/* ── Midnight (DJI-like cinematic) ── */
+[data-tone="midnight"] {
+  --bg:        #0B0C0E;
+  --bg-2:      #121418;
+  --bg-3:      #1A1D22;
+  --surface:   #14171C;
+  --line:      rgba(255,255,255,0.08);
+  --line-2:    rgba(255,255,255,0.14);
+  --fg:        #F4F4F2;
+  --fg-2:      rgba(244,244,242,0.72);
+  --fg-3:      rgba(244,244,242,0.50);
+  --accent:    #FF6600;
+  --accent-soft: rgba(255,102,0,0.14);
+  --success:   #6DE07A;
+}
+
+/* ── Daylight (Velotric / Kwikset editorial) ── */
+[data-tone="daylight"] {
+  --bg:        #F7F5F1;
+  --bg-2:      #EFECE6;
+  --bg-3:      #E6E1D9;
+  --surface:   #FFFFFF;
+  --line:      rgba(15,15,15,0.08);
+  --line-2:    rgba(15,15,15,0.16);
+  --fg:        #111213;
+  --fg-2:      rgba(17,18,19,0.68);
+  --fg-3:      rgba(17,18,19,0.45);
+  --accent:    #FF6600;
+  --accent-soft: rgba(255,102,0,0.10);
+  --success:   #0F8F4A;
+}
+
+/* ── Hybrid (deep hero, light product, deep UGC) ── */
+[data-tone="hybrid"] {
+  --bg:        #F7F5F1;
+  --bg-2:      #EFECE6;
+  --bg-3:      #0B0C0E;
+  --surface:   #FFFFFF;
+  --line:      rgba(15,15,15,0.08);
+  --line-2:    rgba(15,15,15,0.16);
+  --fg:        #111213;
+  --fg-2:      rgba(17,18,19,0.68);
+  --fg-3:      rgba(17,18,19,0.45);
+  --accent:    #FF6600;
+  --accent-soft: rgba(255,102,0,0.10);
+  --success:   #0F8F4A;
+}
+
+/* ── Base resets scoped to prototype ── */
+.sl-root, .sl-root * { box-sizing: border-box; }
+.sl-root {
+  font-family: var(--font-text);
+  color: var(--fg);
+  background: var(--bg);
+  letter-spacing: var(--track-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.sl-root h1, .sl-root h2, .sl-root h3, .sl-root h4 {
+  font-family: var(--font-display);
+  letter-spacing: var(--track-display);
+  line-height: 1.04;
+  font-weight: 700;
+  margin: 0;
+  text-wrap: balance;
+}
+.sl-root p { margin: 0; }
+.sl-root a { color: inherit; text-decoration: none; }
+.sl-root button { font: inherit; border: 0; background: transparent; cursor: pointer; color: inherit; }
+.sl-root ul { list-style: none; margin: 0; padding: 0; }
+.sl-root img, .sl-root svg { display: block; max-width: 100%; }
+
+.sl-eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--track-eyebrow);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--fg-3);
+}
+.sl-mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}

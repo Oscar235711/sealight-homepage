@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SEALIGHT · v04 方向说明（可阅读版）</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="components.css" />
+<link rel="stylesheet" href="nav-variants.css" />
+<link rel="stylesheet" href="hero-variants.css" />
+<link rel="stylesheet" href="modules.css" />
+
+<style>
+  /* ─── Reader chrome ─────────────────────────────────────── */
+  html, body { margin: 0; padding: 0; background: #f7f5f1; }
+  body {
+    font-family: 'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: #1a1715;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .reader-wrap { max-width: 1200px; margin: 0 auto; padding: 72px 40px 120px; }
+
+  .reader-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: #c96442; margin-bottom: 18px;
+  }
+  .reader-title {
+    font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+    font-size: clamp(40px, 5vw, 64px);
+    font-weight: 700; letter-spacing: -0.03em; line-height: 1.05;
+    margin: 0 0 24px; color: #0f0e0d;
+  }
+  .reader-lede {
+    font-size: 19px; color: #48413b; max-width: 62ch;
+    line-height: 1.65; margin: 0 0 48px;
+  }
+
+  /* TOC */
+  .reader-toc {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    padding: 24px; border: 1px solid rgba(0,0,0,.08);
+    border-radius: 14px; background: #fff;
+    margin-bottom: 72px;
+  }
+  .reader-toc a {
+    text-decoration: none; color: #1a1715;
+    padding: 14px 16px; border-radius: 10px; background: #f3f0ea;
+    display: block; transition: background .2s, transform .2s;
+  }
+  .reader-toc a:hover { background: #ffe7d7; transform: translateY(-1px); }
+  .reader-toc .n {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: #c96442; letter-spacing: .12em; text-transform: uppercase;
+  }
+  .reader-toc .t { font-weight: 600; font-size: 15px; margin-top: 4px; }
+
+  /* Section */
+  .reader-section { margin: 96px 0; }
+  .reader-section h2 {
+    font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+    font-size: clamp(28px, 3.4vw, 44px);
+    font-weight: 700; letter-spacing: -0.025em; line-height: 1.15;
+    margin: 0 0 16px; color: #0f0e0d;
+  }
+  .reader-section .sec-intro {
+    font-size: 17px; color: #48413b; max-width: 64ch;
+    margin: 0 0 40px; line-height: 1.7;
+  }
+
+  /* Variant block */
+  .variant {
+    background: #fff; border: 1px solid rgba(0,0,0,.08);
+    border-radius: 20px; padding: 32px 32px 0;
+    margin-bottom: 32px; overflow: hidden;
+  }
+  .variant-head {
+    display: grid; grid-template-columns: 1fr auto; gap: 20px;
+    align-items: start; margin-bottom: 20px;
+  }
+  .variant-head h3 {
+    font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+    font-size: 28px; font-weight: 700; letter-spacing: -0.02em;
+    margin: 0; color: #0f0e0d; line-height: 1.15;
+  }
+  .variant-code {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: .14em; text-transform: uppercase; color: #c96442;
+    background: #fff1e6; padding: 4px 10px; border-radius: 6px;
+    white-space: nowrap;
+  }
+  .variant-blurb {
+    font-size: 16px; color: #48413b;
+    max-width: 62ch; margin: 0 0 28px; line-height: 1.65;
+  }
+
+  .variant-table {
+    display: grid; grid-template-columns: 120px 1fr;
+    gap: 12px 24px; margin-bottom: 28px;
+    font-size: 14px; color: #48413b;
+  }
+  .variant-table dt {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase; color: #8a7c6e;
+    padding-top: 3px;
+  }
+  .variant-table dd { margin: 0; line-height: 1.65; }
+  .variant-table dd b { color: #1a1715; }
+
+  /* Pros/Cons */
+  .pc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .pc-block {
+    border-radius: 12px; padding: 16px 18px;
+    font-size: 14px; line-height: 1.6;
+  }
+  .pc-block.pro { background: #e8f2e0; color: #2d4a1f; }
+  .pc-block.con { background: #fde7d7; color: #7a3a14; }
+  .pc-block h4 {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: .14em; text-transform: uppercase;
+    margin: 0 0 10px; font-weight: 600;
+  }
+  .pc-block ul { margin: 0; padding-left: 18px; }
+  .pc-block li { margin-bottom: 6px; }
+
+  /* Preview frame — component renders inside at natural 1440px width, scaled to fit */
+  .preview-frame {
+    position: relative; margin: 0 -32px;
+    border-top: 1px solid rgba(0,0,0,.08);
+    overflow: hidden; background: #ebe8e1;
+  }
+  .preview-label {
+    position: absolute; top: 14px; left: 20px; z-index: 3;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: .14em; text-transform: uppercase; color: rgba(0,0,0,.45);
+    background: rgba(255,255,255,.85); padding: 4px 9px; border-radius: 6px;
+    backdrop-filter: blur(4px);
+  }
+  .preview-scale { transform-origin: top left; }
+
+  /* Tone swatch blocks */
+  .tones-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .tone-card {
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,.08);
+    display: flex; flex-direction: column;
+  }
+  .tone-swatches {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    height: 120px;
+  }
+  .tone-body { padding: 22px 22px 24px; background: #fff; flex: 1; }
+  .tone-body h4 {
+    font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+    font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .tone-body .tone-code {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: #c96442; text-transform: uppercase; letter-spacing: .12em;
+    margin-bottom: 14px;
+  }
+  .tone-body p { margin: 0; font-size: 14px; color: #48413b; line-height: 1.6; }
+
+  /* Decision matrix */
+  .matrix-wrap { background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 16px; padding: 28px; margin-bottom: 32px; }
+  .matrix-wrap table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .matrix-wrap th, .matrix-wrap td { padding: 14px 16px; text-align: left; }
+  .matrix-wrap th {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: .12em; text-transform: uppercase; color: #8a7c6e;
+    background: #f3f0ea; border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+  .matrix-wrap td { border-bottom: 1px solid rgba(0,0,0,.04); }
+  .matrix-wrap td:first-child { font-weight: 600; color: #1a1715; }
+  .cell-good { background: #e8f2e0; color: #2d4a1f; font-weight: 600; }
+  .cell-ok { background: #fff4d9; color: #7a5e10; font-weight: 600; }
+  .cell-bad { background: #fde7d7; color: #7a3a14; font-weight: 600; }
+
+  .recommend {
+    background: linear-gradient(135deg, #FF6600 0%, #E63B14 100%);
+    color: #fff; border-radius: 16px; padding: 32px;
+    margin-top: 24px;
+  }
+  .recommend .tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: .16em; text-transform: uppercase;
+    opacity: .85; margin-bottom: 12px;
+  }
+  .recommend h3 {
+    font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+    font-size: 28px; font-weight: 700; letter-spacing: -0.02em;
+    margin: 0 0 10px; color: #fff;
+  }
+  .recommend p { margin: 0; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.92); max-width: 60ch; }
+
+  /* Next steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .step {
+    background: #fff; border: 1px solid rgba(0,0,0,.08);
+    border-radius: 14px; padding: 22px;
+  }
+  .step .n {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: #c96442; letter-spacing: .14em; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .step h4 {
+    font-family: 'Space Grotesk', 'Noto Sans SC', sans-serif;
+    font-size: 17px; font-weight: 600; letter-spacing: -0.01em;
+    margin: 0 0 8px; color: #0f0e0d;
+  }
+  .step p { margin: 0; font-size: 14px; color: #48413b; line-height: 1.6; }
+
+  /* Sticky link back to canvas */
+  .reader-back {
+    position: fixed; top: 20px; right: 20px; z-index: 50;
+    background: #1a1715; color: #fff; padding: 10px 16px;
+    border-radius: 999px; font-size: 13px; font-weight: 500;
+    text-decoration: none;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,.3);
+  }
+  .reader-back:hover { background: #FF6600; }
+
+  /* Responsive */
+  @media (max-width: 820px) {
+    .reader-wrap { padding: 40px 20px 80px; }
+    .reader-toc { grid-template-columns: 1fr 1fr; }
+    .pc-grid, .tones-grid, .steps { grid-template-columns: 1fr; }
+    .variant { padding: 22px 18px 0; }
+  }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<a href="SEALIGHT v04.html" class="reader-back">→ 画布版</a>
+
+<div class="reader-wrap">
+
+  <div class="reader-eyebrow">SEALIGHT · 首页 v04 · 方向说明</div>
+  <h1 class="reader-title">首页改版的三个决策，分别讲明白。</h1>
+  <p class="reader-lede">
+    v04 不是一个首页方案 —— 是<b>三个独立的决策轴</b>。导航架构决定用户怎么进漏斗，Hero
+    决定品牌语气，色调决定视觉情绪。这份文档把每个轴的选项拆开讲：它是什么、为什么这样、适合谁、风险在哪。读完你可以自己组合出首选方案，
+    也可以直接采纳我们推荐的那组。
+  </p>
+
+  <nav class="reader-toc">
+    <a href="#axes"><div class="n">01</div><div class="t">三轴总览</div></a>
+    <a href="#navs"><div class="n">02</div><div class="t">导航架构</div></a>
+    <a href="#heroes"><div class="n">03</div><div class="t">Hero 方向</div></a>
+    <a href="#tones"><div class="n">04</div><div class="t">色调系统</div></a>
+    <a href="#matrix"><div class="n">05</div><div class="t">决策矩阵</div></a>
+    <a href="#recommend"><div class="n">06</div><div class="t">推荐组合</div></a>
+    <a href="#assembled"><div class="n">07</div><div class="t">完整页面</div></a>
+    <a href="#next"><div class="n">08</div><div class="t">下一步</div></a>
+  </nav>
+
+  <section class="reader-section" id="axes">
+    <h2>01 · 把首页拆成三根独立的轴</h2>
+    <p class="sec-intro">
+      v03 的问题不是"不好看"，是<b>几个决策被绑在一起</b>——想换 Hero 就被迫连品牌语气一起换，想调导航就牵动产品区配色。v04 把决策解耦：
+      每一轴都能单独投票，最后再合。对评审团队来说，会议从"你喜欢哪个方案"变成"这三件事你各站哪一边"。
+    </p>
+    <dl class="variant-table" style="grid-template-columns: 160px 1fr;">
+      <dt>导航架构</dt><dd>决定<b>首页 → 产品页</b>的进入方式。按需求 / 按车型 / 极简三种逻辑。</dd>
+      <dt>Hero 方向</dt><dd>决定首屏<b>品牌语气</b>。电影感（工程叙事）/ 杂志风（生活方式）/ 适配优先（工具承诺）。</dd>
+      <dt>色调系统</dt><dd>决定<b>整页视觉情绪</b>。Midnight 深色影院感 / Daylight 浅色编辑风 / Hybrid 混排。</dd>
+    </dl>
+  </section>
+
+  <section class="reader-section" id="navs">
+    <h2>02 · 导航架构：三种让用户进漏斗的方式</h2>
+    <p class="sec-intro">
+      北美 DIY 车主到店里最想问的第一句是"这玩意我的车能不能用"。三版导航的差异本质上是<b>在哪一步把这个问题问出来</b>——在顶部常驻 pill、在专属适配栏、还是在右侧抽屉里。
+    </p>
+
+    <div class="variant">
+      <div class="variant-head">
+        <h3>Nav A · 按需求分类的 Mega 菜单</h3>
+        <span class="variant-code">NAV · A</span>
+      </div>
+      <p class="variant-blurb">
+        顶栏三个主入口：<b>按需求</b>、<b>按车型</b>、<b>按灯泡型号</b>。鼠标悬停任一项展开三列 mega，第四列固定是当季旗舰（Nova）推荐。
+        右上角是一枚常驻的 <em>2022 · Ford · F-150</em> 适配 pill，用户随时能改。
+      </p>
+      <dl class="variant-table">
+        <dt>适合谁</dt><dd>想<b>先逛再决定</b>的用户——不确定自己要"亮度"还是"防眩"，也不想立刻选车型。</dd>
+        <dt>核心承诺</dt><dd>三种购物路径一视同仁：按痛点选、按车型选、按零件号选。</dd>
+        <dt>信息密度</dt><dd>中到高。Mega 展开时覆盖约 380px 垂直空间。</dd>
+      </dl>
+      <div class="pc-grid">
+        <div class="pc-block pro">
+          <h4>优势</h4>
+          <ul>
+            <li>探索友好，三条漏斗平权</li>
+            <li>Nova 旗舰在第四列长期曝光</li>
+            <li>保留常驻 fitment pill，不损失效率</li>
+          </ul>
+        </div>
+        <div class="pc-block con">
+          <h4>权衡</h4>
+          <ul>
+            <li>移动端 mega 需重新设计（底抽屉）</li>
+            <li>对老用户偏冗余——他们只想点 F-150</li>
+            <li>三入口需要精确命名，否则用户不知道点哪个</li>
+          </ul>
+        </div>
+      </div>
+      <div class="preview-frame" id="preview-navA">
+        <div class="preview-label">Nav A · Mega 菜单（鼠标悬停查看下拉）</div>
+        <div class="preview-scale" id="mount-navA"></div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-head">
+        <h3>Nav B · 适配优先的双层栏</h3>
+        <span class="variant-code">NAV · B ★</span>
+      </div>
+      <p class="variant-blurb">
+        顶层是<b>产品大类</b>（Headlights / Fog / Interior / Off-road / Combo / Support），下面是一条专属的<b>Year · Make · Model</b> 选择栏，右边实时显示"12 matches"。
+        把 SEALIGHT 最核心的承诺（精准适配）直接做成 chrome。
+      </p>
+      <dl class="variant-table">
+        <dt>适合谁</dt><dd>已经<b>知道要换什么、只差确认车型</b>的老用户——也就是 Amazon 习惯过来的那拨。</dd>
+        <dt>核心承诺</dt><dd>"你的车装哪个我知道"。把适配做成视觉签名。</dd>
+        <dt>信息密度</dt><dd>高。顶栏 60px + 适配栏 52px = 112px 常驻。</dd>
+      </dl>
+      <div class="pc-grid">
+        <div class="pc-block pro">
+          <h4>优势</h4>
+          <ul>
+            <li>适配摩擦归零——选择器永远在眼前</li>
+            <li>"12 matches" 的实时计数本身就是社会证明</li>
+            <li>对标 Lasfit 等竞品，拉开差异</li>
+          </ul>
+        </div>
+        <div class="pc-block con">
+          <h4>权衡</h4>
+          <ul>
+            <li>Chrome 偏重，Hero 要顶着 112px 开始</li>
+            <li>移动端适配栏需要折叠成抽屉</li>
+            <li>对品牌/生活方式内容不友好——气质偏工具</li>
+          </ul>
+        </div>
+      </div>
+      <div class="preview-frame" id="preview-navB">
+        <div class="preview-label">Nav B · 双层适配优先栏</div>
+        <div class="preview-scale" id="mount-navB"></div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-head">
+        <h3>Nav C · 极简 + Find My Bulb 抽屉</h3>
+        <span class="variant-code">NAV · C</span>
+      </div>
+      <p class="variant-blurb">
+        顶栏只有四项：<em>Shop · Series · Support · Learn</em>。右上角一枚带圆点的 <b>Find My Bulb</b> 按钮，点击后右侧滑出一个聚焦的适配抽屉——
+        Year → Make → Model 三步走完，不离开当前页面。气质最接近 DJI / Aesop。
+      </p>
+      <dl class="variant-table">
+        <dt>适合谁</dt><dd>来看<b>品牌故事或生活方式</b>的潜在用户——比如从 Instagram / YouTube 评测过来的流量。</dd>
+        <dt>核心承诺</dt><dd>"我们是高端的"。首屏不谈功能，只谈气质。</dd>
+        <dt>信息密度</dt><dd>低。72px 顶栏，且叠在 Hero 上浮动透明。</dd>
+      </dl>
+      <div class="pc-grid">
+        <div class="pc-block pro">
+          <h4>优势</h4>
+          <ul>
+            <li>Hero 视觉呼吸感最强</li>
+            <li>抽屉式适配是独立模块，可复用到 PDP</li>
+            <li>首页不像零件店——拉开品牌调性</li>
+          </ul>
+        </div>
+        <div class="pc-block con">
+          <h4>权衡</h4>
+          <ul>
+            <li>没有常驻 CTA，首屏转化可能降</li>
+            <li>对只想快速买的老用户有点反直觉</li>
+            <li>四项主导航需要信息架构完全重写</li>
+          </ul>
+        </div>
+      </div>
+      <div class="preview-frame" id="preview-navC" style="background: linear-gradient(180deg, #0B0C0E 0%, #13171B 100%);">
+        <div class="preview-label" style="background: rgba(255,255,255,.12); color: rgba(255,255,255,.65);">Nav C · 深色极简 + 抽屉</div>
+        <div class="preview-scale" id="mount-navC"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reader-section" id="heroes">
+    <h2>03 · Hero 方向：同一句承诺，三种情绪读法</h2>
+    <p class="sec-intro">
+      三版 Hero 对外说的都是同一件事——"精准适配 + LED 升级"。差异在于<b>情绪切入点</b>：
+      是把夜路开给你看（电影感）、把产品摆成杂志封面（编辑风）、还是把 fitment 选择器直接变成主角（工具感）。
+    </p>
+
+    <div class="variant">
+      <div class="variant-head">
+        <h3>Hero 1 · Cinematic Beam 电影感光束</h3>
+        <span class="variant-code">HERO · 1</span>
+      </div>
+      <p class="variant-blurb">
+        左文字右产品。标题 "See the road. Own the <em>dark.</em>" 用 Space Grotesk 的粗体 + 亮橙 accent；右侧是夜路实拍（目前是占位图）+ 产品参数浮层（Series / Lumens / Kelvin）。
+        下方嵌入一个半透明的 fitment 小部件——既给工具感，又不抢情绪。
+      </p>
+      <dl class="variant-table">
+        <dt>情绪</dt><dd>工程派 · DJI / Tesla · 偏男性向</dd>
+        <dt>资产需求</dt><dd>一张<b>真实夜路照片</b>（雨天湿路 / 山区弯道），主光源在画面右侧</dd>
+        <dt>和谁搭</dt><dd>Midnight 色调 + Nav A 或 Nav C</dd>
+      </dl>
+      <div class="pc-grid">
+        <div class="pc-block pro">
+          <h4>优势</h4>
+          <ul>
+            <li>品牌记忆点最强——"黑夜 + 橙色光束"</li>
+            <li>fitment 浮层让转化路径不丢</li>
+            <li>参数 chip 让工程用户一眼读懂</li>
+          </ul>
+        </div>
+        <div class="pc-block con">
+          <h4>权衡</h4>
+          <ul>
+            <li>需要高质量夜景实拍，不能用 stock</li>
+            <li>深色首屏对浅色产品区有过渡成本</li>
+            <li>对"想看人用"的 UGC 路线不亲和</li>
+          </ul>
+        </div>
+      </div>
+      <div class="preview-frame" id="preview-hero1">
+        <div class="preview-label" style="background: rgba(0,0,0,.6); color: rgba(255,255,255,.7);">Hero 1 · Cinematic</div>
+        <div class="preview-scale" id="mount-hero1"></div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-head">
+        <h3>Hero 2 · Editorial Split 杂志分屏</h3>
+        <span class="variant-code">HERO · 2 ★</span>
+      </div>
+      <p class="variant-blurb">
+        左文右图的杂志排版。标题混排 Space Grotesk + Instrument Serif 斜体——"Brighter. Cleaner. <em>Finally,</em> yours."
+        右侧是产品棚拍大图 + 三张系列缩略图；左下三个数字指标（300% / 10K+ / 4.7★）做底部支撑。整体温暖、编辑、有人味。
+      </p>
+      <dl class="variant-table">
+        <dt>情绪</dt><dd>生活方式 · Velotric / Kwikset · 性别中立</dd>
+        <dt>资产需求</dt><dd>一张<b>棚拍产品 3/4 角</b>旗舰图 + 3 张系列缩略（目前 CSS 占位）</dd>
+        <dt>和谁搭</dt><dd>Daylight 色调 + Nav B（最搭）</dd>
+      </dl>
+      <div class="pc-grid">
+        <div class="pc-block pro">
+          <h4>优势</h4>
+          <ul>
+            <li>读完第一屏用户知道<b>有几个系列</b>——缩短选择路径</li>
+            <li>serif 斜体拉出品牌感，和竞品拉开</li>
+            <li>指标行既是卖点也是信任锚</li>
+          </ul>
+        </div>
+        <div class="pc-block con">
+          <h4>权衡</h4>
+          <ul>
+            <li>棚拍资产得补齐——当前占位看上去空</li>
+            <li>第一屏没有 fitment——要靠 Nav B 的顶栏补</li>
+            <li>浅色首屏对夜景叙事克制</li>
+          </ul>
+        </div>
+      </div>
+      <div class="preview-frame" id="preview-hero2">
+        <div class="preview-label">Hero 2 · Editorial</div>
+        <div class="preview-scale" id="mount-hero2"></div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-head">
+        <h3>Hero 3 · Interactive Fitment-first 适配优先交互式</h3>
+        <span class="variant-code">HERO · 3</span>
+      </div>
+      <p class="variant-blurb">
+        首屏正中间就是一个巨型 <b>Year · Make · Model</b> 选择器，下方 "Show 12 compatible bulbs" 的橙色大按钮。
+        背景是 loop 视频占位（夜路 + 光束扫过弯道），底部四个数字 stat（500K+ / 10K+ / 24h / 30-day）。
+      </p>
+      <dl class="variant-table">
+        <dt>情绪</dt><dd>工具感 · 电商 · 直给</dd>
+        <dt>资产需求</dt><dd>一段 10-15 秒的<b>无声循环视频</b>（弯道 + 车灯扫过）</dd>
+        <dt>和谁搭</dt><dd>Midnight 色调 + Nav C（此时顶部不再显示 Fitment，避免冗余）</dd>
+      </dl>
+      <div class="pc-grid">
+        <div class="pc-block pro">
+          <h4>优势</h4>
+          <ul>
+            <li>转化漏斗最短——首屏就能开始适配</li>
+            <li>数字 stat 行给公信力</li>
+            <li>结构最像 Lasfit 等转化型竞品</li>
+          </ul>
+        </div>
+        <div class="pc-block con">
+          <h4>权衡</h4>
+          <ul>
+            <li>品牌叙事牺牲——首屏没故事</li>
+            <li>和 Nav B 功能重叠，会显得冗余</li>
+            <li>视频资产要求高，加载也要兜底</li>
+          </ul>
+        </div>
+      </div>
+      <div class="preview-frame" id="preview-hero3">
+        <div class="preview-label" style="background: rgba(0,0,0,.6); color: rgba(255,255,255,.7);">Hero 3 · Fitment-first</div>
+        <div class="preview-scale" id="mount-hero3"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reader-section" id="tones">
+    <h2>04 · 色调系统：三种可切换的视觉情绪</h2>
+    <p class="sec-intro">
+      色调和 Hero / Nav 独立——同一个导航可以是深色也可以是浅色。Midnight 继承 v03 的夜景感，
+      Daylight 是对竞品杂志风的回应，Hybrid 是"首屏深 · 产品区浅 · UGC 深"的节奏组合，避免整页单调。
+    </p>
+    <div class="tones-grid">
+      <div class="tone-card">
+        <div class="tone-swatches">
+          <div style="background:#0B0C0E"></div>
+          <div style="background:#121418"></div>
+          <div style="background:#1A1D22"></div>
+          <div style="background:#FF6600"></div>
+          <div style="background:#F4F4F2"></div>
+        </div>
+        <div class="tone-body">
+          <div class="tone-code">01 · MIDNIGHT</div>
+          <h4>深色 · Cinematic</h4>
+          <p>保留 v03 的 #0D0D0D + 橙 #FF6600 骨架。夜路实拍自然贴合，品牌记忆最强。DJI / Tesla 调性。</p>
+        </div>
+      </div>
+      <div class="tone-card">
+        <div class="tone-swatches">
+          <div style="background:#F7F5F1"></div>
+          <div style="background:#EFECE6"></div>
+          <div style="background:#E6E1D9"></div>
+          <div style="background:#FF6600"></div>
+          <div style="background:#111213"></div>
+        </div>
+        <div class="tone-body">
+          <div class="tone-code">02 · DAYLIGHT</div>
+          <h4>浅色 · Editorial</h4>
+          <p>暖白 #F7F5F1 + 墨黑 + 橙 accent。Velotric / Kwikset 杂志风。对棚拍产品友好，性别更中立。</p>
+        </div>
+      </div>
+      <div class="tone-card">
+        <div class="tone-swatches">
+          <div style="background:#F7F5F1"></div>
+          <div style="background:#0B0C0E"></div>
+          <div style="background:#EFECE6"></div>
+          <div style="background:#0B0C0E"></div>
+          <div style="background:#FF6600"></div>
+        </div>
+        <div class="tone-body">
+          <div class="tone-code">03 · HYBRID</div>
+          <h4>混合 · 节奏组合</h4>
+          <p>首屏深 → 产品系列浅 → UGC 深 → Footer 浅。避免单一色调的视觉疲劳，节奏感最强，但 token 切换成本最高。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reader-section" id="matrix">
+    <h2>05 · 决策矩阵：哪些组合说得通</h2>
+    <p class="sec-intro">
+      不是所有 Nav × Hero 都配得起。适配优先栏（Nav B）配适配优先 Hero（Hero 3）会让同一个选择器出现两次；
+      极简导航（Nav C）配电影感 Hero（Hero 1）缺少明确 CTA。下面这张矩阵是我们实际跑过的判断。
+    </p>
+    <div class="matrix-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>导航 ↓ · Hero →</th>
+            <th>Hero 1 · 电影感</th>
+            <th>Hero 2 · 杂志风</th>
+            <th>Hero 3 · 适配优先</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A · 按需求 Mega</td>
+            <td class="cell-good">✓ 可行</td>
+            <td class="cell-ok">△ 偏重</td>
+            <td class="cell-bad">✗ 冗余</td>
+          </tr>
+          <tr>
+            <td>B · 适配优先栏</td>
+            <td class="cell-good">✓ 强</td>
+            <td class="cell-good">✓ 推荐 ★</td>
+            <td class="cell-bad">✗ 功能重复</td>
+          </tr>
+          <tr>
+            <td>C · 极简 + Drawer</td>
+            <td class="cell-ok">△ 需补 CTA</td>
+            <td class="cell-good">✓ 高端</td>
+            <td class="cell-good">✓ 克制</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="reader-section" id="recommend">
+    <h2>06 · 我们的推荐</h2>
+    <div class="recommend">
+      <div class="tag">首选组合 · 可作为 v04 主线</div>
+      <h3>Nav B · 适配优先栏 &nbsp;+&nbsp; Hero 2 · 杂志风 &nbsp;+&nbsp; Daylight 色调</h3>
+      <p>
+        理由：把 SEALIGHT 最硬的"车型适配"承诺做进 chrome（Nav B），Hero 就腾出来承载<b>品牌叙事</b>而不是重复问 VIN（Hero 2）。
+        浅色 Daylight 让棚拍产品自然发光，也和 UGC 照片的暖调一致。三件事各司其职，不互相拧。
+      </p>
+    </div>
+  </section>
+
+  <section class="reader-section" id="assembled">
+    <h2>07 · 完整页面组合预览</h2>
+    <p class="sec-intro">
+      三组完整页面的缩放预览。每个都是 Nav + Hero + Trust bar + 场景 + Before/After + 系列卡 + Reviews + Support CTA + Footer 的完整装配。
+      点击标签可以在新标签里看画布版的大图。
+    </p>
+
+    <div class="variant">
+      <div class="variant-head">
+        <h3>方案 A · Nav A + Hero 1 + Midnight</h3>
+        <span class="variant-code">ASSEMBLY · A</span>
+      </div>
+      <p class="variant-blurb">全深色 · 电影感叙事 · Mega 菜单。品牌调性最强，适合作为"宣传周 / 新品发布"的临时首页。</p>
+      <div class="preview-frame" id="preview-fullA" style="height: 600px;">
+        <div class="preview-label" style="background: rgba(0,0,0,.6); color: rgba(255,255,255,.7);">Full page · A</div>
+        <div class="preview-scale" id="mount-fullA"></div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-head">
+        <h3>方案 B · Nav B + Hero 2 + Daylight ★</h3>
+        <span class="variant-code">ASSEMBLY · B</span>
+      </div>
+      <p class="variant-blurb">推荐组合。浅色 · 杂志风 · 适配栏。转化 + 品牌两头都兼顾，作为<b>v04 主线</b>推进。</p>
+      <div class="preview-frame" id="preview-fullB" style="height: 600px;">
+        <div class="preview-label">Full page · B ★</div>
+        <div class="preview-scale" id="mount-fullB"></div>
+      </div>
+    </div>
+
+    <div class="variant">
+      <div class="variant-head">
+        <h3>方案 C · Nav C + Hero 3 + Midnight</h3>
+        <span class="variant-code">ASSEMBLY · C</span>
+      </div>
+      <p class="variant-blurb">深色 · 工具感 · 极简导航 + 抽屉。转化路径最短但品牌叙事最弱，适合作为 "Shop" 聚合落地页而非主页。</p>
+      <div class="preview-frame" id="preview-fullC" style="height: 600px;">
+        <div class="preview-label" style="background: rgba(0,0,0,.6); color: rgba(255,255,255,.7);">Full page · C</div>
+        <div class="preview-scale" id="mount-fullC"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reader-section" id="next">
+    <h2>08 · 下一步</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">STEP 01</div>
+        <h4>对齐首选组合</h4>
+        <p>本周内确认是否采纳 Nav B + Hero 2 + Daylight，或给出要调整的变量。评审会可以直接用这份文档逐轴过。</p>
+      </div>
+      <div class="step">
+        <div class="n">STEP 02</div>
+        <h4>UGC 资产征集</h4>
+        <p>Ops 启动 5-10 张 Before/After 真实安装照 + 3 条安装短视频的征集，是 Hero 2 和 Reviews 模块的硬依赖。</p>
+      </div>
+      <div class="step">
+        <div class="n">STEP 03</div>
+        <h4>Fitment API 确认</h4>
+        <p>确认当前 Year-Make-Model 接口是否返回推荐系列字段。Nav B 的"12 matches"实时计数依赖这个。</p>
+      </div>
+      <div class="step">
+        <div class="n">STEP 04</div>
+        <h4>移动端适配稿</h4>
+        <p>Nav B 的双层栏在移动端需要折叠成单行 + 适配 drawer。产出一版 375px 宽的移动端细化稿。</p>
+      </div>
+      <div class="step">
+        <div class="n">STEP 05</div>
+        <h4>设计 Token 落代码</h4>
+        <p>把 tokens.css 里的三套色调变量落到现有 design system，让切换真的只是 data-tone 属性切一下。</p>
+      </div>
+      <div class="step">
+        <div class="n">STEP 06</div>
+        <h4>A/B 测试埋点清单</h4>
+        <p>首选 Nav B + Hero 2 上线后，对照 v03 做 AB。埋点关注：Hero CTA 点击、适配栏完成率、PDP 到达率。</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Shared component files -->
+<script type="text/babel" src="navs.jsx"></script>
+<script type="text/babel" src="heros.jsx"></script>
+<script type="text/babel" src="modules.jsx"></script>
+
+<script type="text/babel">
+const { useEffect } = React;
+
+function PageShell({ tone = 'midnight', children, style }) {
+  return (
+    <div className="sl-root" data-tone={tone} style={{ ...style }}>{children}</div>
+  );
+}
+
+// Scales natural-width component into the preview frame
+function ScaledPreview({ mountId, frameId, width = 1440, height, tone = 'midnight', children }) {
+  useEffect(() => {
+    const mount = document.getElementById(mountId);
+    const frame = document.getElementById(frameId);
+    if (!mount || !frame) return;
+    const fit = () => {
+      const fw = frame.clientWidth;
+      const scale = fw / width;
+      mount.style.width = width + 'px';
+      mount.style.transform = `scale(${scale})`;
+      mount.style.transformOrigin = 'top left';
+      // Set frame height to scaled content height
+      if (height) frame.style.height = (height * scale) + 'px';
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(frame);
+    return () => ro.disconnect();
+  }, []);
+  return ReactDOM.createPortal(
+    <PageShell tone={tone}>{children}</PageShell>,
+    document.getElementById(mountId),
+  );
+}
+
+function Reader() {
+  return (
+    <>
+      {/* Nav previews */}
+      <ScaledPreview mountId="mount-navA" frameId="preview-navA" height={640} tone="daylight">
+        <NavA />
+        <div style={{ padding: '60px 32px 100px', background: 'var(--bg)', minHeight: 460, borderTop: '1px solid var(--line)' }}>
+          <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+            <div className="sl-eyebrow">BODY PLACEHOLDER</div>
+            <h2 style={{ fontSize: 48, letterSpacing: '-0.03em', margin: '14px 0 18px', maxWidth: '14ch' }}>Hover a top-level link to see the mega menu.</h2>
+            <p style={{ color: 'var(--fg-2)', fontSize: 16, maxWidth: '46ch' }}>
+              Three-column tray: shop by need, by vehicle, or by bulb size. Fourth column is a persistent Nova flagship feature.
+            </p>
+          </div>
+        </div>
+      </ScaledPreview>
+
+      <ScaledPreview mountId="mount-navB" frameId="preview-navB" height={640} tone="daylight">
+        <NavB />
+        <div style={{ padding: '60px 32px 100px', background: 'var(--bg)', minHeight: 460, borderTop: '1px solid var(--line)' }}>
+          <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+            <div className="sl-eyebrow">BODY PLACEHOLDER</div>
+            <h2 style={{ fontSize: 48, letterSpacing: '-0.03em', margin: '14px 0 18px', maxWidth: '18ch' }}>Fitment sits in the chrome. Always visible.</h2>
+            <p style={{ color: 'var(--fg-2)', fontSize: 16, maxWidth: '50ch' }}>
+              Top bar is product categories. The persistent secondary bar owns Year / Make / Model and shows "12 matches" live.
+            </p>
+          </div>
+        </div>
+      </ScaledPreview>
+
+      <ScaledPreview mountId="mount-navC" frameId="preview-navC" height={640} tone="midnight">
+        <div style={{ position: 'relative', minHeight: 800, background: 'radial-gradient(ellipse 70% 60% at 35% 40%, rgba(255,102,0,.12) 0%, transparent 55%), linear-gradient(180deg, #0B0C0E 0%, #13171B 100%)', overflow: 'hidden' }}>
+          <NavC theme="dark" showDrawer={true} />
+          <div style={{ padding: '160px 32px 80px', color: '#fff', maxWidth: 640, marginLeft: 'max(32px, calc((100vw - 1280px)/2 + 32px))', position: 'relative', zIndex: 2 }}>
+            <div className="sl-eyebrow" style={{ color: 'rgba(255,255,255,.6)' }}>BODY PLACEHOLDER</div>
+            <h2 style={{ fontSize: 56, letterSpacing: '-0.03em', margin: '14px 0 18px', color: '#fff', lineHeight: 1, maxWidth: '12ch' }}>Minimal header. Full-screen fitment drawer on demand.</h2>
+            <p style={{ color: 'rgba(255,255,255,.72)', fontSize: 17, maxWidth: '48ch', lineHeight: 1.55 }}>
+              Hero breathes. Find My Bulb opens a focused right-drawer — Year → Make → Model with zero visual noise.
+            </p>
+          </div>
+        </div>
+      </ScaledPreview>
+
+      {/* Hero previews */}
+      <ScaledPreview mountId="mount-hero1" frameId="preview-hero1" height={860} tone="midnight">
+        <Hero1Cinematic />
+      </ScaledPreview>
+      <ScaledPreview mountId="mount-hero2" frameId="preview-hero2" height={820} tone="daylight">
+        <Hero2Editorial />
+      </ScaledPreview>
+      <ScaledPreview mountId="mount-hero3" frameId="preview-hero3" height={920} tone="midnight">
+        <Hero3Fitment />
+      </ScaledPreview>
+
+      {/* Full-page previews */}
+      <ScaledPreview mountId="mount-fullA" frameId="preview-fullA" height={3400} tone="midnight">
+        <NavA />
+        <Hero1Cinematic />
+        <TrustBar />
+        <ScenesModule />
+        <BeforeAfterModule />
+        <SeriesModule />
+        <ReviewsModule dark={true} />
+        <SupportCTA />
+        <SiteFooter />
+      </ScaledPreview>
+      <ScaledPreview mountId="mount-fullB" frameId="preview-fullB" height={3400} tone="daylight">
+        <NavB />
+        <Hero2Editorial />
+        <TrustBar />
+        <ScenesModule />
+        <BeforeAfterModule />
+        <SeriesModule />
+        <ReviewsModule dark={false} />
+        <SupportCTA />
+        <SiteFooter />
+      </ScaledPreview>
+      <ScaledPreview mountId="mount-fullC" frameId="preview-fullC" height={3400} tone="midnight">
+        <NavC theme="dark" />
+        <Hero3Fitment />
+        <TrustBar />
+        <ScenesModule />
+        <BeforeAfterModule />
+        <SeriesModule />
+        <ReviewsModule dark={true} />
+        <SupportCTA />
+        <SiteFooter />
+      </ScaledPreview>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.createElement('div')).render(<Reader />);
+</script>
+
+</body>
+</html>

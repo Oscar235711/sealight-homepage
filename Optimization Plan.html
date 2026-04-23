@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SEALIGHT Homepage v04 · 优化方案 Handoff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --orange:#FF6600; --orange-deep:#CC4F00; --orange-2:#FF8A3D;
+    --bg:#F7F5F1; --bg-2:#EFECE6; --paper:#FFFFFF;
+    --ink:#111213; --ink-2:rgba(17,18,19,.68); --ink-3:rgba(17,18,19,.48);
+    --line:rgba(15,15,15,.08); --line-2:rgba(15,15,15,.16);
+    --ok:#0F8F4A; --warn:#B86E00; --danger:#C9301E;
+    --font-display:'Space Grotesk','Noto Sans SC',system-ui,sans-serif;
+    --font-text:'Inter','Noto Sans SC',system-ui,sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-text);font-size:15px;line-height:1.62;letter-spacing:-.002em;-webkit-font-smoothing:antialiased}
+  a{color:var(--orange);text-decoration:none;border-bottom:1px solid currentColor}
+  a:hover{color:var(--orange-deep)}
+  code{font-family:var(--font-mono);font-size:12.5px;background:rgba(0,0,0,.05);padding:2px 6px;border-radius:4px;letter-spacing:0}
+  hr{border:0;border-top:1px solid var(--line);margin:48px 0}
+
+  .page{max-width:1180px;margin:0 auto;padding:72px 56px 120px}
+  .kicker{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-3);margin-bottom:20px}
+  .kicker .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--orange);margin-right:10px;vertical-align:2px}
+
+  h1{font-family:var(--font-display);font-weight:700;letter-spacing:-.028em;line-height:1.02;font-size:clamp(44px,5.6vw,76px);margin:0 0 24px;text-wrap:balance}
+  h1 em{color:var(--orange);font-style:normal}
+  h2{font-family:var(--font-display);font-weight:700;letter-spacing:-.024em;line-height:1.08;font-size:clamp(28px,3.4vw,44px);margin:0 0 12px}
+  h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.018em;font-size:22px;margin:28px 0 10px}
+  h4{font-family:var(--font-display);font-weight:600;font-size:15px;margin:18px 0 6px;letter-spacing:-.006em}
+  p{margin:0 0 14px;max-width:72ch;color:var(--ink)}
+  p.lead{font-size:19px;color:var(--ink-2);max-width:64ch;line-height:1.55}
+  ul,ol{margin:8px 0 16px;padding-left:22px}
+  li{margin:4px 0;color:var(--ink-2)}
+  li strong{color:var(--ink)}
+
+  /* Top banner */
+  .hero{
+    border:1px solid var(--line);border-radius:18px;padding:48px 48px 44px;
+    background:linear-gradient(135deg,#FFFFFF 0%,#F3EFE6 100%);
+    position:relative;overflow:hidden;margin-bottom:72px;
+  }
+  .hero::before{content:"";position:absolute;top:-30%;right:-10%;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,102,0,.14) 0%,transparent 60%);pointer-events:none}
+  .hero-meta{display:flex;gap:32px;margin-top:28px;font-family:var(--font-mono);font-size:12px;color:var(--ink-3);flex-wrap:wrap}
+  .hero-meta b{color:var(--ink);font-weight:600}
+  .hero-cta{display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:12px 20px;
+    background:var(--ink);color:#fff;border-radius:999px;font-weight:600;font-size:14px;border-bottom:0}
+  .hero-cta:hover{background:var(--orange);color:#fff}
+
+  /* Section */
+  section{margin-bottom:80px;scroll-margin-top:40px}
+  .sec-head{display:flex;align-items:baseline;gap:24px;margin-bottom:32px;border-bottom:1px solid var(--line);padding-bottom:20px}
+  .sec-num{font-family:var(--font-mono);font-size:12px;color:var(--ink-3);letter-spacing:.14em}
+
+  /* Pain/Goal grid */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .card h4{margin-top:0}
+  .card .pill{display:inline-block;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.12em;padding:3px 8px;border-radius:4px;margin-bottom:12px;font-weight:500}
+  .pill.pain{background:#FCE9E4;color:#8C2315}
+  .pill.goal{background:#E4F3EA;color:#0A6A39}
+  .pill.info{background:#FFE9D6;color:#8C4A15}
+
+  /* Comparison matrix */
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0 24px;background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--bg-2);font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2);font-weight:500}
+  td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  .check{color:var(--ok);font-weight:700}
+  .warn{color:var(--warn);font-weight:700}
+  .cross{color:var(--ink-3);font-weight:700}
+
+  /* IA tree */
+  .ia{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px 24px;font-family:var(--font-mono);font-size:13px;line-height:1.85;color:var(--ink-2);white-space:pre;overflow-x:auto}
+  .ia b{color:var(--ink);font-weight:600}
+  .ia .orange{color:var(--orange);font-weight:600}
+
+  /* Module list */
+  .modules{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:16px 0}
+  .mod{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+  .mod-num{font-family:var(--font-mono);font-size:11px;color:var(--orange);letter-spacing:.1em;margin-bottom:6px}
+  .mod h4{margin:0 0 8px}
+  .mod p{font-size:13.5px;color:var(--ink-2);margin:0 0 10px;max-width:none}
+  .mod .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .tag{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;padding:3px 7px;border:1px solid var(--line-2);border-radius:4px;color:var(--ink-2)}
+
+  /* Tokens grid */
+  .tokens{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0 24px}
+  .tok{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px;font-family:var(--font-mono);font-size:11.5px}
+  .tok .sw{height:48px;border-radius:6px;margin-bottom:10px;border:1px solid var(--line)}
+  .tok b{font-weight:600;color:var(--ink);display:block;font-size:13px;font-family:var(--font-text)}
+  .tok span{color:var(--ink-3);display:block;margin-top:2px}
+
+  /* Type spec */
+  .type-spec{display:grid;grid-template-columns:160px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .type-spec:last-child{border-bottom:0}
+  .type-label{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3)}
+  .type-sample{font-family:var(--font-display)}
+
+  /* Roadmap */
+  .phase{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:24px;margin-bottom:14px}
+  .phase-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+  .phase-num{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--orange);letter-spacing:-.02em}
+  .phase-title{font-family:var(--font-display);font-size:20px;font-weight:600}
+  .phase-when{margin-left:auto;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase;background:var(--bg-2);padding:4px 10px;border-radius:4px}
+  .phase ul{margin:6px 0 0}
+
+  /* Decision callout */
+  .decide{background:#FFF4EB;border:1px solid #FFD2A8;border-left:4px solid var(--orange);border-radius:10px;padding:20px 24px;margin:16px 0}
+  .decide h4{margin:0 0 8px;color:var(--orange-deep)}
+  .decide p{margin:0;color:var(--ink);font-size:14px}
+
+  /* Nav / Hero rec */
+  .rec{display:grid;grid-template-columns:1fr 2fr;gap:20px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px;margin:12px 0}
+  .rec .label{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-3)}
+  .rec h4{margin:6px 0 10px}
+  .rec .chosen{display:inline-block;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;padding:3px 8px;background:#E4F3EA;color:#0A6A39;border-radius:4px;margin-left:8px;vertical-align:2px;font-weight:600;text-transform:uppercase}
+
+  /* TOC */
+  .toc{position:sticky;top:0;background:rgba(247,245,241,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin:-72px -56px 48px;padding:16px 56px;z-index:10}
+  .toc-inner{display:flex;gap:28px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);flex-wrap:wrap;align-items:center}
+  .toc-inner .brand{color:var(--ink);font-weight:600}
+  .toc-inner a{color:var(--ink-2);border-bottom:0;transition:color .15s}
+  .toc-inner a:hover{color:var(--orange)}
+
+  @media (max-width:820px){
+    .page{padding:40px 24px 80px}
+    .grid-2,.modules,.tokens{grid-template-columns:1fr}
+    .tokens{grid-template-columns:1fr 1fr}
+    .rec{grid-template-columns:1fr}
+    .toc{margin:-40px -24px 32px;padding:12px 24px}
+    .type-spec{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav class="toc">
+    <div class="toc-inner">
+      <span class="brand">SEALIGHT v04 · HANDOFF</span>
+      <a href="#context">01 Context</a>
+      <a href="#ia">02 IA</a>
+      <a href="#modules">03 Modules</a>
+      <a href="#recommendations">04 Rec</a>
+      <a href="#system">05 System</a>
+      <a href="#roadmap">06 Roadmap</a>
+      <a href="#open">07 Open Qs</a>
+    </div>
+  </nav>
+
+  <div class="kicker"><span class="dot"></span>INTERNAL · v04 OPTIMIZATION PROPOSAL · APR 2026</div>
+  <div class="hero">
+    <h1>SEALIGHT Homepage<br/><em>Optimization Plan.</em></h1>
+    <p class="lead">从 v03 静态原型到 v04 —— 一份给设计与技术交付的优化方案。核心目标：在不打乱主站节奏的前提下，把首页从「功能罗列」变成「场景导航 + 转化漏斗」。</p>
+    <a class="hero-cta" href="SEALIGHT v04.html">Open v04 Demo →</a>
+    <div class="hero-meta">
+      <span>OWNER · <b>首页改版负责人</b></span>
+      <span>STATUS · <b>Design review ready</b></span>
+      <span>ARTIFACTS · <b>v04 canvas + this doc</b></span>
+      <span>ISOLATION · <b>与 sealight-led.com 完全隔离</b></span>
+    </div>
+  </div>
+
+  <!-- 01 Context -->
+  <section id="context">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>背景 · 问题 · 目标</h2>
+    </div>
+
+    <p class="lead">本轮优化面向北美 DIY 车主、对原厂卤素不满的升级用户、以及越野/皮卡改装圈。教育入口优先级下降，转化入口优先级上升。</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <span class="pill pain">v03 · PAIN POINTS</span>
+        <h4>当前原型的问题</h4>
+        <ul>
+          <li><strong>页面偏长</strong>——10 个模块线性堆砌，用户往下滚 3 屏就流失</li>
+          <li><strong>没有动态感 / 活人感</strong>——缺真实车辆照、缺 Before/After、UGC 只有文字</li>
+          <li><strong>缺品牌特色</strong>——橙色是唯一视觉抓手，没有形成独特语言</li>
+          <li><strong>导航结构不清</strong>——4 个顶部链接，跳转逻辑和分类逻辑互相打架</li>
+          <li><strong>Hero 转化链条单薄</strong>——Fitment 选择器是全部，没有「按驾驶场景」的分流</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="pill goal">v04 · GOALS</span>
+        <h4>本轮要达成的</h4>
+        <ul>
+          <li><strong>场景清晰划分</strong>——夜驾 / 雨雾 / 安装难度 / 通用装配 四条平行入口</li>
+          <li><strong>转化优先</strong>——Fitment 作为全局常驻功能，不只是 Hero 里的 widget</li>
+          <li><strong>品牌强化</strong>——橙色 + Midnight 底色 + 单衬线强调字的系统化表达</li>
+          <li><strong>导航重排</strong>——Shop by Need · Series · Category · Support 四主栏</li>
+          <li><strong>教育降级</strong>——不在首屏；放到 Footer 附近的 Edu 模块 + 文章页承接</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>目标受众优先级</h3>
+    <table>
+      <thead><tr><th>受众</th><th>行为特征</th><th>首页承接</th><th>关键模块</th></tr></thead>
+      <tbody>
+        <tr><td>DIY 车主 (P0)</td><td>想自己换灯；怕装不上、怕不亮、怕错码</td><td>Fitment → 场景 → Spark/Prism → Install Guide</td><td>Hero · Scene · Series · Support</td></tr>
+        <tr><td>升级党 (P0)</td><td>对原厂卤素不满；亮度 / 审美都在意</td><td>Fitment → 场景(夜驾/雨雾) → Nova/Pulsar → UGC</td><td>Hero · Scene · UGC</td></tr>
+        <tr><td>改装圈 (P1)</td><td>越野 / 皮卡；需要 rotating collar / 异形仓</td><td>Universal Fit 宽卡片 → Pulsar/Nova</td><td>Scene (wide card) · Brand</td></tr>
+        <tr><td>新手小白 (P2)</td><td>不知道 LED vs 卤素的差别</td><td>Hero 上的「Not sure?」浅入口 → Edu 长页</td><td>Education (Below fold)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr/>
+
+  <!-- 02 IA -->
+  <section id="ia">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>信息架构 · 导航重排</h2>
+    </div>
+
+    <p>v03 的四主栏（Shop by Need / Series / Categories / Support）方向是对的，但层级和 Mega 内容需要重写。v04 把一级分类从功能型改成 <b>「场景 + 车型」</b> 双轴，让 DIY 用户不用懂产品就能进。</p>
+
+    <h3>新顶栏一级结构</h3>
+    <div class="ia"><b>SEALIGHT</b>
+  ├─ <span class="orange">SHOP BY NEED</span>          → 按驾驶场景入口（Mega: Night · Weather · Install · Universal · Interior）
+  ├─ <span class="orange">SERIES</span>                 → 五系对比（Nova · Pulsar · Prism · Spark · Ray）
+  ├─ CATEGORIES             → 按灯位入口（Headlight · Fog · Brake · Signal · Interior · Combo）
+  ├─ SUPPORT                → Fitment · Install · Troubleshoot · FAQ · Contact
+  └─ [Fitment Finder]       <span class="orange">← 常驻 CTA · 二级 sticky bar (见 Nav B)</span></div>
+
+    <h3>Nav 方案对比（v04 demo 中 Row 2 已提供原型）</h3>
+    <table>
+      <thead><tr><th>方案</th><th>交互核心</th><th>适合场景</th><th>风险</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>A · Mega by Need</td>
+          <td>悬停展开四列 Mega，最右列放一张 feature 图片 + 推荐系列</td>
+          <td>北美主流电商习惯（最接近 Costco / Velotric）</td>
+          <td>移动端需要完全重写成 Drawer</td>
+        </tr>
+        <tr>
+          <td>B · Fitment-first Sticky Bar</td>
+          <td>顶栏下方二级条常驻 Year/Make/Model 三选，滚动也不消失</td>
+          <td>Fitment 转化驱动（最接近 Amazon 汽配）</td>
+          <td>视觉噪声高；会压缩首屏 Hero 空间</td>
+        </tr>
+        <tr>
+          <td>C · Minimal + Drawer</td>
+          <td>顶栏只 4 个链接 + 圆形橙色 CTA；详情全靠右侧 Drawer</td>
+          <td>品牌感强（最接近 DJI / Kwikset）</td>
+          <td>信息密度低；对不熟悉 drawer 的用户摩擦大</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="decide">
+      <h4>推荐 · Nav A (Mega) + 全局 Fitment Sticky</h4>
+      <p>取 A 的结构（成熟、可扩展）+ B 的 Fitment 常驻（转化刚需），放弃 C。Nav C 的极简感在 Hero 里通过 H3 的 fitment-first 布局单独保留。</p>
+    </div>
+  </section>
+
+  <hr/>
+
+  <!-- 03 Modules -->
+  <section id="modules">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>模块系统 · v04 vs v03</h2>
+    </div>
+
+    <p>v03 总共 10 个模块（Hero / Trust / Scenes / Categories / Series / Brand / UGC / Support / CTA / Edu）。v04 保留 7 个，合并 2 个，降级 1 个。</p>
+
+    <div class="modules">
+      <div class="mod"><div class="mod-num">M01 · KEEP</div><h4>Hero · 场景化升级</h4><p>三种方向：Cinematic Beam（夜驾光束）/ Editorial Split（产品质感）/ Fitment-first（转化导向）。demo 中可切换。</p><div class="tags"><span class="tag">Above fold</span><span class="tag">3 directions</span></div></div>
+
+      <div class="mod"><div class="mod-num">M02 · KEEP</div><h4>Trust Bar · hairline 化</h4><p>从卡片式改为四等分 hairline 行，去除 emoji 化图标，换成描边 SVG。</p><div class="tags"><span class="tag">visual cleanup</span></div></div>
+
+      <div class="mod"><div class="mod-num">M03 · REDESIGN</div><h4>Scenes · 1 flagship + 3 小卡</h4><p>v03 是 5 张同等卡片；v04 改成 1 张 flagship（夜驾）+ 3 张小卡 + 1 张 wide（通用装配）。视觉节奏更像 DJI Mavic 页面。</p><div class="tags"><span class="tag">featured</span><span class="tag">rotating collar</span></div></div>
+
+      <div class="mod"><div class="mod-num">M04 · NEW</div><h4>Before/After Drag Slider</h4><p>原 UGC 模块里的静态 B/A 拆出独立模块，加上可拖拽分隔条。解决「缺动态感、活人感」的核心痛点之一。</p><div class="tags"><span class="tag">动态</span><span class="tag">install 摄影 needed</span></div></div>
+
+      <div class="mod"><div class="mod-num">M05 · REDESIGN</div><h4>Series Rail · 横向 5 卡</h4><p>从 5 卡网格改为横向可滚 rail + 规格进度条。Prism 保留「Most Popular」flag。</p><div class="tags"><span class="tag">horizontal scroll</span></div></div>
+
+      <div class="mod"><div class="mod-num">M06 · KEEP</div><h4>Reviews · 含车辆照片</h4><p>v03 只有文字评论。v04 每张卡必须带一张真实车辆/安装照占位，UGC 征集流程同步启动。</p><div class="tags"><span class="tag">照片刚需</span><span class="tag">ops 配合</span></div></div>
+
+      <div class="mod"><div class="mod-num">M07 · MERGE</div><h4>Support CTA (合并 Brand + Bottom CTA)</h4><p>v03 的 Brand 模块（Why Drivers Choose）+ Bottom CTA 合成一个收尾页面：大字标题 + 三个 CTA 按钮。</p><div class="tags"><span class="tag">合并</span></div></div>
+
+      <div class="mod"><div class="mod-num">M08 · DEMOTE</div><h4>Education · 降级到 Footer 上方</h4><p>用户研究说教育入口 P2。从第 10 屏提前到 Footer 前一屏，且只保留 4 张卡；深度内容全部走 /learn 独立路径。</p><div class="tags"><span class="tag">below fold</span><span class="tag">/learn hub</span></div></div>
+
+      <div class="mod"><div class="mod-num">REMOVED</div><h4>Categories Quick-Access</h4><p>v03 有 8 张 icon 卡。v04 移到顶栏 Mega 的第二列，不在首页占模块位。已知灯号的用户直接走 Mega · Categories。</p><div class="tags"><span class="tag">nav only</span></div></div>
+
+      <div class="mod"><div class="mod-num">REMOVED</div><h4>Bottom CTA 独立模块</h4><p>和 Support CTA 合并成 M07。</p><div class="tags"><span class="tag">merged</span></div></div>
+    </div>
+  </section>
+
+  <hr/>
+
+  <!-- 04 Rec -->
+  <section id="recommendations">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2>推荐组合 · 给设计/技术的最终主张</h2>
+    </div>
+
+    <p>demo 里给了 Nav ×3、Hero ×3、Tone ×3 共 27 种组合。下面是我推荐给生产的那条路径——供设计 review 时作为讨论锚点。</p>
+
+    <div class="rec">
+      <div>
+        <span class="label">NAV</span>
+        <h4>Nav A — Mega by Need <span class="chosen">recommended</span></h4>
+        <p style="font-size:13px;color:var(--ink-3);font-family:var(--font-mono);letter-spacing:0;margin:0">+ Fitment sticky from Nav B</p>
+      </div>
+      <div>
+        <p>结构最成熟、最接近北美电商习惯；Mega 的四列能一次性承载 Need / Series / Category / Feature，不牺牲任何一级入口。Fitment sticky bar 从 Nav B 里剥离出来做为全局组件，保证任何深页都能触发 Fitment。</p>
+      </div>
+    </div>
+
+    <div class="rec">
+      <div>
+        <span class="label">HERO</span>
+        <h4>Hero 1 — Cinematic Beam <span class="chosen">recommended</span></h4>
+        <p style="font-size:13px;color:var(--ink-3);font-family:var(--font-mono);letter-spacing:0;margin:0">fallback · Hero 3 Fitment-first</p>
+      </div>
+      <div>
+        <p>Cinematic Beam 最能解决「没有活人感」的痛点——视觉承载高，留给 Fitment widget + 双 CTA + 下方 marquee trust 足够空间。Hero 3（Fitment-first 居中）作为 A/B 测试 variant，在「转化漏斗第一步是 Fitment」这个假设上跑数据再定。Hero 2（Editorial）更适合 /nova 产品着陆页，不是首页主路。</p>
+      </div>
+    </div>
+
+    <div class="rec">
+      <div>
+        <span class="label">TONE</span>
+        <h4>Hybrid tone <span class="chosen">recommended</span></h4>
+        <p style="font-size:13px;color:var(--ink-3);font-family:var(--font-mono);letter-spacing:0;margin:0">Midnight hero → Daylight product → Midnight UGC</p>
+      </div>
+      <div>
+        <p>Midnight（深底）承接夜驾情绪 + 产品 hero；Daylight（浅底）承接 Series 对比和产品规格陈列（看清楚是关键）；再 Midnight 收尾 UGC + CTA 强化品牌记忆。这是 Velotric / Kwikset / DJI 共同的节奏。</p>
+      </div>
+    </div>
+  </section>
+
+  <hr/>
+
+  <!-- 05 System -->
+  <section id="system">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2>设计系统 · Tokens + Type</h2>
+    </div>
+
+    <p>所有 tokens 已写在 <code>tokens.css</code>；支持三种 tone 切换（<code>data-tone="midnight | daylight | hybrid"</code>）。交付给技术时保留这套变量名即可，不引入 Tailwind / DS 框架。</p>
+
+    <h3>Brand color</h3>
+    <div class="tokens">
+      <div class="tok"><div class="sw" style="background:#FF6600"></div><b>Orange / Primary</b><span>#FF6600 · --brand-orange</span></div>
+      <div class="tok"><div class="sw" style="background:#FF8A3D"></div><b>Orange / Light</b><span>#FF8A3D · --brand-orange-2</span></div>
+      <div class="tok"><div class="sw" style="background:#CC4F00"></div><b>Orange / Deep</b><span>#CC4F00 · --brand-orange-deep</span></div>
+      <div class="tok"><div class="sw" style="background:#0B0C0E"></div><b>Midnight</b><span>#0B0C0E · hero / ugc bg</span></div>
+      <div class="tok"><div class="sw" style="background:#F7F5F1;border:1px solid var(--line)"></div><b>Daylight</b><span>#F7F5F1 · product / series bg</span></div>
+      <div class="tok"><div class="sw" style="background:#14171C"></div><b>Surface Dark</b><span>#14171C · --surface on midnight</span></div>
+      <div class="tok"><div class="sw" style="background:#FFFFFF;border:1px solid var(--line)"></div><b>Surface Light</b><span>#FFFFFF · card bg</span></div>
+      <div class="tok"><div class="sw" style="background:#111213"></div><b>Ink</b><span>#111213 · body text</span></div>
+    </div>
+
+    <h3>Type pairing</h3>
+    <div style="background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:4px 24px">
+      <div class="type-spec">
+        <div class="type-label">Display · H1</div>
+        <div class="type-sample" style="font-size:52px;font-weight:700;letter-spacing:-.028em;line-height:1">Space Grotesk 700</div>
+      </div>
+      <div class="type-spec">
+        <div class="type-label">Display · H2</div>
+        <div class="type-sample" style="font-size:36px;font-weight:700;letter-spacing:-.024em">Space Grotesk 700</div>
+      </div>
+      <div class="type-spec">
+        <div class="type-label">Body · lead</div>
+        <div class="type-sample" style="font-family:Inter,sans-serif;font-size:18px;font-weight:400;line-height:1.55;color:var(--ink-2)">Inter 400 — lead paragraph for hero subheads and section openers.</div>
+      </div>
+      <div class="type-spec">
+        <div class="type-label">Body · text</div>
+        <div class="type-sample" style="font-family:Inter,sans-serif;font-size:15px;font-weight:400">Inter 400 — body copy. Tracking -0.002em, line-height 1.62.</div>
+      </div>
+      <div class="type-spec">
+        <div class="type-label">Mono · kicker / spec</div>
+        <div class="type-sample" style="font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-3)">JetBrains Mono · eyebrow · spec · meta</div>
+      </div>
+      <div class="type-spec">
+        <div class="type-label">Accent · editorial</div>
+        <div class="type-sample" style="font-family:'Instrument Serif',serif;font-style:italic;font-size:52px;color:var(--orange)">Finally, yours.</div>
+      </div>
+    </div>
+
+    <h3>Grid / spacing</h3>
+    <ul>
+      <li><strong>Container</strong>: max 1280px, side padding 32px desktop / 24px tablet / 20px mobile</li>
+      <li><strong>Section vertical padding</strong>: 112px desktop / 72px tablet / 56px mobile</li>
+      <li><strong>Radius scale</strong>: 4 / 8 / 14 / 22 / 32 + pill (999px)</li>
+      <li><strong>Shadow scale</strong>: soft / card / lift — all 0-alpha-composited (no solid grays)</li>
+    </ul>
+  </section>
+
+  <hr/>
+
+  <!-- 06 Roadmap -->
+  <section id="roadmap">
+    <div class="sec-head">
+      <span class="sec-num">06</span>
+      <h2>落地路线图</h2>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">01</span>
+        <span class="phase-title">Design review + asset prep</span>
+        <span class="phase-when">Week 1-2</span>
+      </div>
+      <ul>
+        <li>团队 review demo · 锁 Nav A + Hero 1 + Hybrid tone（或提出 variant）</li>
+        <li>摄影 / 视频 brief：Hero 夜驾素材、Before/After 对比、5 位车主安装场景 UGC</li>
+        <li>设计细化 Mega 的第四列（feature image + 推荐系列卡）</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">02</span>
+        <span class="phase-title">Figma component build</span>
+        <span class="phase-when">Week 3-4</span>
+      </div>
+      <ul>
+        <li>在现有 Figma 文件里新建 v04 page · 把 demo 里的 Nav / Hero / Scene / Series / UGC 组件化</li>
+        <li>全局 Fitment sticky 作为独立 component（顶栏下第二层）</li>
+        <li>移动端重写所有 Mega 为 Drawer · 给出 sm / md / lg 三档 breakpoint</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">03</span>
+        <span class="phase-title">Dev handoff · 前端集成</span>
+        <span class="phase-when">Week 5-8</span>
+      </div>
+      <ul>
+        <li>保持 demo 的 token 命名 (<code>--accent</code> / <code>--bg</code> / <code>data-tone</code>)，不重写主站变量</li>
+        <li>Fitment widget 与主站现有 API 对接 (Year/Make/Model)</li>
+        <li>Before/After slider 作为新组件 · 其他模块可复用主站既有 card / button</li>
+        <li>埋点：Scene 卡点击、Fitment 完成、Series 卡点击、Review 展开</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-head">
+        <span class="phase-num">04</span>
+        <span class="phase-title">Staging → A/B test → Launch</span>
+        <span class="phase-when">Week 9-12</span>
+      </div>
+      <ul>
+        <li>先上 staging · 内部测试 Fitment 链路完整性</li>
+        <li>生产 A/B：v03-like control vs v04（Hero 1 为主）· 25/25/50 流量切分可加 Hero 3 variant</li>
+        <li>观测指标：Fitment 完成率、Scene CTR、Series 页跳转、加购率、跳出率</li>
+        <li>满足上线阈值后 100% 放量 · 保留 v03 作为 fallback URL 一段时间</li>
+      </ul>
+    </div>
+  </section>
+
+  <hr/>
+
+  <!-- 07 Open Qs -->
+  <section id="open">
+    <div class="sec-head">
+      <span class="sec-num">07</span>
+      <h2>Open questions · 给团队的讨论点</h2>
+    </div>
+    <ol>
+      <li><strong>UGC 素材节奏</strong>——Before/After + Reviews 对真实车辆照片强依赖。ops 什么时候能集齐 5-10 张高质量安装照？是否启动用户征集 + 奖励机制？</li>
+      <li><strong>Fitment 数据来源</strong>——主站 Year/Make/Model 当前返回的是否包含 series 推荐？若否，这层推荐逻辑由前端规则 or 后端新建接口？</li>
+      <li><strong>Hero 视频/动图</strong>——Hero 1 的夜驾 beam 是视频 loop 还是静态 hero？视频对加载预算的影响（LCP）需要确认。</li>
+      <li><strong>Series 命名</strong>——Nova / Pulsar / Prism / Spark / Ray 在 v03 中已确立，v04 延用。正式对外是否还叫这 5 个？有无潜在商标问题？</li>
+      <li><strong>Education 承接</strong>——首页只留 4 张 Edu 卡。深度内容是新建 /learn hub，还是挂到博客 subdomain？与 SEO 策略如何协同？</li>
+      <li><strong>主站切换节奏</strong>——这一版是独立 staging 域名 → 一次切换，还是先把 Hero + Nav 灰度到主站？</li>
+    </ol>
+  </section>
+
+  <div style="margin-top:80px;padding:32px;background:var(--paper);border:1px solid var(--line);border-radius:14px;text-align:center">
+    <p style="margin:0 0 12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)">NEXT STEP</p>
+    <p style="margin:0 0 20px;font-family:var(--font-display);font-size:24px;font-weight:600;letter-spacing:-.02em">Design review · 带着这份文档 + demo 一起过。</p>
+    <a href="SEALIGHT v04.html" class="hero-cta" style="background:var(--orange);display:inline-flex">Open v04 Demo →</a>
+  </div>
+
+</div>
+</body>
+</html>

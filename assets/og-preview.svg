@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <radialGradient id="beam" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#FF8833" stop-opacity="0.55"></stop>
+      <stop offset="55%" stop-color="#FF6600" stop-opacity="0.18"></stop>
+      <stop offset="100%" stop-color="#0D0D0D" stop-opacity="0"></stop>
+    </radialGradient>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#111418"></stop>
+      <stop offset="100%" stop-color="#0D0D0D"></stop>
+    </linearGradient>
+  </defs>
+
+  
+  <rect width="1200" height="630" fill="url(#bg)"></rect>
+
+  
+  <g opacity="0.25">
+    <line x1="600" y1="180" x2="40" y2="560" stroke="#2a2a2a" stroke-width="2"></line>
+    <line x1="600" y1="180" x2="1160" y2="560" stroke="#2a2a2a" stroke-width="2"></line>
+    <line x1="600" y1="180" x2="260" y2="560" stroke="#1e1e1e" stroke-width="1.5"></line>
+    <line x1="600" y1="180" x2="940" y2="560" stroke="#1e1e1e" stroke-width="1.5"></line>
+  </g>
+
+  
+  <ellipse cx="520" cy="210" rx="320" ry="380" fill="url(#beam)"></ellipse>
+  <ellipse cx="680" cy="210" rx="320" ry="380" fill="url(#beam)"></ellipse>
+
+  
+  <rect x="520" y="330" width="160" height="6" rx="3" fill="#FF6600" opacity="0.25"></rect>
+  <rect x="470" y="380" width="260" height="5" rx="2.5" fill="#FF6600" opacity="0.18"></rect>
+  <rect x="410" y="430" width="380" height="4" rx="2" fill="#FF6600" opacity="0.12"></rect>
+
+  
+  <circle cx="520" cy="210" r="10" fill="#FFAA66"></circle>
+  <circle cx="520" cy="210" r="5" fill="#FFFFFF"></circle>
+  <circle cx="680" cy="210" r="10" fill="#FFAA66"></circle>
+  <circle cx="680" cy="210" r="5" fill="#FFFFFF"></circle>
+
+  
+  <text x="80" y="105" fill="#FFFFFF" font-family="Inter, -apple-system, sans-serif" font-size="34" font-weight="800" letter-spacing="-1">
+    SEAL<tspan fill="#FF6600">LIGHT</tspan>
+  </text>
+
+  
+  <text x="80" y="500" fill="#FFFFFF" font-family="Inter, -apple-system, sans-serif" font-size="68" font-weight="800" letter-spacing="-2">
+    See the Road Ahead.
+  </text>
+  <text x="80" y="575" fill="#FF6600" font-family="Inter, -apple-system, sans-serif" font-size="68" font-weight="800" letter-spacing="-2">
+    Drive with Confidence.
+  </text>
+
+  
+  <text x="80" y="155" fill="rgba(255,255,255,0.55)" font-family="Inter, -apple-system, sans-serif" font-size="17" font-weight="600" letter-spacing="2.5">
+    PREMIUM LED HEADLIGHT UPGRADES  ·  VERIFIED FITMENT  ·  500,000+ DRIVERS
+  </text>
+</svg>
